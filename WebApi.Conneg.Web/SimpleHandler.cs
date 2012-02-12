@@ -39,18 +39,17 @@ namespace WebApi.Conneg.Web {
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
 			return Task.Factory.StartNew(() => {
-				var mediaType = ContentNegotiation.Negotiate(_formatterSelector, _formatters.Keys, request.Headers.Accept);
-				var result = ApplyTemplate("value", mediaType);
-
-				var response = request.CreateResponse();
-				response.Content = new StringContent(result, Encoding.UTF8, mediaType);
-				return response;
+				var mediaType = _formatterSelector.Negotiate(_formatters.Keys, request.Headers.Accept);
+				return new HttpResponseMessage {
+					Content = ApplyTemplate("value", mediaType),
+				};
 			}, cancellationToken);
 		}
 
-		private string ApplyTemplate(string content, string mediaType) {
+		private HttpContent ApplyTemplate(string content, string mediaType) {
 			// This could run Razor or some other template engine.
-			return string.Format(_formatters[mediaType], content);
+			var result = string.Format(_formatters[mediaType], content);
+			return new StringContent(result, Encoding.UTF8, mediaType);
 		}
 	}
 }
