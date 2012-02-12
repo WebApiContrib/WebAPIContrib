@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 namespace WebApi.Conneg {
 	public static class ContentNegotiation {
 		public static string Negotiate(
-			IFormatterSelector formatterSelector,
+			this IFormatterSelector formatterSelector,
 			IEnumerable<string> supportedMediaTypes,
 			string accept) {
 			return Negotiate(
@@ -18,7 +18,7 @@ namespace WebApi.Conneg {
 		}
 
 		public static string Negotiate(
-			IFormatterSelector formatterSelector,
+			this IFormatterSelector formatterSelector,
 			IEnumerable<string> supportedMediaTypes,
 			IEnumerable<string> accept) {
 			return Negotiate(
@@ -28,7 +28,7 @@ namespace WebApi.Conneg {
 		}
 
 		public static string Negotiate(
-			IFormatterSelector formatterSelector,
+			this IFormatterSelector formatterSelector,
 			IEnumerable<string> supportedMediaTypes,
 			IEnumerable<MediaTypeWithQualityHeaderValue> accept) {
 			var formatters = supportedMediaTypes.Select(mt => new ConnegFormatter(mt));
