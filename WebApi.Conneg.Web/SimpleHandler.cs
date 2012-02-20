@@ -4,16 +4,19 @@ using System.Net.Http.Formatting;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
-namespace WebApi.Conneg.Web {
-	public class SimpleHandler : DelegatingHandler {
+namespace WebApi.Conneg.Web
+{
+	public class SimpleHandler : DelegatingHandler
+	{
 		private readonly IFormatterSelector _formatterSelector;
 		private readonly IDictionary<string, string> _formatters;
 
-		public SimpleHandler() {
+		public SimpleHandler()
+		{
 			_formatterSelector = new FormatterSelector();
-			_formatters = new Dictionary<string, string> {
+			_formatters = new Dictionary<string, string>
+			{
 				{ "application/xml", @"<?xml version=""1.0""?>
 <root>
 	<string>{0}</string>
@@ -37,16 +40,20 @@ namespace WebApi.Conneg.Web {
 			};
 		}
 
-		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
-			return Task.Factory.StartNew(() => {
+		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+		{
+			return Task.Factory.StartNew(() =>
+			{
 				var mediaType = _formatterSelector.Negotiate(_formatters.Keys, request.Headers.Accept);
-				return new HttpResponseMessage {
+				return new HttpResponseMessage
+				{
 					Content = ApplyTemplate("value", mediaType),
 				};
 			}, cancellationToken);
 		}
 
-		private HttpContent ApplyTemplate(string content, string mediaType) {
+		private HttpContent ApplyTemplate(string content, string mediaType)
+		{
 			// This could run Razor or some other template engine.
 			var result = string.Format(_formatters[mediaType], content);
 			return new StringContent(result, Encoding.UTF8, mediaType);
