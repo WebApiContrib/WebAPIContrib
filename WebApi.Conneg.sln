@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg.Web", "WebApi.Conneg.Web\WebApi.Conneg.Web.csproj", "{79C3E016-EF76-435B-B44B-F42FAC8F80F1}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg.Tests", "tests\WebApi.Conneg.Tests\WebApi.Conneg.Tests.csproj", "{1EE5EF76-7AC4-44C4-8DCD-9DEA0C775106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg.Tests", "WebApi.Conneg.Tests\WebApi.Conneg.Tests.csproj", "{1EE5EF76-7AC4-44C4-8DCD-9DEA0C775106}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg", "src\WebApi.Conneg\WebApi.Conneg.csproj", "{9AD615A7-5229-471A-A86E-06184BD69A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg", "WebApi.Conneg\WebApi.Conneg.csproj", "{9AD615A7-5229-471A-A86E-06184BD69A8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Conneg.Web", "samples\WebApi.Conneg.Web\WebApi.Conneg.Web.csproj", "{79C3E016-EF76-435B-B44B-F42FAC8F80F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,14 @@ Global
 		{1EE5EF76-7AC4-44C4-8DCD-9DEA0C775106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EE5EF76-7AC4-44C4-8DCD-9DEA0C775106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EE5EF76-7AC4-44C4-8DCD-9DEA0C775106}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9AD615A7-5229-471A-A86E-06184BD69A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AD615A7-5229-471A-A86E-06184BD69A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD615A7-5229-471A-A86E-06184BD69A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD615A7-5229-471A-A86E-06184BD69A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C3E016-EF76-435B-B44B-F42FAC8F80F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
