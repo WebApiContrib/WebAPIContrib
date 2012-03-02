@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib", "WebApiContrib\WebApiContrib.csproj", "{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib", "src\WebApiContrib\WebApiContrib.csproj", "{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContribTests", "WebApiContribTests\WebApiContribTests.csproj", "{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContribTests", "src\WebApiContribTests\WebApiContribTests.csproj", "{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
