@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseMessages\CreateResponse.cs" />
+    <Compile Include="ResponseMessages\IApiResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
