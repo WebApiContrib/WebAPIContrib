@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
+    <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
