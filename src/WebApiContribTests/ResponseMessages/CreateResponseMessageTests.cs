@@ -22,15 +22,26 @@ namespace WebApiContribTests.ResponseMessages
             var apiResource = new TestResource();
             var response = new CreateResponse(apiResource);
             response.StatusCode.ShouldEqual(HttpStatusCode.Created);
-            response.Headers.Location.ShouldEqual(apiResource.Self);
+            response.Headers.Location.ShouldEqual(apiResource.Location);
         }
 
+        [Test]
+        public void Should_add_content_to_message_when_its_a_typed_response_message()
+        {
+            var apiResource = new TestResource();
+            var response = new CreateResponse<TestResource>(apiResource);
+            response.StatusCode.ShouldEqual(HttpStatusCode.Created);
+            response.Headers.Location.ShouldEqual(apiResource.Location);
+            response.Content.ShouldNotBeNull();
+            response.Content.ObjectType.ShouldEqual(typeof(TestResource));
+        }
 
         private class TestResource : IApiResource
         {
-            public Uri Self
+            public Uri Location { get; set; }
+            public void SetLocation(ResourceLocation location)
             {
-                get { return new Uri("http://api.webapicontrib.org/test/1"); }
+                Location = location.Location;
             }
         }
 
