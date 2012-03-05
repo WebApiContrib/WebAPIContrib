@@ -12,7 +12,26 @@ namespace WebApiContrib.ResponseMessages
 
         public CreateResponse(IApiResource resource) :this()
         {
-            Headers.Location = resource.Self;
+            var location = new ResourceLocation();
+            resource.SetLocation(location);
+            Headers.Location = location.Location;
+        }
+    }
+
+    public class CreateResponse<T> : HttpResponseMessage<T>
+    {
+        public CreateResponse() : base(HttpStatusCode.Created)
+        {
+        }
+        public CreateResponse(T resource) : base(resource, HttpStatusCode.Created)
+        {
+            if (resource is IApiResource)
+            {
+                var apiResource = resource as IApiResource;
+                var resourceLocation = new ResourceLocation();
+                apiResource.SetLocation(resourceLocation);
+                Headers.Location = resourceLocation.Location;
+            }
         }
     }
 }
