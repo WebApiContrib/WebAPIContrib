@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Web.Http;
 using NUnit.Framework;
 using Should;
 using WebApiContrib.ResponseMessages;
@@ -39,9 +40,19 @@ namespace WebApiContribTests.ResponseMessages
         private class TestResource : IApiResource
         {
             public Uri Location { get; set; }
+
             public void SetLocation(ResourceLocation location)
             {
+                location.Set(new Uri("http://foo.com"));
                 Location = location.Location;
+            }
+        }
+
+        private class TestController : ApiController
+        {
+            public TestResource Get(int id)
+            {
+                return new TestResource();
             }
         }
 
