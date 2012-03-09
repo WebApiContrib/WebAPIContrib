@@ -47,14 +47,5 @@ namespace WebApiContribTests.ResponseMessages
                 Location = location.Location;
             }
         }
-
-        private class TestController : ApiController
-        {
-            public TestResource Get(int id)
-            {
-                return new TestResource();
-            }
-        }
-
     }
 }
