@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using System.Web.Http;
+using System.Web.Http.Controllers;
 using NUnit.Framework;
 using Should;
 using WebApiContrib.ResponseMessages;
@@ -21,7 +21,8 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_location_header_to_the_message_when_response_contains_a_api_resource()
         {
             var apiResource = new TestResource();
-            var response = new CreateResponse(apiResource);
+
+            var response = new CreateResponse(apiResource, new HttpControllerContext());
             response.StatusCode.ShouldEqual(HttpStatusCode.Created);
             response.Headers.Location.ShouldEqual(apiResource.Location);
         }
@@ -30,7 +31,7 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_content_to_message_when_its_a_typed_response_message()
         {
             var apiResource = new TestResource();
-            var response = new CreateResponse<TestResource>(apiResource);
+            var response = new CreateResponse<TestResource>(apiResource, new HttpControllerContext());
             response.StatusCode.ShouldEqual(HttpStatusCode.Created);
             response.Headers.Location.ShouldEqual(apiResource.Location);
             response.Content.ShouldNotBeNull();
