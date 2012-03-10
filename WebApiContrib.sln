@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib", "src\WebApi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContribTests", "src\WebApiContribTests\WebApiContribTests.csproj", "{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager", "..\Presentations\WebAPI\ContactManager\C#\ContactManager\ContactManager.csproj", "{DF4E89A3-079C-4C07-85D7-FF7E2CB1540A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +19,6 @@ Global
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF4E89A3-079C-4C07-85D7-FF7E2CB1540A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF4E89A3-079C-4C07-85D7-FF7E2CB1540A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF4E89A3-079C-4C07-85D7-FF7E2CB1540A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF4E89A3-079C-4C07-85D7-FF7E2CB1540A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
