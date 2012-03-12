@@ -7,10 +7,10 @@ using ContactManager.Web.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ninject;
-using Thinktecture.Web.Http.DI;
 using Thinktecture.Web.Http.Filters;
 using Thinktecture.Web.Http.Formatters;
 using Thinktecture.Web.Http.Handlers;
+using Thinktecture.Web.Http.IoC;
 using Thinktecture.Web.Http.Selectors;
 
 namespace ContactManager.Web
@@ -46,7 +46,7 @@ namespace ContactManager.Web
             kernel.Bind<IContactRepository>().ToConstant(new InMemoryContactRepository());
             kernel.Bind<IHttpActionSelector>().ToConstant(new CorsActionSelector());
 
-            config.ServiceResolver.SetResolver(new NinjectResolver(kernel));
+            config.ServiceResolver.SetResolver(new NinjectResolver(kernel));            
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

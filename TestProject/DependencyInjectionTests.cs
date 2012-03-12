@@ -6,7 +6,7 @@ using ContactManager.Models;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
-using Thinktecture.Web.Http.DI;
+using Thinktecture.Web.Http.IoC;
 
 namespace TestProject
 {

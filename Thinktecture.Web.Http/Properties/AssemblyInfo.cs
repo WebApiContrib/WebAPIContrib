@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Thinktecture.Web.Http")]
-[assembly: AssemblyDescription("The Thinktecture.Web.Http library provides convenience extensions from the community for the ASP.NET Web API framework (Beta 1) - like custom media type formatters, message handlers, action filters, dependency injection helpers and more.")]
+[assembly: AssemblyDescription("The Thinktecture.Web.Http library provides convenience extensions from the community for the ASP.NET Web API framework (Beta 1) - like custom media type formatters, message handlers, action filters and more.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("thinktecture")]
 [assembly: AssemblyProduct("Thinktecture.Web.Http")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.2.0.0")]

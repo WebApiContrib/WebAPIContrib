@@ -36,7 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\Samples\ContactManager.Web\Bin\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.6.1.841\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -80,6 +83,18 @@
     <ProjectReference Include="..\Samples\ContactManager.Models\ContactManager.Models.csproj">
       <Project>{A9E9CB97-9693-4311-A872-D710CB1EB060}</Project>
       <Name>ContactManager.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thinktecture.Web.Http.IoC.AutoFac\Thinktecture.Web.Http.IoC.AutoFac.csproj">
+      <Project>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</Project>
+      <Name>Thinktecture.Web.Http.IoC.AutoFac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thinktecture.Web.Http.IoC.Ninject\Thinktecture.Web.Http.IoC.Ninject.csproj">
+      <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
+      <Name>Thinktecture.Web.Http.IoC.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Thinktecture.Web.Http.IoC.Unity\Thinktecture.Web.Http.IoC.Unity.csproj">
+      <Project>{543DD4BC-C610-4381-82D9-2BA3686AEE0F}</Project>
+      <Name>Thinktecture.Web.Http.IoC.Unity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Thinktecture.Web.Http\Thinktecture.Web.Http.csproj">
       <Project>{915BB2DC-0A07-4DBB-802B-C299B3A492EC}</Project>

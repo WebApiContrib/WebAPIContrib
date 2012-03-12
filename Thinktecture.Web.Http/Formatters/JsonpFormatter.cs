@@ -41,8 +41,10 @@ namespace Thinktecture.Web.Http.Formatters
                             var writer = new StreamWriter(stream);
                             writer.Write(callback + "(");
                             writer.Flush();
+
                             base.OnWriteToStreamAsync(type, value, stream, contentHeaders,
                                                     formatterContext, transportContext).Wait();
+                           
                             writer.Write(")");
                             writer.Flush();
                         });

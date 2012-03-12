@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ContactManager.Models")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Thinktecture.Web.Http.IoC.Unity")]
+[assembly: AssemblyDescription("The Thinktecture.Web.Http.IoC.Unity library provides dependency injection helpers for ASP.NET Web API.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ContactManager.Models")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCompany("thinktecture")]
+[assembly: AssemblyProduct("Thinktecture.Web.Http.IoC.Unity")]
+[assembly: AssemblyCopyright("Copyright © thinktecture 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a67d3220-292f-485e-a8af-b434c7834e1a")]
+[assembly: Guid("482daee8-0da0-479e-bb86-582bc866a839")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.2.0.0")]
+[assembly: AssemblyFileVersion("0.2.0.0")]

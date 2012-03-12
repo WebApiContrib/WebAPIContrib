@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net;
-using System.IO.Compression;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Thinktecture.Web.Http.Handlers
 {
@@ -33,7 +30,12 @@ namespace Thinktecture.Web.Http.Handlers
             }
             else
             {
+                HttpContent originalContent = request.Content;
+
                 var incomingStream = request.Content.ReadAsStreamAsync().Result;
+
+                incomingStream.Position = 0;
+
                 // we would need to store the decompressed stream
                 var outputStream = new MemoryStream(4096);
 
@@ -41,9 +43,17 @@ namespace Thinktecture.Web.Http.Handlers
                 {
                     decompressedStream.CopyTo(outputStream);
                 }
-                
+
                 outputStream.Position = 0;
-                request.Content = new StreamContent(outputStream);
+
+                var newContent = new StreamContent(outputStream);
+
+                foreach (KeyValuePair<string, IEnumerable<string>> header in originalContent.Headers)
+                {
+                    newContent.Headers.AddWithoutValidation(header.Key, header.Value);
+                }
+
+                request.Content = newContent;
             }
 
             return base.SendAsync(request, cancellationToken).ContinueWith<HttpResponseMessage>((responseToCompleteTask) =>
@@ -59,7 +69,7 @@ namespace Thinktecture.Web.Http.Handlers
 
                 return response;
             },
-            TaskContinuationOptions.OnlyOnRanToCompletion);            
+            TaskContinuationOptions.OnlyOnRanToCompletion);
         }
     }
 }

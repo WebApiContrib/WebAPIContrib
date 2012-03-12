@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System;
 
 namespace Thinktecture.Web.Http
 {
@@ -47,7 +47,7 @@ namespace Thinktecture.Web.Http
 
             return false;
         }
-        
+
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
             Stream compressedStream = null;

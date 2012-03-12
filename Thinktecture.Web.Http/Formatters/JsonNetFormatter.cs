@@ -43,17 +43,25 @@ namespace Thinktecture.Web.Http.Formatters
                                                               FormatterContext formatterContext)
         {
             var serializer = JsonSerializer.Create(jsonSerializerSettings);
+            var tcs = new TaskCompletionSource<object>();
 
-            return Task.Factory.StartNew(() =>
+            try
+            {
+                using (var streamReader = new StreamReader(stream, Encoding))
+                {
+                    using (var jsonTextReader = new JsonTextReader(streamReader))
                     {
-                        using (var streamReader = new StreamReader(stream, Encoding))
-                        {
-                            using (var jsonTextReader = new JsonTextReader(streamReader))
-                            {
-                                return serializer.Deserialize(jsonTextReader, type);
-                            }
-                        }
-                    });
+                        var result = serializer.Deserialize(jsonTextReader, type);
+                        tcs.SetResult(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+
+            return tcs.Task;
         }
 
         protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream,
@@ -62,17 +70,24 @@ namespace Thinktecture.Web.Http.Formatters
                                                      TransportContext transportContext)
         {
             var serializer = JsonSerializer.Create(jsonSerializerSettings);
+            var tcs = new TaskCompletionSource<object>();
 
-            return Task.Factory.StartNew(() =>
+            try
+            {
+                using (var streamWriter = new StreamWriter(stream, Encoding))
+                {
+                    using (var jsonTextWriter = new JsonTextWriter(streamWriter))
                     {
-                        using (var streamWriter = new StreamWriter(stream, Encoding))
-                        {
-                            using (var jsonTextWriter = new JsonTextWriter(streamWriter))
-                            {
-                                serializer.Serialize(jsonTextWriter, value);
-                            }
-                        }
-                    });
+                        serializer.Serialize(jsonTextWriter, value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+
+            return tcs.Task;
         }
 
         private static bool CanReadTypeCore(Type type)

@@ -12,11 +12,11 @@ namespace ContactManager.APIs
     // NOTE: Maybe it is not a good idea to expose the 'model' in the service/API.
     // Consider using use-case-based DTOs (http://davybrion.com/blog/2012/02/dtos-should-transfer-data-not-entities).
     public class ContactsController : ApiController
-    {
+    {        
         private readonly IContactRepository repository;
 
         public ContactsController(IContactRepository repository)
-        {
+        {            
             this.repository = repository;
         }
 

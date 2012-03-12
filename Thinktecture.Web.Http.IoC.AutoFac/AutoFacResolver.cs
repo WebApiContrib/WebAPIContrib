@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Services;
 using Autofac;
 
-namespace Thinktecture.Web.Http.DI
+namespace Thinktecture.Web.Http.IoC
 {
     public class AutoFacResolver : IDependencyResolver
     {
