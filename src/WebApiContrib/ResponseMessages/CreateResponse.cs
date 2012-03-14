@@ -1,24 +1,20 @@
 ﻿using System.Net;
-using System.Net.Http;
 
 namespace WebApiContrib.ResponseMessages
 {
-    public class CreateResponse : HttpResponseMessage
+    public class CreateResponse : ResourceResponseBase
     {
          public CreateResponse() : base(HttpStatusCode.Created)
          {
 
          }
 
-        public CreateResponse(IApiResource resource) : this()
+        public CreateResponse(IApiResource resource) : base(HttpStatusCode.Created, resource)
         {
-            var location = new ResourceLocation();
-            resource.SetLocation(location);
-            Headers.Location = location.Location;
         }
     }
 
-    public class CreateResponse<T> : HttpResponseMessage<T>
+    public class CreateResponse<T> : ResponseBase<T>
     {
         public CreateResponse() : base(HttpStatusCode.Created)
         {
@@ -26,13 +22,6 @@ namespace WebApiContrib.ResponseMessages
 
         public CreateResponse(T resource) : base(resource, HttpStatusCode.Created)
         {
-            if (resource is IApiResource)
-            {
-                var apiResource = resource as IApiResource;
-                var resourceLocation = new ResourceLocation();
-                apiResource.SetLocation(resourceLocation);
-                Headers.Location = resourceLocation.Location;
-            }
         }
     }
 }

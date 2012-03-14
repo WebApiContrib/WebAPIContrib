@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using NUnit.Framework;
 using Should;
 using WebApiContrib.ResponseMessages;
@@ -6,12 +6,13 @@ using WebApiContrib.ResponseMessages;
 namespace WebApiContribTests.ResponseMessages
 {
     [TestFixture]
-    public class CreateResponseMessageTests : HttpResponseMessageTester
+    public class OkResponseMessageTests : HttpResponseMessageTester
     {
         [Test]
-        public void Should_retrun_an_http_response_message_with_status_Created()
+        public void Should_return_an_http_response_message_with_status_Found()
         {
-            var response = new CreateResponse();
+            var response = new OkResponse();
+
             AssertExpectedStatus(response);
         }
 
@@ -19,8 +20,8 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_location_header_to_the_message_when_response_contains_a_api_resource()
         {
             var apiResource = new TestResource();
+            var response = new OkResponse<TestResource>(apiResource);
 
-            var response = new CreateResponse(apiResource);
             AssertExpectedStatus(response);
             response.Headers.Location.ShouldEqual(apiResource.Location);
         }
@@ -29,7 +30,8 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_content_to_message_when_its_a_typed_response_message()
         {
             var apiResource = new TestResource();
-            var response = new CreateResponse<TestResource>(apiResource);
+            var response = new OkResponse<TestResource>(apiResource);
+
             AssertExpectedStatus(response);
             response.Headers.Location.ShouldEqual(apiResource.Location);
             response.Content.ShouldNotBeNull();
@@ -38,7 +40,7 @@ namespace WebApiContribTests.ResponseMessages
 
         protected override HttpStatusCode? ExpectedStatusCode
         {
-            get { return HttpStatusCode.Created; }
+            get { return HttpStatusCode.OK; }
         }
     }
 }
