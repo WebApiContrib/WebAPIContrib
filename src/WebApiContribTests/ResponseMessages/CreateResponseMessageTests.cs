@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Web.Http.Controllers;
 using NUnit.Framework;
 using Should;
 using WebApiContrib.ResponseMessages;
@@ -22,7 +21,7 @@ namespace WebApiContribTests.ResponseMessages
         {
             var apiResource = new TestResource();
 
-            var response = new CreateResponse(apiResource, new HttpControllerContext());
+            var response = new CreateResponse(apiResource);
             response.StatusCode.ShouldEqual(HttpStatusCode.Created);
             response.Headers.Location.ShouldEqual(apiResource.Location);
         }
@@ -31,7 +30,7 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_content_to_message_when_its_a_typed_response_message()
         {
             var apiResource = new TestResource();
-            var response = new CreateResponse<TestResource>(apiResource, new HttpControllerContext());
+            var response = new CreateResponse<TestResource>(apiResource);
             response.StatusCode.ShouldEqual(HttpStatusCode.Created);
             response.Headers.Location.ShouldEqual(apiResource.Location);
             response.Content.ShouldNotBeNull();

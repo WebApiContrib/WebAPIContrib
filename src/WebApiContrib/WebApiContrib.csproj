@@ -71,7 +71,6 @@
     <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="ResponseMessages\IApiResource.cs" />
     <Compile Include="Internal\ReflectionHelper.cs" />
-    <Compile Include="Internal\RoutingHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

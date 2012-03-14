@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http;
-using System.Web.Http.Controllers;
 
 namespace WebApiContrib.ResponseMessages
 {
@@ -11,9 +10,9 @@ namespace WebApiContrib.ResponseMessages
 
          }
 
-        public CreateResponse(IApiResource resource, HttpControllerContext controllerContext) : this()
+        public CreateResponse(IApiResource resource) : this()
         {
-            var location = new ResourceLocation(controllerContext);
+            var location = new ResourceLocation();
             resource.SetLocation(location);
             Headers.Location = location.Location;
         }
@@ -25,12 +24,12 @@ namespace WebApiContrib.ResponseMessages
         {
         }
 
-        public CreateResponse(T resource, HttpControllerContext controllerContext) : base(resource, HttpStatusCode.Created)
+        public CreateResponse(T resource) : base(resource, HttpStatusCode.Created)
         {
             if (resource is IApiResource)
             {
                 var apiResource = resource as IApiResource;
-                var resourceLocation = new ResourceLocation(controllerContext);
+                var resourceLocation = new ResourceLocation();
                 apiResource.SetLocation(resourceLocation);
                 Headers.Location = resourceLocation.Location;
             }
