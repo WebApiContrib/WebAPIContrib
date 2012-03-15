@@ -10,7 +10,7 @@ namespace WebApiContribTests.ResponseMessages
     public class MovedPermanentlyResponseMessageTests : HttpResponseMessageTester
     {
         [Test]
-        public void Should_retrun_an_http_response_message_with_status_Created()
+        public void Should_return_an_http_response_message_with_expected_status()
         {
             var response = new MovedPermanentlyResponse();
             AssertExpectedStatus(response);
