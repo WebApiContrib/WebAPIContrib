@@ -1,19 +1,16 @@
 using System.Net;
+using System.Net.Http;
 
 namespace WebApiContrib.ResponseMessages
 {
-    public class OkResponse : ResourceResponseBase
+    public class OkResponse : HttpResponseMessage
     {
         public OkResponse() : base(HttpStatusCode.OK)
         {
         }
-
-        public OkResponse(IApiResource resource) : base(HttpStatusCode.OK, resource)
-        {
-        }
     }
 
-    public class OkResponse<T> : ResponseBase<T>
+    public class OkResponse<T> : HttpResponseMessage<T>
     {
         public OkResponse() : base(HttpStatusCode.OK)
         {
