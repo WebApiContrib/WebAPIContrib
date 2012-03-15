@@ -6,12 +6,12 @@ using WebApiContrib.ResponseMessages;
 namespace WebApiContribTests.ResponseMessages
 {
     [TestFixture]
-    public class CreateResponseMessageTests : HttpResponseMessageTester
+    public class NotModifiedResponseMessageTests : HttpResponseMessageTester
     {
         [Test]
         public void Should_return_an_http_response_message_with_expected_status()
         {
-            var response = new CreateResponse();
+            var response = new NotModifiedResponse();
             AssertExpectedStatus(response);
         }
 
@@ -20,7 +20,7 @@ namespace WebApiContribTests.ResponseMessages
         {
             var apiResource = new TestResource();
 
-            var response = new CreateResponse(apiResource);
+            var response = new NotModifiedResponse(apiResource);
             AssertExpectedStatus(response);
             response.Headers.Location.ShouldEqual(apiResource.Location);
         }
@@ -29,16 +29,16 @@ namespace WebApiContribTests.ResponseMessages
         public void Should_add_content_to_message_when_its_a_typed_response_message()
         {
             var apiResource = new TestResource();
-            var response = new CreateResponse<TestResource>(apiResource);
+            var response = new NotModifiedResponse<TestResource>(apiResource);
             AssertExpectedStatus(response);
             response.Headers.Location.ShouldEqual(apiResource.Location);
             response.Content.ShouldNotBeNull();
-            response.Content.ObjectType.ShouldEqual(typeof(TestResource));
+            response.Content.ObjectType.ShouldEqual(typeof (TestResource));
         }
 
         protected override HttpStatusCode? ExpectedStatusCode
         {
-            get { return HttpStatusCode.Created; }
+            get { return HttpStatusCode.NotModified; }
         }
     }
 }
