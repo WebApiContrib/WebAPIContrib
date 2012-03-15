@@ -55,6 +55,12 @@
     <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
     <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
+    <Compile Include="ResponseMessages\HttpResponseMessageTester.cs" />
+    <Compile Include="ResponseMessages\NotModifiedResponseTests.cs" />
+    <Compile Include="ResponseMessages\OkResponseMessageTests.cs" />
+    <Compile Include="ResponseMessages\MovedPermanentlyResponseMessageTests.cs" />
+    <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
+    <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
