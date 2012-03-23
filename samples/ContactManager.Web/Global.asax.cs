@@ -7,6 +7,7 @@ using ContactManager.Web.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ninject;
+using Thinktecture.Web.Http.Data;
 using Thinktecture.Web.Http.Filters;
 using Thinktecture.Web.Http.Formatters;
 using Thinktecture.Web.Http.Handlers;
@@ -29,7 +30,10 @@ namespace ContactManager.Web
             config.Formatters.Add(new ContactCalendarFormatter());
             
             config.MessageHandlers.Add(new UriFormatExtensionHandler(new UriExtensionMappings()));
-            config.MessageHandlers.Add(new LoggingHandler());
+            
+            var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
+            config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
+
             config.MessageHandlers.Add(new NotAcceptableHandler());
 
             ConfigureResolver(config);
