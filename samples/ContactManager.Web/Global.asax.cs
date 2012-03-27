@@ -31,8 +31,8 @@ namespace ContactManager.Web
             
             config.MessageHandlers.Add(new UriFormatExtensionHandler(new UriExtensionMappings()));
             
-            var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
-            config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
+            //var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
+            //config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
 
             config.MessageHandlers.Add(new NotAcceptableHandler());
 

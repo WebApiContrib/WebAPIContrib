@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using ProtoBuf;
+using System.Globalization;
 
 namespace ContactManager.Models
 {
@@ -17,6 +18,11 @@ namespace ContactManager.Models
         public string Zip { get; set; }
         public string Email { get; set; }
         public string Twitter { get; set; }
-        public DateTime Birthday { get; set; }        
+        public DateTime Birthday { get; set; }
+        public string Self
+        {
+            get { return string.Format(CultureInfo.CurrentCulture, "contacts/{0}", this.Id); }
+            set { }
+        }
     }
 }

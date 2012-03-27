@@ -79,6 +79,7 @@ namespace Thinktecture.Web.Http.Formatters
                     using (var jsonTextWriter = new JsonTextWriter(streamWriter))
                     {
                         serializer.Serialize(jsonTextWriter, value);
+                        tcs.SetResult(null);
                     }
                 }
             }
