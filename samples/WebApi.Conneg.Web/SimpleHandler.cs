@@ -42,14 +42,13 @@ namespace WebApi.Conneg.Web
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			return Task.Factory.StartNew(() =>
+			var mediaType = _formatterSelector.Negotiate(_formatters.Keys, request.Headers.Accept);
+			var tcs = new TaskCompletionSource<HttpResponseMessage>();
+			tcs.SetResult(new HttpResponseMessage
 			{
-				var mediaType = _formatterSelector.Negotiate(_formatters.Keys, request.Headers.Accept);
-				return new HttpResponseMessage
-				{
-					Content = ApplyTemplate("value", mediaType),
-				};
-			}, cancellationToken);
+				Content = ApplyTemplate("value", mediaType),
+			});
+			return tcs.Task;
 		}
 
 		private HttpContent ApplyTemplate(string content, string mediaType)
