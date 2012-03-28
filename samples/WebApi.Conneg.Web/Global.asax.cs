@@ -7,9 +7,7 @@ namespace WebApi.Conneg.Web
 	{
 		public static void RegisterApis(HttpConfiguration config)
 		{
-			// NOTE: There is nothing similar to the MVC {path*} that appears to work.
-			config.Routes.MapHttpRoute("Root", "{path}", new { path = RouteParameter.Optional });
-			config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+			config.Routes.MapHttpRoute("Root", "{*path}", new { path = RouteParameter.Optional });
 		}
 
 		protected void Application_Start()

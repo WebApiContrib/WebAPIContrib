@@ -4,6 +4,7 @@ using System.Net.Http.Formatting;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WebApiContrib.Conneg;
 
 namespace WebApi.Conneg.Web
 {

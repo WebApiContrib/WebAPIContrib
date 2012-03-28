@@ -107,15 +107,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
+      <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
+      <Name>WebApiContrib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebApi.Conneg\WebApi.Conneg.csproj">
-      <Project>{9AD615A7-5229-471A-A86E-06184BD69A8D}</Project>
-      <Name>WebApi.Conneg</Name>
-    </ProjectReference>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
