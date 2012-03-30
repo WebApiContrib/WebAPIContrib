@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\WebApiContrib\WebApiContrib.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
       <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
       <Name>WebApiContrib</Name>
     </ProjectReference>
