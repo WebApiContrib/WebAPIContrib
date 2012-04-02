@@ -5,8 +5,8 @@ using System.Net.Http.Formatting;
 using System.Text;
 using NUnit.Framework;
 using ServiceStack.Text;
-using WebApiContrib.MediaTypeFormatters;
 using Should;
+using WebApiContrib.Formatting;
 
 namespace WebApiContribTests.MediaTypeFormatters
 {
