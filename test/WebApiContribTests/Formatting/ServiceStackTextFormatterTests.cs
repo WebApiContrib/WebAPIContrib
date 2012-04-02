@@ -11,12 +11,12 @@ using WebApiContrib.Formatting;
 namespace WebApiContribTests.MediaTypeFormatters
 {
     [TestFixture]
-    public class ServiceStackTextJsonMediaTypeFormatterTests
+    public class ServiceStackTextFormatterTests
     {
         [Test]
         public void Should_support_only_json_media_type()
         {
-            var formatter = new ServiceStackTextJsonMediaTypeFormatter();
+            var formatter = new ServiceStackTextFormatter();
 
             formatter.SupportedMediaTypes.Count.ShouldEqual(1);
             formatter.SupportedMediaTypes.ShouldContain(StandardMediaTypeHeaderValues.ApplicationJson);
@@ -25,7 +25,7 @@ namespace WebApiContribTests.MediaTypeFormatters
         [Test]
         public void Should_write_serialized_object_to_stream()
         {
-            var formatter = new ServiceStackTextJsonMediaTypeFormatter();
+            var formatter = new ServiceStackTextFormatter();
             var value = GetTestObject();
 
             var contentHeader = new StringContent(string.Empty).Headers;
@@ -49,7 +49,7 @@ namespace WebApiContribTests.MediaTypeFormatters
         [Test]
         public void Should_write_serialized_object_to_stream_using_date_handler()
         {
-            var formatter = new ServiceStackTextJsonMediaTypeFormatter(JsonDateHandler.TimestampOffset);
+            var formatter = new ServiceStackTextFormatter(JsonDateHandler.TimestampOffset);
             var value = GetTestObject();
 
             var contentHeader = new StringContent(string.Empty).Headers;
@@ -72,7 +72,7 @@ namespace WebApiContribTests.MediaTypeFormatters
         [Test]
         public void Should_read_serialized_object_from_stream()
         {
-            var formatter = new ServiceStackTextJsonMediaTypeFormatter();
+            var formatter = new ServiceStackTextFormatter();
             var value = GetTestObject();
             var utf8Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
 
@@ -105,7 +105,7 @@ namespace WebApiContribTests.MediaTypeFormatters
         [Test]
         public void Should_read_serialized_object_from_stream_using_date_handler()
         {
-            var formatter = new ServiceStackTextJsonMediaTypeFormatter(JsonDateHandler.DCJSCompatible);
+            var formatter = new ServiceStackTextFormatter(JsonDateHandler.DCJSCompatible);
             var value = GetTestObject();
             var utf8Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
 
