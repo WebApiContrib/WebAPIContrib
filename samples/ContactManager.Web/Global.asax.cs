@@ -7,12 +7,12 @@ using ContactManager.Web.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ninject;
-using Thinktecture.Web.Http.Data;
 using Thinktecture.Web.Http.Filters;
 using Thinktecture.Web.Http.Formatters;
 using Thinktecture.Web.Http.Handlers;
 using Thinktecture.Web.Http.IoC;
 using Thinktecture.Web.Http.Selectors;
+using WebApiContrib.MessageHandlers;
 
 namespace ContactManager.Web
 {
@@ -34,7 +34,7 @@ namespace ContactManager.Web
             //var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
             //config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
 
-            config.MessageHandlers.Add(new NotAcceptableHandler());
+            config.MessageHandlers.Add(new NotAcceptableMessageHandler());
 
             ConfigureResolver(config);
 

@@ -8,8 +8,8 @@
     <ProjectGuid>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Thinktecture.Web.Http.IoC.AutoFac</RootNamespace>
-    <AssemblyName>Thinktecture.Web.Http.IoC.AutoFac</AssemblyName>
+    <RootNamespace>WebApiContrib.IoC.AutoFac</RootNamespace>
+    <AssemblyName>WebApiContrib.IoC.AutoFac</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

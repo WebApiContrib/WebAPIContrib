@@ -85,21 +85,21 @@
       <Project>{A9E9CB97-9693-4311-A872-D710CB1EB060}</Project>
       <Name>ContactManager.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Thinktecture.Web.Http.IoC.AutoFac\Thinktecture.Web.Http.IoC.AutoFac.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj">
       <Project>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</Project>
-      <Name>Thinktecture.Web.Http.IoC.AutoFac</Name>
+      <Name>WebApiContrib.IoC.AutoFac</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Thinktecture.Web.Http.IoC.Ninject\Thinktecture.Web.Http.IoC.Ninject.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
       <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
-      <Name>Thinktecture.Web.Http.IoC.Ninject</Name>
+      <Name>WebApiContrib.IoC.Ninject</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Thinktecture.Web.Http.IoC.Unity\Thinktecture.Web.Http.IoC.Unity.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.Unity\WebApiContrib.IoC.Unity.csproj">
       <Project>{543DD4BC-C610-4381-82D9-2BA3686AEE0F}</Project>
-      <Name>Thinktecture.Web.Http.IoC.Unity</Name>
+      <Name>WebApiContrib.IoC.Unity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\srcThinktecture.Web.Http\Thinktecture.Web.Http.csproj">
-      <Project>{915BB2DC-0A07-4DBB-802B-C299B3A492EC}</Project>
-      <Name>Thinktecture.Web.Http</Name>
+    <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
+      <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
+      <Name>WebApiContrib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
