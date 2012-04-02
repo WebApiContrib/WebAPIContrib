@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -60,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internal\MediaTypeConstants.cs" />
+    <Compile Include="MediaTypeFormatters\ServiceStackTextJsonMediaTypeFormatter.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
     <Compile Include="MessageHandlers\SelfHostConsoleOutputHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
