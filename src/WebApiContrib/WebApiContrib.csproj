@@ -36,9 +36,21 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\packages\protobuf-net.2.0.0.480\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Json">
       <HintPath>..\..\packages\System.Json.4.0.20126.16343\lib\net40\System.Json.dll</HintPath>
@@ -58,27 +70,47 @@
     <Reference Include="System.Web.Http.Common">
       <HintPath>..\..\packages\System.Web.Http.Common.4.0.20126.16343\lib\net40\System.Web.Http.Common.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AspNetWebApi.SelfHost.4.0.20126.16343\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\..\packages\AspNetWebApi.4.0.20126.16343\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formatting\JsonpFormatter.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="MediaTypeFormatters\ServiceStackTextJsonMediaTypeFormatter.cs" />
+    <Compile Include="Conneg\ContentNegotiation.cs" />
+    <Compile Include="Content\CompressedContent.cs" />
+    <Compile Include="Content\SimpleObjectContent.cs" />
+    <Compile Include="Data\ILoggingRepository.cs" />
+    <Compile Include="Filters\EnableCorsAttribute.cs" />
+    <Compile Include="Filters\ValidationAttribute.cs" />
+    <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatter.cs" />
+    <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Internal\ReflectionHelper.cs" />
+    <Compile Include="MessageHandlers\EncodingHandler.cs" />
+    <Compile Include="MessageHandlers\LoggingHandler.cs" />
+    <Compile Include="MessageHandlers\MethodOverrideHandler.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
     <Compile Include="MessageHandlers\SelfHostConsoleOutputHandler.cs" />
+    <Compile Include="MessageHandlers\SimpleCorsHandler.cs" />
+    <Compile Include="MessageHandlers\UriExtensionMappings.cs" />
+    <Compile Include="MessageHandlers\UriFormatExtensionHandler.cs" />
+    <Compile Include="Messages\ApiLoggingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseMessages\CreateResponse.cs" />
-    <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="ResponseMessages\MovedPermanentlyResponse.cs" />
     <Compile Include="ResponseMessages\OkResponse.cs" />
     <Compile Include="ResponseMessages\IApiResource.cs" />
-    <Compile Include="Internal\ReflectionHelper.cs" />
     <Compile Include="ResponseMessages\RedirectResponse.cs" />
     <Compile Include="ResponseMessages\ResourceIdentifierBase.cs" />
     <Compile Include="ResponseMessages\ResourceResponseBase.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
-    <Compile Include="Conneg\ContentNegotiation.cs" />
+    <Compile Include="Selectors\CorsActionSelector.cs" />
+    <Compile Include="SelfHost\SslHttpSelfHostConfiguration.cs" />
+    <Compile Include="ReadAsSingleObjectPolicy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

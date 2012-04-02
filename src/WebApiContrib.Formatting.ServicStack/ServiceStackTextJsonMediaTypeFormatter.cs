@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ServiceStack.Text;
 using WebApiContrib.Internal;
 
-namespace WebApiContrib.MediaTypeFormatters
+namespace WebApiContrib.Formatting
 {
     public class ServiceStackTextJsonMediaTypeFormatter : MediaTypeFormatter
     {

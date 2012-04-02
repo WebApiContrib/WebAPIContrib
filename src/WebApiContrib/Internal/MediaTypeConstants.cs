@@ -2,7 +2,7 @@
 
 namespace WebApiContrib.Internal
 {
-    internal static class MediaTypeConstants
+    public static class MediaTypeConstants
     {
         private static readonly MediaTypeHeaderValue _applicationJson = new MediaTypeHeaderValue("application/json");
 
