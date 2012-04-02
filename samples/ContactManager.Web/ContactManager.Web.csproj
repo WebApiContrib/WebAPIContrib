@@ -224,6 +224,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.JsonNet\WebApiContrib.Formatting.JsonNet.csproj">
+      <Project>{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}</Project>
+      <Name>WebApiContrib.Formatting.JsonNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
       <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
       <Name>WebApiContrib.IoC.Ninject</Name>
