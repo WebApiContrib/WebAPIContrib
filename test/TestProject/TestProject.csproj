@@ -101,6 +101,10 @@
       <Project>{543DD4BC-C610-4381-82D9-2BA3686AEE0F}</Project>
       <Name>WebApiContrib.IoC.Unity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
+      <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
+      <Name>WebApiContrib.Testing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
       <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
       <Name>WebApiContrib</Name>

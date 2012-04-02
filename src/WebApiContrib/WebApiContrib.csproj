@@ -109,10 +109,6 @@
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
     <Compile Include="SelfHost\SslHttpSelfHostConfiguration.cs" />
-    <Compile Include="Testing\DummyLoggingRepository.cs" />
-    <Compile Include="Testing\FakeController.cs" />
-    <Compile Include="Testing\FakeHandler.cs" />
-    <Compile Include="Testing\TestFactory.cs" />
     <Compile Include="ReadAsSingleObjectPolicy.cs" />
   </ItemGroup>
   <ItemGroup>
