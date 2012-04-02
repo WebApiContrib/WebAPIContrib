@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Ninject",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Unity", "src\WebApiContrib.IoC.Unity\WebApiContrib.IoC.Unity.csproj", "{543DD4BC-C610-4381-82D9-2BA3686AEE0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.JavaScriptSerializer", "src\WebApiContrib.Formatting.JavaScriptSerializer\WebApiContrib.Formatting.JavaScriptSerializer.csproj", "{9641B6A6-278A-479F-B9F5-46B2E6B9657E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{543DD4BC-C610-4381-82D9-2BA3686AEE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{543DD4BC-C610-4381-82D9-2BA3686AEE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{543DD4BC-C610-4381-82D9-2BA3686AEE0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
