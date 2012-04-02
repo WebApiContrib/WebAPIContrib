@@ -8,17 +8,17 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using ContactManager.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 
 namespace TestProject
 {
-    [TestClass]
+    [TestFixture]
     public class EncodingTests
     {
-        [TestMethod]
+        [Test]
         public void Post_Lots_Of_Contacts_Using_EncodingHandler_Test()
         {
             var config = new HttpConfiguration();

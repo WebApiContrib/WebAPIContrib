@@ -4,15 +4,15 @@ using System.Json;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WebApiContrib.Formatting;
 
 namespace MediaTypeFormatters.Test
 {
-    [TestClass]
+    [TestFixture]
     public class ReadWriteFormUrlEncodedFormatterTests
     {
-        [TestMethod]
+        [Test]
         public void FlatObjectTests()
         {
             TestJsonObjectAndFormsEncodedConversion("a=1", new JsonObject { { "a", 1 } }, false);
@@ -22,14 +22,14 @@ namespace MediaTypeFormatters.Test
             TestJsonObjectAndFormsEncodedConversion("a=1&b=2.5", new JsonObject { { "a", "1" }, { "b", "2.5" } }, true);
         }
 
-        [TestMethod]
+        [Test]
         public void SimpleArrays()
         {
             TestJsonObjectAndFormsEncodedConversion("a[]=1&a[]=2", new JsonObject { { "a", new JsonArray("1", "2") } }, true);
             TestJsonObjectAndFormsEncodedConversion("a[]=1&a[]=2&b=3", new JsonObject { { "a", new JsonArray("1", "2") }, { "b", "3" } }, true);
         }
 
-        [TestMethod]
+        [Test]
         public void MultiDimArrays()
         {
             TestJsonObjectAndFormsEncodedConversion("a[0][0][]=1", (JsonObject)JsonValue.Parse("{\"a\":[[[\"1\"]]]}"), true);
@@ -40,7 +40,7 @@ namespace MediaTypeFormatters.Test
                 (JsonObject)JsonValue.Parse("{'a':[['1','2','3'],['4']]}".Replace('\'', '\"')), true);
         }
 
-        [TestMethod]
+        [Test]
         public void DeepObjects()
         {
             TestJsonObjectAndFormsEncodedConversion("a[b]=1&a[c]=2&a[d][]=3&a[e][f]=4",
@@ -48,7 +48,7 @@ namespace MediaTypeFormatters.Test
                     .Replace('\'', '\"')), true);
         }
 
-        [TestMethod]
+        [Test]
         public void NullValues()
         {
             TestJsonObjectAndFormsEncodedConversion("a[b]=1&a[d][]=3",

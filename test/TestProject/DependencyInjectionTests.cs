@@ -4,7 +4,7 @@ using System.Web.Http.Controllers;
 using Autofac;
 using ContactManager.Models;
 using Microsoft.Practices.Unity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Ninject;
 using WebApiContrib.IoC.AutoFac;
 using WebApiContrib.IoC.Ninject;
@@ -12,10 +12,10 @@ using WebApiContrib.IoC.Unity;
 
 namespace TestProject
 {
-    [TestClass]
+    [TestFixture]
     public class DependencyInjectionTests
     {
-        [TestMethod]
+        [Test]
         public void AutoFacResolver_Resolves_Registered_ContactRepository_Test()
         {          
             var builder = new ContainerBuilder();
@@ -28,7 +28,7 @@ namespace TestProject
             Assert.IsNotNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void AutoFacResolver_DoesNot_Resolve_NonRegistered_ContactRepository_Test()
         {
             var builder = new ContainerBuilder();
@@ -40,7 +40,7 @@ namespace TestProject
             Assert.IsNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void AutoFacResolver_Resolves_Registered_ContactRepository_ThroughHost_Test()
         {
             var config = new HttpConfiguration();
@@ -62,7 +62,7 @@ namespace TestProject
         }
 
 
-        [TestMethod]
+        [Test]
         public void AutoFacResolver_In_HttpConfig_DoesNot_Resolve_PipelineType_But_Fallback_To_DefaultResolver_Test()
         {            
             var builder = new ContainerBuilder();
@@ -75,7 +75,7 @@ namespace TestProject
             Assert.IsNotNull(instance);
         }
         
-        [TestMethod]
+        [Test]
         public void NinjectResolver_Resolves_Registered_ContactRepository_Test()
         {
             var kernel = new StandardKernel();
@@ -87,7 +87,7 @@ namespace TestProject
             Assert.IsNotNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void NinjectResolver_DoesNot_Resolve_NonRegistered_ContactRepository_Test()
         {
             var kernel = new StandardKernel();
@@ -98,7 +98,7 @@ namespace TestProject
             Assert.IsNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void NinjectResolver_Resolves_Registered_ContactRepository_Through_ContactsController_Test()
         {
             var config = new HttpConfiguration();
@@ -118,7 +118,7 @@ namespace TestProject
             Assert.IsNotNull(response.Content);
         }
 
-        [TestMethod]
+        [Test]
         public void NinjectResolver_In_HttpConfig_DoesNot_Resolve_PipelineType_But_Fallback_To_DefaultResolver_Test()
         {
             var kernel = new StandardKernel();
@@ -130,7 +130,7 @@ namespace TestProject
             Assert.IsNotNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void UnityResolver_Resolves_Registered_ContactRepository_Test()
         {
             var container = new UnityContainer();
@@ -142,7 +142,7 @@ namespace TestProject
             Assert.IsNotNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void UnityResolver_DoesNot_Resolve_NonRegistered_ContactRepository_Test()
         {
             var container = new UnityContainer();
@@ -153,7 +153,7 @@ namespace TestProject
             Assert.IsNull(instance);
         }
 
-        [TestMethod]
+        [Test]
         public void UnityResolver_Resolves_Registered_ContactRepository_Through_ContactsController_Test()
         {
             var config = new HttpConfiguration();
@@ -173,7 +173,7 @@ namespace TestProject
             Assert.IsNotNull(response.Content);
         }
 
-        [TestMethod]
+        [Test]
         public void UnityResolver_In_HttpConfig_DoesNot_Resolve_PipelineType_But_Fallback_To_DefaultResolver_Test()
         {
             var container = new UnityContainer();

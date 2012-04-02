@@ -7,7 +7,7 @@ using System.Threading;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using ContactManager.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
@@ -15,10 +15,10 @@ using WebApiContrib.Testing;
 
 namespace TestProject
 {
-    [TestClass]
+    [TestFixture]
     public class LoggingTests
     {
-        [TestMethod]
+        [Test]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()
         {
             var config = new HttpConfiguration();
@@ -54,7 +54,7 @@ namespace TestProject
 
             Thread.Sleep(1000);
 
-            Assert.AreEqual<int>(2, dummyRepository.LogMessageCount);
+            Assert.AreEqual(2, dummyRepository.LogMessageCount);
             Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
             Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
         }
