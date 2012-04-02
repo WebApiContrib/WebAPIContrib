@@ -70,7 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatting\ServiceStackTextJsonMediaTypeFormatterTests.cs" />
+    <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
     <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
     <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
@@ -90,7 +90,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ServicStack\WebApiContrib.Formatting.ServiceStack.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj">
       <Project>{AD84D9A8-0849-4461-A9A7-952722F9A6C9}</Project>
       <Name>WebApiContrib.Formatting.ServiceStack</Name>
     </ProjectReference>
