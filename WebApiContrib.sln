@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4C93B8
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ServiceStack", "src\WebApiContrib.Formatting.ServicStack\WebApiContrib.Formatting.ServiceStack.csproj", "{AD84D9A8-0849-4461-A9A7-952722F9A6C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ServiceStack", "src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj", "{AD84D9A8-0849-4461-A9A7-952722F9A6C9}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.AutoFac", "src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj", "{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Ninject", "src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj", "{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}"
