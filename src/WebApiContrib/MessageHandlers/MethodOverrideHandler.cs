@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Thinktecture.Web.Http.Handlers
+namespace WebApiContrib.MessageHandlers
 {
     public class MethodOverrideHandler : DelegatingHandler
     {

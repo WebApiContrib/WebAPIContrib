@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thinktecture.Web.Http.Formatters
+namespace WebApiContrib.Formatters
 {
     // Code based on: http://blogs.msdn.com/b/carlosfigueira/archive/2012/03/05/writing-formurlencoded-data-with-asp-net-web-apis.aspx
     public class ReadWriteFormUrlEncodedFormatter : FormUrlEncodedMediaTypeFormatter

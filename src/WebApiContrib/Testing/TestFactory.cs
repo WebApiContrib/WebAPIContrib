@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web.Http;
 
-namespace Thinktecture.Web.Http.Testing
+namespace WebApiContrib.Testing
 {
     public static class TestFactory
     {

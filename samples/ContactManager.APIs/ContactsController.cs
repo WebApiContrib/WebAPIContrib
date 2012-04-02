@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ContactManager.Models;
-using Thinktecture.Web.Http.Filters;
+using WebApiContrib.Filters;
 
 namespace ContactManager.APIs
 {

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Thinktecture.Web.Http.Handlers
+namespace WebApiContrib.MessageHandlers
 {
     // Code based on: http://code.msdn.microsoft.com/Implementing-CORS-support-a677ab5d
     public class SimpleCorsHandler : DelegatingHandler

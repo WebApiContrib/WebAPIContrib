@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using ProtoBuf.Meta;
 
-namespace Thinktecture.Web.Http.Formatters
+namespace WebApiContrib.Formatters
 {
     public class ProtoBufFormatter : MediaTypeFormatter
     {

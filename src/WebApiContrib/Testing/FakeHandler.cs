@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Thinktecture.Web.Http.Testing
+namespace WebApiContrib.Testing
 {
     public class FakeHandler : DelegatingHandler
     {

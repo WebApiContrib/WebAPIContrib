@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using Thinktecture.Web.Http.Data;
-using Thinktecture.Web.Http.Messages;
+using WebApiContrib.Data;
+using WebApiContrib.Messages;
 
-namespace Thinktecture.Web.Http.Testing
+namespace WebApiContrib.Testing
 {
 	public class DummyLoggingRepository : ILoggingRepository
 	{
@@ -11,7 +11,7 @@ namespace Thinktecture.Web.Http.Testing
 		public bool HasRequestMessageTypeBeenReceived { get; set; }
 		public bool HasResponseMessageTypeBeenReceived { get; set; }
 
-		public void Log(Messages.ApiLoggingInfo loggingInfo)
+		public void Log(ApiLoggingInfo loggingInfo)
 		{
 			LogMessageCount++;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Thinktecture.Web.Http.Handlers
+namespace WebApiContrib.MessageHandlers
 {
     public class UriExtensionMappings : List<UriExtensionMapping>
     {

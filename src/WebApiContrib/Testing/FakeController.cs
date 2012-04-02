@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Thinktecture.Web.Http.Testing
+namespace WebApiContrib.Testing
 {
     public class DummyController : ApiController
     {

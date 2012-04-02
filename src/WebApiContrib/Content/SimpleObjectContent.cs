@@ -5,7 +5,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Thinktecture.Web.Http
+namespace WebApiContrib.Content
 {
     // Code based on: https://gist.github.com/1651087
     public class SimpleObjectContent<T> : HttpContent

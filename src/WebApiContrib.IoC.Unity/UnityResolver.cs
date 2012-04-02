@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Services;
 using Microsoft.Practices.Unity;
 
-namespace Thinktecture.Web.Http.IoC
+namespace WebApiContrib.IoC.Unity
 {
     public class UnityResolver : IDependencyResolver
     {

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace Thinktecture.Web.Http.Filters
+namespace WebApiContrib.Filters
 {
     public class ValidationAttribute : ActionFilterAttribute
     {

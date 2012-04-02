@@ -5,8 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using WebApiContrib.Content;
 
-namespace Thinktecture.Web.Http.Handlers
+namespace WebApiContrib.MessageHandlers
 {
     public class EncodingHandler : DelegatingHandler
     {

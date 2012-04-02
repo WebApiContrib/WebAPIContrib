@@ -3,7 +3,7 @@ using System.ServiceModel.Channels;
 using System.Web.Http.SelfHost;
 using System.Web.Http.SelfHost.Channels;
 
-namespace Thinktecture.Web.Http.SelfHost
+namespace WebApiContrib.SelfHost
 {
     public class SslHttpSelfHostConfiguration : HttpSelfHostConfiguration
     {

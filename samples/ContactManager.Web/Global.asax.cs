@@ -7,12 +7,11 @@ using ContactManager.Web.Formatters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ninject;
-using Thinktecture.Web.Http.Filters;
-using Thinktecture.Web.Http.Formatters;
-using Thinktecture.Web.Http.Handlers;
-using Thinktecture.Web.Http.IoC;
-using Thinktecture.Web.Http.Selectors;
+using WebApiContrib.Filters;
+using WebApiContrib.Formatters;
+using WebApiContrib.IoC.Ninject;
 using WebApiContrib.MessageHandlers;
+using WebApiContrib.Selectors;
 
 namespace ContactManager.Web
 {

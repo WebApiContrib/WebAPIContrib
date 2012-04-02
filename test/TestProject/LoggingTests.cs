@@ -8,10 +8,10 @@ using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using ContactManager.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Thinktecture.Web.Http;
-using Thinktecture.Web.Http.Formatters;
-using Thinktecture.Web.Http.Handlers;
-using Thinktecture.Web.Http.Testing;
+using WebApiContrib;
+using WebApiContrib.Formatters;
+using WebApiContrib.MessageHandlers;
+using WebApiContrib.Testing;
 
 namespace TestProject
 {

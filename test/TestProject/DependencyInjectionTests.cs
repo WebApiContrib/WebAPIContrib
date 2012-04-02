@@ -6,7 +6,9 @@ using ContactManager.Models;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
-using Thinktecture.Web.Http.IoC;
+using WebApiContrib.IoC.AutoFac;
+using WebApiContrib.IoC.Ninject;
+using WebApiContrib.IoC.Unity;
 
 namespace TestProject
 {

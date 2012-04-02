@@ -6,9 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using Thinktecture.Web.Http.Filters;
+using WebApiContrib.Filters;
 
-namespace Thinktecture.Web.Http.Selectors
+namespace WebApiContrib.Selectors
 {
     // Code based on: http://code.msdn.microsoft.com/Implementing-CORS-support-418970ee
     public class CorsActionSelector : ApiControllerActionSelector
