@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formatting\JsonpFormatter.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="MediaTypeFormatters\ServiceStackTextJsonMediaTypeFormatter.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />

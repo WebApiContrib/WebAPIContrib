@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Thinktecture.Web.Http.Formatters
+namespace WebApiContrib.Formatting
 {
     public class JsonpMediaTypeFormatter : JsonMediaTypeFormatter
     {
