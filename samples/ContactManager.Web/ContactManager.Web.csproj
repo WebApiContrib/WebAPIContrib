@@ -225,6 +225,10 @@
       <Project>{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}</Project>
       <Name>WebApiContrib.Formatting.JsonNet</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj">
+      <Project>{2537E1C1-0212-4595-9F73-C0DEAE31BD62}</Project>
+      <Name>WebApiContrib.Formatting.ProtoBuf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
       <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
       <Name>WebApiContrib.IoC.Ninject</Name>

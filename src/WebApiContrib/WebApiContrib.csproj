@@ -64,7 +64,6 @@
     <Reference Include="System.Net.Http.WebRequest">
       <HintPath>..\..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http">
       <HintPath>..\..\packages\AspNetWebApi.Core.4.0.20126.16343\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
@@ -87,7 +86,6 @@
     <Compile Include="Data\ILoggingRepository.cs" />
     <Compile Include="Filters\EnableCorsAttribute.cs" />
     <Compile Include="Filters\ValidationAttribute.cs" />
-    <Compile Include="Formatting\ProtoBufFormatter.cs" />
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatter.cs" />
     <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Internal\ReflectionHelper.cs" />
