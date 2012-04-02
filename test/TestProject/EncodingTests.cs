@@ -10,7 +10,7 @@ using System.Web.Http.ModelBinding;
 using ContactManager.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApiContrib;
-using WebApiContrib.Formatters;
+using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 
 namespace TestProject

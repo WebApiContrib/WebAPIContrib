@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Ninject;
 using WebApiContrib.Filters;
-using WebApiContrib.Formatters;
+using WebApiContrib.Formatting;
 using WebApiContrib.IoC.Ninject;
 using WebApiContrib.MessageHandlers;
 using WebApiContrib.Selectors;

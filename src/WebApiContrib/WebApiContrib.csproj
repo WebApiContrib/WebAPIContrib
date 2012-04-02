@@ -87,10 +87,10 @@
     <Compile Include="Data\ILoggingRepository.cs" />
     <Compile Include="Filters\EnableCorsAttribute.cs" />
     <Compile Include="Filters\ValidationAttribute.cs" />
-    <Compile Include="Formatters\JavaScriptSerializerFormatter.cs" />
-    <Compile Include="Formatters\JsonNetFormatter.cs" />
-    <Compile Include="Formatters\ProtoBufFormatter.cs" />
-    <Compile Include="Formatters\ReadWriteFormUrlEncodedFormatter.cs" />
+    <Compile Include="Formatting\JavaScriptSerializerFormatter.cs" />
+    <Compile Include="Formatting\JsonNetFormatter.cs" />
+    <Compile Include="Formatting\ProtoBufFormatter.cs" />
+    <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatter.cs" />
     <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Internal\ReflectionHelper.cs" />
     <Compile Include="MessageHandlers\EncodingHandler.cs" />

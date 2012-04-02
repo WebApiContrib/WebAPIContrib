@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace WebApiContrib.Formatters
+namespace WebApiContrib.Formatting
 {
     // Code based on: http://code.msdn.microsoft.com/Using-JSONNET-with-ASPNET-b2423706
     public class JsonNetFormatter : MediaTypeFormatter

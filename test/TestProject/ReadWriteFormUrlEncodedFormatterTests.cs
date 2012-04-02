@@ -5,7 +5,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WebApiContrib.Formatters;
+using WebApiContrib.Formatting;
 
 namespace MediaTypeFormatters.Test
 {

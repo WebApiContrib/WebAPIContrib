@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace WebApiContrib.Formatters
+namespace WebApiContrib.Formatting
 {
     // Code based on: http://codepaste.net/dfz984
     public class JavaScriptSerializerFormatter : MediaTypeFormatter
