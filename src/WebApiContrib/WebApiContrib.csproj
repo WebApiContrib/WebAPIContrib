@@ -33,19 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\..\packages\protobuf-net.2.0.0.480\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.3.6.3\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -79,8 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Formatting\JsonpFormatter.cs" />
-    <Compile Include="Internal\MediaTypeConstants.cs" />
-    <Compile Include="MediaTypeFormatters\ServiceStackTextJsonMediaTypeFormatter.cs" />
+    <Compile Include="Internal\MediaTypeConstants.cs" />    
     <Compile Include="Conneg\ContentNegotiation.cs" />
     <Compile Include="Content\CompressedContent.cs" />
     <Compile Include="Content\SimpleObjectContent.cs" />
