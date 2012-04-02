@@ -8,18 +8,18 @@ using WebApiContrib.Internal;
 
 namespace WebApiContrib.Formatting
 {
-    public class ServiceStackTextJsonMediaTypeFormatter : MediaTypeFormatter
+    public class ServiceStackTextFormatter : MediaTypeFormatter
     {
         //Uses ISO8601 date by default
         private JsonDateHandler _dateHandler = JsonDateHandler.ISO8601;
 
-        public ServiceStackTextJsonMediaTypeFormatter(JsonDateHandler dateHandler)
+        public ServiceStackTextFormatter(JsonDateHandler dateHandler)
             : this()
         {
             _dateHandler = dateHandler;
         }
 
-        public ServiceStackTextJsonMediaTypeFormatter()
+        public ServiceStackTextFormatter()
         {
             SupportedMediaTypes.Add(MediaTypeConstants.ApplicationJson);
 
