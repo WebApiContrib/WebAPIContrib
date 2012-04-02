@@ -74,7 +74,7 @@
       <Project>{A9E9CB97-9693-4311-A872-D710CB1EB060}</Project>
       <Name>ContactManager.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Thinktecture.Web.Http\Thinktecture.Web.Http.csproj">
+    <ProjectReference Include="..\..\src\Thinktecture.Web.Http\Thinktecture.Web.Http.csproj">
       <Project>{915BB2DC-0A07-4DBB-802B-C299B3A492EC}</Project>
       <Name>Thinktecture.Web.Http</Name>
     </ProjectReference>
