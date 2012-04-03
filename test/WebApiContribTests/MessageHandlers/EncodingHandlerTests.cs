@@ -7,16 +7,15 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
-using ContactManager.Models;
 using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 
-namespace TestProject
+namespace WebApiContribTests.MessageHandlers
 {
     [TestFixture]
-    public class EncodingTests
+    public class EncodingHandlerTests
     {
         [Test]
         public void Post_Lots_Of_Contacts_Using_EncodingHandler_Test()
@@ -49,6 +48,13 @@ namespace TestProject
         }
     }
 
+    public class Contact
+    {
+        public DateTime Birthday { get; set; }
+
+        public int Id { get; set; }
+    }
+
     public class ContactsController : ApiController
     {
         public HttpResponseMessage Post(List<Contact> contacts)
@@ -56,9 +62,9 @@ namespace TestProject
             Debug.WriteLine(String.Format("POSTed Contacts: {0}", contacts.Count));
 
             var response = new HttpResponseMessage()
-                            {
-                                StatusCode = HttpStatusCode.Created
-                            };
+            {
+                StatusCode = HttpStatusCode.Created
+            };
 
             return response;
         }

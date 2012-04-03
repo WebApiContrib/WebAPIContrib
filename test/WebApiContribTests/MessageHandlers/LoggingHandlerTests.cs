@@ -6,17 +6,16 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
-using ContactManager.Models;
 using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 using WebApiContrib.Testing;
 
-namespace TestProject
+namespace WebApiContribTests.MessageHandlers
 {
     [TestFixture]
-    public class LoggingTests
+    public class LoggingHandlerTests
     {
         [Test]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()
@@ -57,6 +56,13 @@ namespace TestProject
             Assert.AreEqual(2, dummyRepository.LogMessageCount);
             Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
             Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
+        }
+
+        class Contact
+        {
+            public DateTime Birthday { get; set; }
+
+            public int Id { get; set; }
         }
     }
 }
