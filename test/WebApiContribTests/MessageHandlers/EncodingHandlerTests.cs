@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -11,6 +9,7 @@ using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
+using WebApiContribTests.Helpers;
 
 namespace WebApiContribTests.MessageHandlers
 {
@@ -45,28 +44,6 @@ namespace WebApiContribTests.MessageHandlers
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
-        }
-    }
-
-    public class Contact
-    {
-        public DateTime Birthday { get; set; }
-
-        public int Id { get; set; }
-    }
-
-    public class ContactsController : ApiController
-    {
-        public HttpResponseMessage Post(List<Contact> contacts)
-        {
-            Debug.WriteLine(String.Format("POSTed Contacts: {0}", contacts.Count));
-
-            var response = new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.Created
-            };
-
-            return response;
         }
     }
 }

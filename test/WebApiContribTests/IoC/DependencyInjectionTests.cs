@@ -8,6 +8,7 @@ using Ninject;
 using WebApiContrib.IoC.AutoFac;
 using WebApiContrib.IoC.Ninject;
 using WebApiContrib.IoC.Unity;
+using WebApiContribTests.Helpers;
 
 namespace WebApiContribTests.IoC
 {
@@ -184,8 +185,4 @@ namespace WebApiContribTests.IoC
             Assert.IsNotNull(instance);
         }
     }
-
-    public class InMemoryContactRepository : IContactRepository { }
-
-    public interface IContactRepository { }
 }

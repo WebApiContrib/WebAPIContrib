@@ -1,16 +1,14 @@
 ﻿using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using WebApiContrib.MessageHandlers;
+using WebApiContribTests.Helpers;
 
 namespace WebApiContribTests.MessageHandlers
 {
-
     [TestFixture]
     public class HeadMessageHandlerTests
     {
-
         [Test]
         public void Should_return_headers_and_no_body_when_method_is_head()
         {
@@ -49,29 +47,6 @@ namespace WebApiContribTests.MessageHandlers
 
             Assert.AreEqual("Boo", response.ReasonPhrase);
             Assert.AreEqual("Hello world", response.Content.ReadAsStringAsync().Result);
-        }
-    }
-
-    public class PrecannedMessageHandler : DelegatingHandler
-    {
-        private readonly HttpResponseMessage _response;
-
-        public PrecannedMessageHandler(HttpResponseMessage response)
-        {
-            _response = response;
-        }
-
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
-        {
-            if (request.Method == HttpMethod.Get)
-            {
-                _response.RequestMessage = request;
-                var tcs = new TaskCompletionSource<HttpResponseMessage>();
-                tcs.SetResult(_response);
-                return tcs.Task;
-            }
-
-            return null;
         }
     }
 }
