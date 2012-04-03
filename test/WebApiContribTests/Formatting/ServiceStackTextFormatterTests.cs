@@ -159,12 +159,6 @@ namespace WebApiContribTests.MediaTypeFormatters
             public string StringProperty { get; set; }
             public DateTime DateProperty { get; set; }
             public ChildClass Child { get; set; }
-
-            public override bool Equals(object obj)
-            {
-                return true;
-            }
-
         }
 
         public class ChildClass
