@@ -85,6 +85,14 @@
     <Compile Include="MessageHandlers\UriExtensionMappings.cs" />
     <Compile Include="MessageHandlers\UriFormatExtensionHandler.cs" />
     <Compile Include="Messages\ApiLoggingInfo.cs" />
+    <Compile Include="Internal\MediaTypeConstants.cs" />
+    <Compile Include="MediaTypeFormatters\ServiceStackTextJsonMediaTypeFormatter.cs" />
+    <Compile Include="MessageHandlers\HeadMessageHandler.cs" />
+    <Compile Include="MessageHandlers\HttpMethodTunnelMessageHandler.cs" />
+    <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
+    <Compile Include="MessageHandlers\SelfHostConsoleOutputHandler.cs" />
+    <Compile Include="MessageHandlers\TraceMessageHandler.cs" />
+    <Compile Include="MessageHandlers\UriFormatExtensionMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseMessages\CreateResponse.cs" />
     <Compile Include="ResponseMessages\MovedPermanentlyResponse.cs" />
