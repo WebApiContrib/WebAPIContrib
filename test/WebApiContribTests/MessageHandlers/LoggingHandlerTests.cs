@@ -6,17 +6,17 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
-using ContactManager.Models;
 using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 using WebApiContrib.Testing;
+using WebApiContribTests.Helpers;
 
-namespace TestProject
+namespace WebApiContribTests.MessageHandlers
 {
     [TestFixture]
-    public class LoggingTests
+    public class LoggingHandlerTests
     {
         [Test]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()

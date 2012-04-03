@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
-using ContactManager.Models;
 using NUnit.Framework;
 using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
+using WebApiContribTests.Helpers;
 
-namespace TestProject
+namespace WebApiContribTests.MessageHandlers
 {
     [TestFixture]
-    public class EncodingTests
+    public class EncodingHandlerTests
     {
         [Test]
         public void Post_Lots_Of_Contacts_Using_EncodingHandler_Test()
@@ -27,7 +25,7 @@ namespace TestProject
             config.MessageHandlers.Add(new EncodingHandler());
             config.Formatters.Add(new ProtoBufFormatter());
 
-            var formatters = new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter(), new ProtoBufFormatter() };
+            var formatters = new List<MediaTypeFormatter> { new JsonMediaTypeFormatter(), new ProtoBufFormatter() };
 
             var server = new HttpServer(config);
             var client = new HttpClient(new EncodingHandler(server));
@@ -46,21 +44,6 @@ namespace TestProject
 
             Assert.IsNotNull(response);
             Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
-        }
-    }
-
-    public class ContactsController : ApiController
-    {
-        public HttpResponseMessage Post(List<Contact> contacts)
-        {
-            Debug.WriteLine(String.Format("POSTed Contacts: {0}", contacts.Count));
-
-            var response = new HttpResponseMessage()
-                            {
-                                StatusCode = HttpStatusCode.Created
-                            };
-
-            return response;
         }
     }
 }

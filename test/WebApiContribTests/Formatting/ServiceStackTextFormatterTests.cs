@@ -8,7 +8,7 @@ using ServiceStack.Text;
 using Should;
 using WebApiContrib.Formatting;
 
-namespace WebApiContribTests.MediaTypeFormatters
+namespace WebApiContribTests.Formatting
 {
     [TestFixture]
     public class ServiceStackTextFormatterTests
@@ -137,11 +137,11 @@ namespace WebApiContribTests.MediaTypeFormatters
 
         private static RootClass GetTestObject()
         {
-            var @object = new RootClass()
+            var @object = new RootClass
             {
                 StringProperty = "Root String Value",
                 DateProperty = new DateTime(2012, 3, 31, 16, 27, 55),
-                Child = new ChildClass()
+                Child = new ChildClass
                 {
                     IntegerProperty = 23,
                     StringProperty = "Child String Value",
