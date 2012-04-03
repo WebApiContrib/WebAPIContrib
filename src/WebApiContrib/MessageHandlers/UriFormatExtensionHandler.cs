@@ -12,7 +12,7 @@ namespace WebApiContrib.MessageHandlers
     {
         private static readonly Dictionary<string, MediaTypeWithQualityHeaderValue> extensionMappings = new Dictionary<string, MediaTypeWithQualityHeaderValue>();
 
-        public UriFormatExtensionHandler(IEnumerable<UriExtensionMapping> mappings)
+        public UriFormatExtensionHandler(IEnumerable<UriFormatExtensionMapping> mappings)
         {
             foreach (var mapping in mappings)
             {
@@ -39,18 +39,18 @@ namespace WebApiContrib.MessageHandlers
         }
     }
 
-    public class UriExtensionMapping
+    public class UriFormatExtensionMapping
     {
         public string Extension { get; set; }
 
         public MediaTypeWithQualityHeaderValue MediaType { get; set; }
     }
 
-    public static class UriExtensionMappingExtensions
+    public static class UriFormatExtensionMappingExtensions
     {
-        public static void AddMapping(this IList<UriExtensionMapping> mappings, string extension, string mediaType)
+        public static void AddMapping(this IList<UriFormatExtensionMapping> mappings, string extension, string mediaType)
         {
-            mappings.Add(new UriExtensionMapping { Extension = extension, MediaType = new MediaTypeWithQualityHeaderValue(mediaType) });
+            mappings.Add(new UriFormatExtensionMapping { Extension = extension, MediaType = new MediaTypeWithQualityHeaderValue(mediaType) });
         }
     }
 }
