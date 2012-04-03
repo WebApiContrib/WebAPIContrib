@@ -26,7 +26,7 @@ namespace WebApiContribTests.MessageHandlers
             config.MessageHandlers.Add(new EncodingHandler());
             config.Formatters.Add(new ProtoBufFormatter());
 
-            var formatters = new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter(), new ProtoBufFormatter() };
+            var formatters = new List<MediaTypeFormatter> { new JsonMediaTypeFormatter(), new ProtoBufFormatter() };
 
             var server = new HttpServer(config);
             var client = new HttpClient(new EncodingHandler(server));
@@ -61,7 +61,7 @@ namespace WebApiContribTests.MessageHandlers
         {
             Debug.WriteLine(String.Format("POSTed Contacts: {0}", contacts.Count));
 
-            var response = new HttpResponseMessage()
+            var response = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.Created
             };

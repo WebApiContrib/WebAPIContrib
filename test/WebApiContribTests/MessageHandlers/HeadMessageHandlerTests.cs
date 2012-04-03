@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using WebApiContrib.MessageHandlers;
@@ -66,7 +61,7 @@ namespace WebApiContribTests.MessageHandlers
             _response = response;
         }
 
-        protected override System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
             if (request.Method == HttpMethod.Get)
             {
@@ -74,11 +69,9 @@ namespace WebApiContribTests.MessageHandlers
                 var tcs = new TaskCompletionSource<HttpResponseMessage>();
                 tcs.SetResult(_response);
                 return tcs.Task;
-            } 
-                else
-            {
-                return null;
             }
+
+            return null;
         }
     }
 }

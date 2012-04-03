@@ -7,7 +7,7 @@ using System.Text;
 using NUnit.Framework;
 using WebApiContrib.Formatting;
 
-namespace WebApiContribTests.MediaTypeFormatters
+namespace WebApiContribTests.Formatting
 {
     [TestFixture]
     public class ReadWriteFormUrlEncodedFormatterTests
