@@ -88,10 +88,12 @@
     <Compile Include="Helpers\PrecannedMessageHandler.cs" />
     <Compile Include="IoC\DependencyInjectionTests.cs" />
     <Compile Include="MessageHandlers\EncodingHandlerTests.cs" />
+    <Compile Include="MessageHandlers\ETagHandlerTests.cs" />
     <Compile Include="MessageHandlers\HeadMessageHandlerTests.cs" />
     <Compile Include="MessageHandlers\LoggingHandlerTests.cs" />
     <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
+    <Compile Include="ResponseMessages\ConflictResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\HttpResponseMessageTester.cs" />
     <Compile Include="ResponseMessages\NotModifiedResponseTests.cs" />
