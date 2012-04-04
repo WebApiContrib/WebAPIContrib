@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace WebApiContrib.MessageHandlers
             if (request.Method == HttpMethod.Get)
             {
                 // should we ignore trailing slash
-                string resource = request.RequestUri.ToString();
+                var resource = request.RequestUri.ToString();
 
                 ICollection<EntityTagHeaderValue> etags = request.Headers.IfNoneMatch;
                 // compare the Etag with the one in the cache
@@ -27,25 +28,16 @@ namespace WebApiContrib.MessageHandlers
                 EntityTagHeaderValue actualEtag = null;
                 if (etags.Count > 0 && ETagHandler.ETagCache.TryGetValue(resource, out actualEtag))
                 {
-                    foreach (var etag in etags)
+                    if (etags.Any(etag => etag.Tag == actualEtag.Tag))
                     {
-                        if (etag.Tag == actualEtag.Tag)
-                        {
-                            // the etag matches one in the cache, send a response with HttpStatusCode NotModified.
-                            var response = new NotModifiedResponse
-                            {
-                                Content = new StringContent("The resource is not modified")
-                            };
-
-                            return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
-                        }
+                        return NotModifiedResponse(cancellationToken);
                     }
                 }
             }
             else if (request.Method == HttpMethod.Put)
             {
                 // should we ignore trailing slash
-                string resource = request.RequestUri.ToString();
+                var resource = request.RequestUri.ToString();
 
                 ICollection<EntityTagHeaderValue> etags = request.Headers.IfMatch;
                 // compare the Etag with the one in the cache
@@ -54,29 +46,20 @@ namespace WebApiContrib.MessageHandlers
                 EntityTagHeaderValue actualEtag = null;
                 if (etags.Count > 0 && ETagHandler.ETagCache.TryGetValue(resource, out actualEtag))
                 {
-                    bool matchFound = false;
-                    foreach (var etag in etags)
-                    {
-                        if (etag.Tag == actualEtag.Tag)
-                        {
-                            matchFound = true;
-                            break;
-                        }
-                    }
+                    var matchFound = etags.Any(etag => etag.Tag == actualEtag.Tag);
+
                     if (!matchFound)
                     {
-                        // we should return a 409 here
-                        var response = new ConflictResponse { Content = new StringContent("If-Match header value is different from the ETag") };
-
-                        return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
+                        return ConflictResponse(cancellationToken);
                     }
                 }
             }
             return base.SendAsync(request, cancellationToken).ContinueWith(task =>
             {
-                HttpResponseMessage httpResponse = task.Result;
-                string eTagKey = request.RequestUri.ToString();
+                var httpResponse = task.Result;
+                var eTagKey = request.RequestUri.ToString();
                 EntityTagHeaderValue eTagValue;
+
                 // Post would invalidate the collection, put should invalidate the individual item
                 if (!ETagCache.TryGetValue(eTagKey, out eTagValue) || request.Method == HttpMethod.Put || request.Method == HttpMethod.Post)
                 {
@@ -87,6 +70,20 @@ namespace WebApiContrib.MessageHandlers
 
                 return httpResponse;
             });
+        }
+
+        private static Task<HttpResponseMessage> NotModifiedResponse(CancellationToken cancellationToken)
+        {
+            var response = new NotModifiedResponse { Content = new StringContent("The resource is not modified") };
+
+            return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
+        }
+
+        private static Task<HttpResponseMessage> ConflictResponse(CancellationToken cancellationToken)
+        {
+            var response = new ConflictResponse { Content = new StringContent("If-Match header value is different from the ETag") };
+
+            return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
         }
     }
 }
