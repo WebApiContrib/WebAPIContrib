@@ -22,9 +22,7 @@ namespace WebApiContribTests.MessageHandlers
 
                 var requestTask = SendAsync(requestMessage, new CancellationToken());
 
-                while (!requestTask.IsCompleted)
-                {
-                }
+                requestTask.Wait(5000); // 5 second timeout - tests should be quicker than this, but better than infinite for now
 
                 return requestTask.Result;
             }
