@@ -30,7 +30,7 @@ namespace WebApiContrib.MessageHandlers
                 {
                     if (etags.Any(etag => etag.Tag == actualEtag.Tag))
                     {
-                        return NotModifiedResponse(cancellationToken);
+                        return Task.Factory.StartNew<HttpResponseMessage>(task => new NotModifiedResponse(), cancellationToken);
                     }
                 }
             }
@@ -50,7 +50,7 @@ namespace WebApiContrib.MessageHandlers
 
                     if (!matchFound)
                     {
-                        return ConflictResponse(cancellationToken);
+                        return Task.Factory.StartNew<HttpResponseMessage>(task => new ConflictResponse(), cancellationToken);
                     }
                 }
             }
@@ -70,20 +70,6 @@ namespace WebApiContrib.MessageHandlers
 
                 return httpResponse;
             });
-        }
-
-        private static Task<HttpResponseMessage> NotModifiedResponse(CancellationToken cancellationToken)
-        {
-            var response = new NotModifiedResponse { Content = new StringContent("The resource is not modified") };
-
-            return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
-        }
-
-        private static Task<HttpResponseMessage> ConflictResponse(CancellationToken cancellationToken)
-        {
-            var response = new ConflictResponse { Content = new StringContent("If-Match header value is different from the ETag") };
-
-            return Task.Factory.StartNew<HttpResponseMessage>(task => response, cancellationToken);
         }
     }
 }
