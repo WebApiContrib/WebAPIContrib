@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4C93B8
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.RavenDb", "src\WebApiContrib.RavenDb\WebApiContrib.RavenDb.csproj", "{3D3C4640-9365-471A-A160-59E7C394B228}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ServiceStack", "src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj", "{AD84D9A8-0849-4461-A9A7-952722F9A6C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.AutoFac", "src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj", "{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}"
@@ -42,6 +43,10 @@ Global
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3C4640-9365-471A-A160-59E7C394B228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3C4640-9365-471A-A160-59E7C394B228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD84D9A8-0849-4461-A9A7-952722F9A6C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD84D9A8-0849-4461-A9A7-952722F9A6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD84D9A8-0849-4461-A9A7-952722F9A6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
