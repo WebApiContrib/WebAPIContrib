@@ -26,7 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ProtoBuf", "src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj", "{2537E1C1-0212-4595-9F73-C0DEAE31BD62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Testing", "src\WebApiContrib.Testing\WebApiContrib.Testing.csproj", "{DDEB5F68-7E22-4F54-9B04-63518083B83E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.RavenDb", "src\WebApiContrib.RavenDb\WebApiContrib.RavenDb.csproj", "{3D3C4640-9365-471A-A160-59E7C394B228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.CastleWindsor", "src\WebApiContrib.IoC.CastleWindsor\WebApiContrib.IoC.CastleWindsor.csproj", "{3735BC1C-6224-417B-8816-D6BC6498682F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +81,10 @@ Global
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3735BC1C-6224-417B-8816-D6BC6498682F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3735BC1C-6224-417B-8816-D6BC6498682F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3735BC1C-6224-417B-8816-D6BC6498682F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3735BC1C-6224-417B-8816-D6BC6498682F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
