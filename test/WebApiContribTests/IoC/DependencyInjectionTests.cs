@@ -5,7 +5,7 @@ using Autofac;
 using Microsoft.Practices.Unity;
 using NUnit.Framework;
 using Ninject;
-using WebApiContrib.IoC.AutoFac;
+using WebApiContrib.IoC.Autofac;
 using WebApiContrib.IoC.Ninject;
 using WebApiContrib.IoC.Unity;
 using WebApiContribTests.Helpers;
@@ -16,32 +16,32 @@ namespace WebApiContribTests.IoC
     public class DependencyInjectionTests
     {
         [Test]
-        public void AutoFacResolver_Resolves_Registered_ContactRepository_Test()
+        public void AutofacResolver_Resolves_Registered_ContactRepository_Test()
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<InMemoryContactRepository>().As<IContactRepository>();
             var container = builder.Build();
 
-            var resolver = new AutoFacResolver(container);
+            var resolver = new AutofacResolver(container);
             var instance = resolver.GetService(typeof(IContactRepository));
 
             Assert.IsNotNull(instance);
         }
 
         [Test]
-        public void AutoFacResolver_DoesNot_Resolve_NonRegistered_ContactRepository_Test()
+        public void AutofacResolver_DoesNot_Resolve_NonRegistered_ContactRepository_Test()
         {
             var builder = new ContainerBuilder();
             var container = builder.Build();
 
-            var resolver = new AutoFacResolver(container);
+            var resolver = new AutofacResolver(container);
             var instance = resolver.GetService(typeof(IContactRepository));
 
             Assert.IsNull(instance);
         }
 
         [Test]
-        public void AutoFacResolver_Resolves_Registered_ContactRepository_ThroughHost_Test()
+        public void AutofacResolver_Resolves_Registered_ContactRepository_ThroughHost_Test()
         {
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute("default",
@@ -51,7 +51,7 @@ namespace WebApiContribTests.IoC
             builder.RegisterType<InMemoryContactRepository>().As<IContactRepository>();
             var container = builder.Build();
 
-            config.ServiceResolver.SetResolver(new AutoFacResolver(container));
+            config.ServiceResolver.SetResolver(new AutofacResolver(container));
 
             var server = new HttpServer(config);
             var client = new HttpClient(server);
@@ -63,13 +63,13 @@ namespace WebApiContribTests.IoC
 
 
         [Test]
-        public void AutoFacResolver_In_HttpConfig_DoesNot_Resolve_PipelineType_But_Fallback_To_DefaultResolver_Test()
+        public void AutofacResolver_In_HttpConfig_DoesNot_Resolve_PipelineType_But_Fallback_To_DefaultResolver_Test()
         {
             var builder = new ContainerBuilder();
             var container = builder.Build();
 
             var config = new HttpConfiguration();
-            config.ServiceResolver.SetResolver(new AutoFacResolver(container));
+            config.ServiceResolver.SetResolver(new AutofacResolver(container));
             var instance = config.ServiceResolver.GetService(typeof(IHttpActionSelector));
 
             Assert.IsNotNull(instance);

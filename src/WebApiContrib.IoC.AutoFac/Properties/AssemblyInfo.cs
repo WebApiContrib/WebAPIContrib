@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Thinktecture.Web.Http.IoC.AutoFac")]
-[assembly: AssemblyDescription("The Thinktecture.Web.Http.IoC.AutoFac library provides dependency injection helpers for ASP.NET Web API.")]
+[assembly: AssemblyTitle("Thinktecture.Web.Http.IoC.Autofac")]
+[assembly: AssemblyDescription("The Thinktecture.Web.Http.IoC.Autofac library provides dependency injection helpers for ASP.NET Web API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("thinktecture")]
-[assembly: AssemblyProduct("Thinktecture.Web.Http.IoC.AutoFac")]
+[assembly: AssemblyProduct("Thinktecture.Web.Http.IoC.Autofac")]
 [assembly: AssemblyCopyright("Copyright © thinktecture 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

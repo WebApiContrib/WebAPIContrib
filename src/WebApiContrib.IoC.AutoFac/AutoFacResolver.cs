@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Web.Http.Services;
 using Autofac;
 
-namespace WebApiContrib.IoC.AutoFac
+namespace WebApiContrib.IoC.Autofac
 {
-    public class AutoFacResolver : IDependencyResolver
+    public class AutofacResolver : IDependencyResolver
     {
         private readonly IContainer container;
 
-        public AutoFacResolver(IContainer container)
+        public AutofacResolver(IContainer container)
         {
             this.container = container;
         }
