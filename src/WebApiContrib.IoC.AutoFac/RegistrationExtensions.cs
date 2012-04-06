@@ -4,7 +4,7 @@ using Autofac;
 using Autofac.Builder;
 using Autofac.Features.Scanning;
 
-namespace WebApiContrib.IoC.AutoFac
+namespace WebApiContrib.IoC.Autofac
 {
     public static class RegistrationExtensions
     {

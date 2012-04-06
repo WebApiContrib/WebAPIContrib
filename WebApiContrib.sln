@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4C93B8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ServiceStack", "src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj", "{AD84D9A8-0849-4461-A9A7-952722F9A6C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.AutoFac", "src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj", "{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Autofac", "src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.Autofac.csproj", "{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Ninject", "src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj", "{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}"
 EndProject
@@ -26,6 +26,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ProtoBuf", "src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj", "{2537E1C1-0212-4595-9F73-C0DEAE31BD62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Testing", "src\WebApiContrib.Testing\WebApiContrib.Testing.csproj", "{DDEB5F68-7E22-4F54-9B04-63518083B83E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.RavenDb", "src\WebApiContrib.RavenDb\WebApiContrib.RavenDb.csproj", "{3D3C4640-9365-471A-A160-59E7C394B228}"
 EndProject
 Global
