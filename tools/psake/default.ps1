@@ -36,7 +36,7 @@ Task RunUnitTests -depends PrepareForTest, Build {
 	
 	if ($lastexitcode -gt 0)
 	{
-		throw "{0} unit tests failed. See {0} for a simple summary." -f $lastexitcode, $test_result
+		throw "{0} unit tests failed. See {1} for a simple summary." -f $lastexitcode, $test_result
 	}
 	if ($lastexitcode -lt 0)
 	{
