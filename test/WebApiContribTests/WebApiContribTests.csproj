@@ -119,9 +119,9 @@
       <Project>{AD84D9A8-0849-4461-A9A7-952722F9A6C9}</Project>
       <Name>WebApiContrib.Formatting.ServiceStack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.Autofac.csproj">
       <Project>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</Project>
-      <Name>WebApiContrib.IoC.AutoFac</Name>
+      <Name>WebApiContrib.IoC.Autofac</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
       <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebApiContrib.IoC.AutoFac</RootNamespace>
-    <AssemblyName>WebApiContrib.IoC.AutoFac</AssemblyName>
+    <AssemblyName>WebApiContrib.IoC.Autofac</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoFacResolver.cs" />
+    <Compile Include="AutofacResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationExtensions.cs" />
   </ItemGroup>
