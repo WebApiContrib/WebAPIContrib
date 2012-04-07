@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\ApiKeyAuthAttribute.cs" />
+    <Compile Include="Filters\IApiKeyAuthorizer.cs" />
     <Compile Include="Formatting\JsonpFormatter.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />
