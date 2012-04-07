@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Formatting\JsonpFormatter.cs" />
-    <Compile Include="Internal\MediaTypeConstants.cs" />    
+    <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />
     <Compile Include="Content\CompressedContent.cs" />
     <Compile Include="Content\SimpleObjectContent.cs" />
@@ -79,13 +79,13 @@
     <Compile Include="MessageHandlers\EncodingHandler.cs" />
     <Compile Include="MessageHandlers\LoggingHandler.cs" />
     <Compile Include="MessageHandlers\MethodOverrideHandler.cs" />
-    <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />    
+    <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
     <Compile Include="MessageHandlers\SimpleCorsHandler.cs" />
     <Compile Include="MessageHandlers\UriExtensionMappings.cs" />
     <Compile Include="MessageHandlers\UriFormatExtensionHandler.cs" />
-    <Compile Include="Messages\ApiLoggingInfo.cs" />        
+    <Compile Include="Messages\ApiLoggingInfo.cs" />
     <Compile Include="MessageHandlers\HeadMessageHandler.cs" />
-    <Compile Include="MessageHandlers\HttpMethodTunnelMessageHandler.cs" />    
+    <Compile Include="MessageHandlers\HttpMethodTunnelMessageHandler.cs" />
     <Compile Include="MessageHandlers\SelfHostConsoleOutputHandler.cs" />
     <Compile Include="MessageHandlers\TraceMessageHandler.cs" />
     <Compile Include="MessageHandlers\UriFormatExtensionMessageHandler.cs" />
@@ -98,6 +98,9 @@
     <Compile Include="ResponseMessages\ResourceIdentifierBase.cs" />
     <Compile Include="ResponseMessages\ResourceResponseBase.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
+    <Compile Include="Routing\HttpRouteAttribute.cs" />
+    <Compile Include="Routing\HttpRouteTableBuilder.cs" />
+    <Compile Include="Routing\OptionalRouteParameterAttribute.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
     <Compile Include="SelfHost\SslHttpSelfHostConfiguration.cs" />
     <Compile Include="ReadAsSingleObjectPolicy.cs" />
