@@ -100,6 +100,9 @@
     <Compile Include="ResponseMessages\ResourceIdentifierBase.cs" />
     <Compile Include="ResponseMessages\ResourceResponseBase.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
+    <Compile Include="Routing\HttpRouteAttribute.cs" />
+    <Compile Include="Routing\HttpRouteTableBuilder.cs" />
+    <Compile Include="Routing\OptionalRouteParameterAttribute.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
     <Compile Include="SelfHost\SslHttpSelfHostConfiguration.cs" />
     <Compile Include="ReadAsSingleObjectPolicy.cs" />
