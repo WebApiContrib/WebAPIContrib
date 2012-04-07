@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Formatting\JsonpFormatter.cs" />
+    <Compile Include="Formatting\RouteDataMapping.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />
     <Compile Include="Content\CompressedContent.cs" />
