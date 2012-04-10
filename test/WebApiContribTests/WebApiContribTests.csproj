@@ -82,6 +82,7 @@
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatterTests.cs" />
     <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
+    <Compile Include="Formatting\ViewEngineTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
     <Compile Include="Helpers\ContactsController.cs" />
     <Compile Include="Helpers\IContactRepository.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="TestHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Formatting\Embed.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -115,6 +117,10 @@
     <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj">
       <Project>{2537E1C1-0212-4595-9F73-C0DEAE31BD62}</Project>
       <Name>WebApiContrib.Formatting.ProtoBuf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.RazorViewEngine\WebApiContrib.Formatting.RazorViewEngine.csproj">
+      <Project>{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}</Project>
+      <Name>WebApiContrib.Formatting.RazorViewEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj">
       <Project>{AD84D9A8-0849-4461-A9A7-952722F9A6C9}</Project>
