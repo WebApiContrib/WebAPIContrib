@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Testing", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.RavenDb", "src\WebApiContrib.RavenDb\WebApiContrib.RavenDb.csproj", "{3D3C4640-9365-471A-A160-59E7C394B228}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.RazorViewEngine", "src\WebApiContrib.Formatting.RazorViewEngine\WebApiContrib.Formatting.RazorViewEngine.csproj", "{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3C4640-9365-471A-A160-59E7C394B228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
