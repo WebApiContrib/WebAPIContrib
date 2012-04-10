@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Formatting\CSVMediaTypeFormatter.cs" />
     <Compile Include="Formatting\JsonpFormatter.cs" />
+    <Compile Include="Formatting\PlainTextFormatter.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />
     <Compile Include="Content\CompressedContent.cs" />
