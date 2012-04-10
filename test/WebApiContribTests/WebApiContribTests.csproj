@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatterTests.cs" />
     <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
