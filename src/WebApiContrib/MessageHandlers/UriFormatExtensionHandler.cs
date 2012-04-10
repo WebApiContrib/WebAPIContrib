@@ -46,6 +46,18 @@ namespace WebApiContrib.MessageHandlers
         public MediaTypeWithQualityHeaderValue MediaType { get; set; }
     }
 
+    public class UriExtensionMappings : List<UriFormatExtensionMapping>
+    {
+        public UriExtensionMappings()
+        {
+            this.AddMapping("xml", "application/xml");
+            this.AddMapping("json", "application/json");
+            this.AddMapping("proto", "application/x-protobuf");
+            this.AddMapping("png", "image/png");
+            this.AddMapping("jpg", "image/jpg");
+        }
+    }
+
     public static class UriFormatExtensionMappingExtensions
     {
         public static void AddMapping(this IList<UriFormatExtensionMapping> mappings, string extension, string mediaType)
