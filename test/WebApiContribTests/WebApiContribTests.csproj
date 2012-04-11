@@ -62,6 +62,9 @@
     <Reference Include="Should">
       <HintPath>..\..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Json">
@@ -147,6 +150,10 @@
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
       <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
       <Name>WebApiContrib.IoC.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.StructureMap\WebApiContrib.IoC.StructureMap.csproj">
+      <Project>{B295E165-A947-4027-8245-02AB24C7E840}</Project>
+      <Name>WebApiContrib.IoC.StructureMap</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.Unity\WebApiContrib.IoC.Unity.csproj">
       <Project>{543DD4BC-C610-4381-82D9-2BA3686AEE0F}</Project>
