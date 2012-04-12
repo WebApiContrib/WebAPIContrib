@@ -17,7 +17,7 @@ Task Clean {
 }
 
 Task Build -depends Clean {
-	Exec { msbuild $solution_name /v:Quiet /t:Build /p:Configuration=Release /p:OutDir=$build_artifacts_dir } 
+	Exec { msbuild $solution_name /v:Quiet /t:Build /p:Configuration=Release /p:OutDir=$build_artifacts_dir\bin\Release } 
 }
 
 Task PrepareForTest {
@@ -32,7 +32,7 @@ Task PrepareForTest {
 Task RunUnitTests -depends PrepareForTest, Build {
 	$test_result = "$build_artifacts_dir\UnitTestsResult.xml"
 	
-	& "$nunitConsole" "$build_artifacts_dir\WebApiContribTests.dll" /nologo /nodots "/xml=$test_result"
+	& "$nunitConsole" "$build_artifacts_dir\bin\Release\WebApiContribTests.dll" /nologo /nodots "/xml=$test_result"
 	
 	if ($lastexitcode -gt 0)
 	{
