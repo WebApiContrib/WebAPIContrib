@@ -1,7 +1,7 @@
 Properties {
 	$base_dir = resolve-path .\..\..\
 	$packages_dir = "$base_dir\packages"
-	$build_artifacts_dir = "$base_dir\build\"
+	$build_artifacts_dir = "$base_dir\build"
 	$solution_name = "$base_dir\WebApiContrib.sln"
 	$nunit_runner = "$packages_dir\NUnit.Runners.2.6.0.12051\tools"
 	$nunit_build_destination = "$build_artifacts_dir\tools\nunit"
@@ -17,7 +17,7 @@ Task Clean {
 }
 
 Task Build -depends Clean {
-	Exec { msbuild $solution_name /v:Quiet /t:Build /p:Configuration=Release /p:OutDir=$build_artifacts_dir\bin\Release } 
+	Exec { msbuild $solution_name /v:Quiet /t:Build /p:Configuration=Release /p:OutDir=$build_artifacts_dir\bin\Release\ } 
 }
 
 Task PrepareForTest {
