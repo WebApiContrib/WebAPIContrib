@@ -1,15 +1,21 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
 using Autofac;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.Practices.Unity;
 using NUnit.Framework;
 using Ninject;
+using Rhino.Mocks;
+using Should;
+using StructureMap;
 using WebApiContrib.IoC.Autofac;
 using WebApiContrib.IoC.CastleWindsor;
 using WebApiContrib.IoC.Ninject;
+using WebApiContrib.IoC.StructureMap;
 using WebApiContrib.IoC.Unity;
 using WebApiContribTests.Helpers;
 
@@ -250,6 +256,67 @@ namespace WebApiContribTests.IoC
 
                 Assert.IsNotNull(instance);
             }
+        }
+
+        [Test]
+        public void StructureMapResolver_should_be_returned_for_IHttpControllerActivator_WithDefaultConventions()
+        {
+            // When building up a SM container, this is the only thing that doesn't get
+            // resolved "nicely" when using default conventions.
+            var container = new Container(x => x.Scan(s =>
+            {
+                s.TheCallingAssembly();
+                s.WithDefaultConventions();
+            }));
+            var config = new HttpConfiguration();
+            var resolver = new StructureMapResolver(container);
+
+            config.ServiceResolver.SetResolver(resolver);
+
+            var actualActivator = config.ServiceResolver.GetService(typeof (IHttpControllerActivator));
+
+            actualActivator.ShouldBeSameAs(resolver);
+        }
+
+        [Test]
+        public void StructureMapResolver_should_return_both_instaces_of_IContactRepository()
+        {
+            var container = new Container(x => x.Scan(s =>
+            {
+                s.TheCallingAssembly();
+                s.AddAllTypesOf<IContactRepository>().NameBy(t => t.Name);
+            }));
+            var config = new HttpConfiguration();
+            var resolver = new StructureMapResolver(container);
+
+            config.ServiceResolver.SetResolver(resolver);
+
+            var repositories = config.ServiceResolver.GetServices(typeof(IContactRepository));
+            repositories.Count().ShouldEqual(2);
+        }
+
+        [Test]
+        public void StructureMapResolver_should_return_an_empty_collection_if_type_isnt_found()
+        {
+            var config = new HttpConfiguration();
+            var resolver = new StructureMapResolver(new Container());
+
+            config.ServiceResolver.SetResolver(resolver);
+
+            var repositories = config.ServiceResolver.GetServices(typeof(IContactRepository));
+            repositories.Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void StructureMapResolver_Create_should_delegate_to_GetInstance()
+        {
+            var container = MockRepository.GenerateMock<StructureMap.IContainer>();
+            var resolver = new StructureMapResolver(container);
+            var controllerType = typeof (ContactsController);
+
+            resolver.Create(new HttpControllerContext(), controllerType);
+
+            container.AssertWasCalled(x => x.GetInstance(controllerType));
         }
     }
 }
