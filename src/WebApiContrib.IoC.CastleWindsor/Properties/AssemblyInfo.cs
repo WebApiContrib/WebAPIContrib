@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WebApiContrib.IoC.CastleWindsor")]
 [assembly: AssemblyDescription("The WebApiContrib.IoC.CastleWindsor library provides dependency injection helpers for ASP.NET Web API.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("WebApiContrib")]
 [assembly: AssemblyProduct("WebApiContrib.IoC.CastleWindsor")]
-[assembly: AssemblyCopyright("Copyright © Richard Dingwall 2012")]
+[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Thinktecture.Web.Http.IoC.Unity")]
-[assembly: AssemblyDescription("The Thinktecture.Web.Http.IoC.Unity library provides dependency injection helpers for ASP.NET Web API.")]
+[assembly: AssemblyTitle("WebApiContrib.IoC.Unity")]
+[assembly: AssemblyDescription("The WebApiContrib.IoC.Unity library provides dependency injection helpers for ASP.NET Web API.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("thinktecture")]
-[assembly: AssemblyProduct("Thinktecture.Web.Http.IoC.Unity")]
-[assembly: AssemblyCopyright("Copyright © thinktecture 2012")]
+[assembly: AssemblyCompany("WebApiContrib")]
+[assembly: AssemblyProduct("WebApiContrib.IoC.Unity")]
+[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

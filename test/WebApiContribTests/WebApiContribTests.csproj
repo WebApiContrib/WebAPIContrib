@@ -121,7 +121,6 @@
     <Compile Include="Routing\HttpRouteTableBuilderTests.cs" />
     <Compile Include="Routing\Mockups\FakeController.cs" />
     <Compile Include="TestBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
   </ItemGroup>
