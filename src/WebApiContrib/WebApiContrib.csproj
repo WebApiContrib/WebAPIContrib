@@ -80,11 +80,13 @@
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatter.cs" />
     <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Internal\ReflectionHelper.cs" />
+    <Compile Include="MessageHandlers\BasicAuthenticationHandler.cs" />
     <Compile Include="MessageHandlers\EncodingHandler.cs" />
     <Compile Include="MessageHandlers\ETagHandler.cs" />
     <Compile Include="MessageHandlers\LoggingHandler.cs" />
     <Compile Include="MessageHandlers\MethodOverrideHandler.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
+    <Compile Include="MessageHandlers\RequireHttpsHandler.cs" />
     <Compile Include="MessageHandlers\SimpleCorsHandler.cs" />
     <Compile Include="MessageHandlers\UriFormatExtensionHandler.cs" />
     <Compile Include="Messages\ApiLoggingInfo.cs" />
