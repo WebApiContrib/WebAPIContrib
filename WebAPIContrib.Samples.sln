@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2D0FB7
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.JavaScriptSerializer", "src\WebApiContrib.Formatting.JavaScriptSerializer\WebApiContrib.Formatting.JavaScriptSerializer.csproj", "{9641B6A6-278A-479F-B9F5-46B2E6B9657E}"
