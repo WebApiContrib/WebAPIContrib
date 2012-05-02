@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using NUnit.Framework;
-using WebApiContrib;
 using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 using WebApiContrib.Testing;
@@ -23,15 +20,12 @@ namespace WebApiContribTests.MessageHandlers
         {
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute("default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
-            config.ServiceResolver.SetService(typeof(IRequestContentReadPolicy), new ReadAsSingleObjectPolicy());
 
             var dummyRepository = new DummyLoggingRepository();
             config.MessageHandlers.Add(new LoggingHandler(dummyRepository));
 
             config.MessageHandlers.Add(new EncodingHandler());
             config.Formatters.Add(new ProtoBufFormatter());
-
-            var formatters = new List<MediaTypeFormatter>() { new JsonMediaTypeFormatter(), new ProtoBufFormatter() };
 
             var server = new HttpServer(config);
             var client = new HttpClient(new EncodingHandler(server));
@@ -42,7 +36,8 @@ namespace WebApiContribTests.MessageHandlers
             var c = new Contact { Id = 1, Birthday = DateTime.Now.AddYears(-20) };
             content.Add(c);
 
-            var request = new HttpRequestMessage<List<Contact>>(content, ProtoBufFormatter.DefaultMediaType, formatters);
+        	var request = new HttpRequestMessage();
+			request.Content = new ObjectContent(typeof(List<Contact>), content, new ProtoBufFormatter(), ProtoBufFormatter.DefaultMediaType.MediaType);
             var response = client.PostAsync("http://anything/api/contacts", request.Content).Result;
 
             Assert.IsNotNull(response);

@@ -12,15 +12,4 @@ namespace WebApiContrib.ResponseMessages
         {
         }
     }
-
-    public class NotModifiedResponse<T> : ResponseBase<T>
-    {
-        public NotModifiedResponse() : base(HttpStatusCode.NotModified)
-        {
-        }
-
-        public NotModifiedResponse(T resource) : base(resource, HttpStatusCode.NotModified)
-        {
-        }
-    }
 }

@@ -16,22 +16,4 @@ namespace WebApiContrib.ResponseMessages
             Headers.Location = location.Location;
         }
     }
-
-    public abstract class ResponseBase<T> : HttpResponseMessage<T>
-    {
-        protected ResponseBase(HttpStatusCode httpStatusCode) : base(httpStatusCode)
-        {
-        }
-
-        protected ResponseBase(T resource, HttpStatusCode httpStatusCode) : base(resource, httpStatusCode)
-        {
-            if (resource is IApiResource)
-            {
-                var apiResource = resource as IApiResource;
-                var resourceLocation = new ResourceLocation();
-                apiResource.SetLocation(resourceLocation);
-                Headers.Location = resourceLocation.Location;
-            }
-        }
-    }
 }

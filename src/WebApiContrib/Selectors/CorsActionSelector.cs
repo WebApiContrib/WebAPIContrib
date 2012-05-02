@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using WebApiContrib.Filters;
@@ -66,24 +68,22 @@ namespace WebApiContrib.Selectors
                 get { return originalAction.ActionName; }
             }
 
-            public override object Execute(HttpControllerContext controllerContext, IDictionary<string, object> arguments)
+            public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments, CancellationToken cancellationToken)
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK);
                 response.Headers.Add(accessControlAllowMethods, prefilghtAccessControlRequestMethod);
 
-                var requestedHeaders = string.Join(
-                    ", ",
-                    controllerContext.Request.Headers.GetValues(accessControlRequestHeaders));
+                var requestedHeaders = string.Join(", ", controllerContext.Request.Headers.GetValues(accessControlRequestHeaders));
 
                 if (!string.IsNullOrEmpty(requestedHeaders))
-                {
                     response.Headers.Add(accessControlAllowHeaders, requestedHeaders);
-                }
 
-                return response;
+                var tcs = new TaskCompletionSource<object>();
+                tcs.SetResult(response);
+                return tcs.Task;
             }
 
-            public override ReadOnlyCollection<HttpParameterDescriptor> GetParameters()
+            public override Collection<HttpParameterDescriptor> GetParameters()
             {
                 return originalAction.GetParameters();
             }
@@ -93,17 +93,17 @@ namespace WebApiContrib.Selectors
                 get { return typeof(HttpResponseMessage); }
             }
 
-            public override ReadOnlyCollection<Filter> GetFilterPipeline()
+            public override Collection<FilterInfo> GetFilterPipeline()
             {
                 return originalAction.GetFilterPipeline();
             }
 
-            public override IEnumerable<IFilter> GetFilters()
+            public override Collection<IFilter> GetFilters()
             {
                 return originalAction.GetFilters();
             }
 
-            public override ReadOnlyCollection<T> GetCustomAttributes<T>()
+            public override Collection<T> GetCustomAttributes<T>()
             {
                 return originalAction.GetCustomAttributes<T>();
             }

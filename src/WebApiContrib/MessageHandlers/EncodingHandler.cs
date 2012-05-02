@@ -51,7 +51,7 @@ namespace WebApiContrib.MessageHandlers
 
                 foreach (KeyValuePair<string, IEnumerable<string>> header in originalContent.Headers)
                 {
-                    newContent.Headers.AddWithoutValidation(header.Key, header.Value);
+                    newContent.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
 
                 request.Content = newContent;

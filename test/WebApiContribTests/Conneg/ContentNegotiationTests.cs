@@ -11,7 +11,7 @@ namespace WebApiContribTests.Conneg
         [TestCase("text/json")]
         public static void WhenAcceptHeaderIsMediaTypeThenNegotiatedMediaTypeMatches(string expected)
         {
-            var actual = new FormatterSelector().Negotiate(new[] { "text/xml", "text/json" }, new[] { expected });
+            var actual = new DefaultContentNegotiator().Negotiate(new[] { "text/xml", "text/json" }, new[] { expected });
 
             Assert.AreEqual(expected, actual);
         }
@@ -20,7 +20,7 @@ namespace WebApiContribTests.Conneg
         [TestCase("text/xml", 0.9, "text/xml", 0.8, "text/xml")]
         public static void WhenAcceptHeaderValuesHaveQualityThenNegotiatedMediaTypeMatchesHigherQuality(string mediaType1, double quality1, string mediaType2, double quality2, string expected)
         {
-            var actual = new FormatterSelector().Negotiate(
+            var actual = new DefaultContentNegotiator().Negotiate(
                 new[] { "text/xml", "text/json" },
                 new[]
                 {
@@ -35,7 +35,7 @@ namespace WebApiContribTests.Conneg
         [TestCase("text/xml;q=0.9", "text/xml;q=0.8", "text/xml")]
         public static void WhenAcceptHeaderStringsHaveQualityThenNegotiatedMediaTypeMatchesHigherQuality(string mediaType1, string mediaType2, string expected)
         {
-            var actual = new FormatterSelector().Negotiate(new[] { "text/xml", "text/json" }, new[] { mediaType1, mediaType2 });
+            var actual = new DefaultContentNegotiator().Negotiate(new[] { "text/xml", "text/json" }, new[] { mediaType1, mediaType2 });
 
             Assert.AreEqual(expected, actual);
         }
@@ -44,7 +44,7 @@ namespace WebApiContribTests.Conneg
         [TestCase("text/xml;q=0.9, text/xml;q=0.8", "text/xml")]
         public static void WhenAcceptHeaderStringHasQualityThenNegotiatedMediaTypeMatchesHigherQuality(string acceptHeader, string expected)
         {
-            var actual = new FormatterSelector().Negotiate(new[] { "text/xml", "text/json" }, acceptHeader);
+            var actual = new DefaultContentNegotiator().Negotiate(new[] { "text/xml", "text/json" }, acceptHeader);
 
             Assert.AreEqual(expected, actual);
         }

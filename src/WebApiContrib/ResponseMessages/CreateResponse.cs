@@ -13,15 +13,4 @@ namespace WebApiContrib.ResponseMessages
         {
         }
     }
-
-    public class CreateResponse<T> : ResponseBase<T>
-    {
-        public CreateResponse() : base(HttpStatusCode.Created)
-        {
-        }
-
-        public CreateResponse(T resource) : base(resource, HttpStatusCode.Created)
-        {
-        }
-    }
 }
