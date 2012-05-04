@@ -42,11 +42,7 @@ namespace ContactManager.APIs
                 throw new HttpResponseException(response);
             }
 
-        	var result = new DefaultContentNegotiator().Negotiate(contact.GetType(), request, GlobalConfiguration.Configuration.Formatters);
-        	var contactResponse = new HttpResponseMessage
-        	{
-        		Content = new ObjectContent<Contact>(contact, result.Formatter, result.MediaType.MediaType)
-        	};
+        	var contactResponse = request.CreateResponse(HttpStatusCode.OK, contact);
 
             contactResponse.Content.Headers.Expires = new DateTimeOffset(DateTime.Now.AddSeconds(300));
 
@@ -56,12 +52,8 @@ namespace ContactManager.APIs
         public HttpResponseMessage Post(Contact contact)
         {            
             repository.Post(contact);
-            
-        	var result = new DefaultContentNegotiator().Negotiate(contact.GetType(), Request, GlobalConfiguration.Configuration.Formatters);
-            var response = new HttpResponseMessage(HttpStatusCode.Created)
-			{
-				Content = new ObjectContent<Contact>(contact, result.Formatter, result.MediaType.MediaType)
-			};
+
+        	var response = Request.CreateResponse(HttpStatusCode.Created, contact);
 
             response.Headers.Location = new Uri(ControllerContext.Request.RequestUri.LocalPath + "/" + contact.Id.ToString(CultureInfo.InvariantCulture), UriKind.Relative);
             
