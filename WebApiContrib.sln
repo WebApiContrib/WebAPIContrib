@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.CastleWin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.StructureMap", "src\WebApiContrib.IoC.StructureMap\WebApiContrib.IoC.StructureMap.csproj", "{B295E165-A947-4027-8245-02AB24C7E840}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.SelfHost", "src\WebApiContrib.SelfHost\WebApiContrib.SelfHost.csproj", "{6E81CA91-1228-4A48-8A33-D7960D97557D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{B295E165-A947-4027-8245-02AB24C7E840}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B295E165-A947-4027-8245-02AB24C7E840}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B295E165-A947-4027-8245-02AB24C7E840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
