@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web.Http;
 using NUnit.Framework;
 using WebApiContrib.MessageHandlers;
 using Should;
@@ -13,7 +14,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]   
         public void Should_return_NotAcceptable_when_media_type_is_not_supported()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
             
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -26,7 +27,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_media_type_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
             
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
@@ -39,7 +40,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_type_group_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/*"));
@@ -52,7 +53,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_NotAcceptable_when_type_group_is_not_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/*"));
@@ -65,7 +66,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test] 
         public void Should_return_OK_when_all_media_types_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
@@ -78,7 +79,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -92,7 +93,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_a_accepted_type_group()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -106,7 +107,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_all_media_types()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler();
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
