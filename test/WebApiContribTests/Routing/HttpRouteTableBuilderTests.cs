@@ -2,11 +2,7 @@
 using System.Web.Http.WebHost.Routing;
 using System.Web.Routing;
 using System.Web.Http;
-using System.Web.Http.WebHost;
-using System.Web.Http.WebHost.Routing;
-using System.Web.UI.WebControls;
 using NUnit.Framework;
-using WebApiContrib.Routing;
 using WebApiContrib.WebHost.Routing;
 
 namespace WebApiContribTests.Routing

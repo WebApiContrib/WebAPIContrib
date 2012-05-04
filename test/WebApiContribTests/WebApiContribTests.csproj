@@ -75,22 +75,23 @@
     </Reference>
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20502.0\lib\net40\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20504.0\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20502.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20504.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20502.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20504.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20502.0\lib\net40\System.Web.Http.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20504.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -169,6 +170,10 @@
     <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
       <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
       <Name>WebApiContrib.Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\WebApiContrib.WebHost\WebApiContrib.WebHost.csproj">
+      <Project>{2544C950-013F-4287-B5F4-8D1D0AEC44E2}</Project>
+      <Name>WebApiContrib.WebHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
       <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
