@@ -32,7 +32,7 @@ namespace ContactManager.Web
             //var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
             //config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
 
-            config.MessageHandlers.Add(new NotAcceptableMessageHandler());
+            config.MessageHandlers.Add(new NotAcceptableMessageHandler(config));
 
             ConfigureResolver(config);
 

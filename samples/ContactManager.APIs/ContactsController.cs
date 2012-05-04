@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using ContactManager.Models;
 using WebApiContrib.Filters;
@@ -27,38 +28,42 @@ namespace ContactManager.APIs
         }
 
         [EnableCors]
-        public HttpResponseMessage<Contact> Get(int id)
+        public HttpResponseMessage Get(int id, HttpRequestMessage request)
         {
             var contact = repository.Get(id);
 
             if (contact == null)
             {
-                var response = new HttpResponseMessage
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
-                    StatusCode = HttpStatusCode.NotFound,
                     Content = new StringContent("Contact not found.")
                 };
 
                 throw new HttpResponseException(response);
             }
 
-            var contactResponse = new HttpResponseMessage<Contact>(contact);
+        	var result = new DefaultContentNegotiator().Negotiate(contact.GetType(), request, GlobalConfiguration.Configuration.Formatters);
+        	var contactResponse = new HttpResponseMessage
+        	{
+        		Content = new ObjectContent<Contact>(contact, result.Formatter, result.MediaType.MediaType)
+        	};
 
             contactResponse.Content.Headers.Expires = new DateTimeOffset(DateTime.Now.AddSeconds(300));
 
             return contactResponse;
         }
 
-        public HttpResponseMessage<Contact> Post(Contact contact)
+        public HttpResponseMessage Post(Contact contact)
         {            
             repository.Post(contact);
             
-            var response = new HttpResponseMessage<Contact>(contact)
-                            {
-                                StatusCode = HttpStatusCode.Created
-                            };
-            response.Headers.Location = new Uri(
-                ControllerContext.Request.RequestUri.LocalPath + "/" + contact.Id.ToString(CultureInfo.InvariantCulture), UriKind.Relative);
+        	var result = new DefaultContentNegotiator().Negotiate(contact.GetType(), Request, GlobalConfiguration.Configuration.Formatters);
+            var response = new HttpResponseMessage(HttpStatusCode.Created)
+			{
+				Content = new ObjectContent<Contact>(contact, result.Formatter, result.MediaType.MediaType)
+			};
+
+            response.Headers.Location = new Uri(ControllerContext.Request.RequestUri.LocalPath + "/" + contact.Id.ToString(CultureInfo.InvariantCulture), UriKind.Relative);
             
             return response;
         }
