@@ -6,8 +6,9 @@ using System.Web.Http;
 using System.Web.Http.WebHost;
 using System.Web.Http.WebHost.Routing;
 using System.Web.Routing;
+using WebApiContrib.Routing;
 
-namespace WebApiContrib.Routing
+namespace WebApiContrib.WebHost.Routing
 {
     /// <summary>
     /// Route table builder that uses the <see cref="HttpRouteAttribute"/> instances found on the controllers
@@ -32,7 +33,7 @@ namespace WebApiContrib.Routing
         /// </summary>
         /// <param name="routes">Route collection to append the routes to</param>
         /// <param name="assembly">Assembly to scan for routes</param>
-        public static void BuildTable(RouteCollection routes,Assembly assembly)
+        public static void BuildTable(RouteCollection routes, Assembly assembly)
         {
             var controllerTypes = assembly.GetExportedTypes()
                 .Where(type => typeof(ApiController).IsAssignableFrom(type));
@@ -156,5 +157,4 @@ namespace WebApiContrib.Routing
             }
         }
     }
-
 }
