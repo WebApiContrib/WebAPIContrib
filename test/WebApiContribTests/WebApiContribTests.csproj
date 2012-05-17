@@ -94,6 +94,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\CachingHandlerRulesTests.cs" />
+    <Compile Include="Caching\CachingHandlerTests.cs" />
+    <Compile Include="Caching\TimedEntityTagHeaderValueTests.cs" />
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatterTests.cs" />
     <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
