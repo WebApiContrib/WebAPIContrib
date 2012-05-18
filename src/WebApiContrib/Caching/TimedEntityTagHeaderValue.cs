@@ -25,8 +25,8 @@ namespace WebApiContrib.Caching
 
 		public TimedEntityTagHeaderValue(string tag, bool isWeak)
 			: base(tag, isWeak)
-		{
-			LastModified = DateTimeOffset.UtcNow;
+		{			
+			LastModified =  DateTimeOffset.Parse(DateTimeOffset.UtcNow.ToString("r")); // to remove milliseconds
 		}
 
 

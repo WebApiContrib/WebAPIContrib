@@ -18,8 +18,8 @@ namespace WebApiContribTests.Caching
 		private static readonly string[] EtagValues = new[] { "abcdefgh", "12345678" };
 
 		[TestCase("GET", true, true, true, false, new []{"Accept", "Accept-Language"})]
-		[TestCase("PUT", true, true, false, false, new[] { "Accept", "Accept-Language" })]
-		[TestCase("POST", true, false, true, true, new[] { "Accept", "Accept-Language" })]
+		[TestCase("PUT", true, true, false, false, new string[0])]
+		[TestCase("POST", true, false, true, true, new[] { "Accept" })]
 		[TestCase("POST", false, true, false, true, new[] { "Accept", "Accept-Language" })]
 		public static void TestCachingContinuation(
 			string method,
@@ -33,6 +33,8 @@ namespace WebApiContribTests.Caching
 			// setup 
 			var mocks = new MockRepository();
 			var request = new HttpRequestMessage(new HttpMethod(method), TestUrl);
+			request.Headers.Add(HttpHeaderNames.Accept, "text/xml");
+			request.Headers.Add(HttpHeaderNames.AcceptLanguage, "en-GB");
 			var entityTagStore = mocks.StrictMock<IEntityTagStore>();
 			var cachingHandler = new CachingHandler(entityTagStore, varyByHeader)
 			                     	{

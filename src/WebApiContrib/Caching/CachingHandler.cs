@@ -62,6 +62,7 @@ namespace WebApiContrib.Caching
 
 			EntityTagKeyGenerator = (resourceUri, headers) =>
 				new EntityTagKey(resourceUri, headers.SelectMany(h => h.Value));
+			CacheController = (request) => new CacheControlHeaderValue(){Private = true, MustRevalidate = true, NoTransform = true};
 		}
 
 		/// <summary>
@@ -83,20 +84,31 @@ namespace WebApiContrib.Caching
 		public Func<string, IEnumerable<KeyValuePair<string, IEnumerable<string>>>, EntityTagKey>
 			 EntityTagKeyGenerator { get; set; }
 
+		/// <summary>
+		/// This is a function that decides whether caching for a particular request
+		/// is supported.
+		/// Function can return null to negate any caching. In this case, responses will not be cached
+		/// and ETag header will not be sent.
+		/// Alternatively it can return a CacheControlHeaderValue which controls cache lifetime on the client.
+		/// By default value is set so that all requests are cachable with expiry of 1 week.
+		/// </summary>
+		public Func<HttpRequestMessage, CacheControlHeaderValue> CacheController { get; set; }
+
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
+			EnusreRulesSetup();
+
 			var varyByHeaders = request.Headers.Where(h => _varyByHeaders.Any(
 				v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
 
 			Task<HttpResponseMessage> task = null;
-			var rule = RequestInterceptionRules.Values.FirstOrDefault(r=>
-			                {
-								task = r(request);
-			                    return task != null;
-			                }
-			
-				);
-
+		
+			RequestInterceptionRules.Values.FirstOrDefault(r =>
+			{
+				task = r(request);
+				return task != null;
+			});				
+	
 
 			if (task == null)
 				return base.SendAsync(request, cancellationToken)
@@ -110,7 +122,11 @@ namespace WebApiContrib.Caching
 			return task =>
 			{
 			    var httpResponse = task.Result;
-			    string uri = request.RequestUri.ToString();
+				var cacheControlHeaderValue = CacheController(request);
+				if (cacheControlHeaderValue == null)
+					return httpResponse;
+
+				string uri = request.RequestUri.ToString();
 			    var varyHeaders = request.Headers.Where(h => 
 					_varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
 
@@ -140,7 +156,9 @@ namespace WebApiContrib.Caching
 				{
 					httpResponse.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
 				}
-				
+
+				httpResponse.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl,cacheControlHeaderValue.ToString());
+
 				return httpResponse;
 			};
 		}
