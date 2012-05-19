@@ -15,13 +15,15 @@ using WebApiContrib.Internal.Extensions;
 namespace WebApiContrib.Caching
 {
 	/// <summary>
-	/// Represents a message handler that deals with caching and supports
-	/// * Resource retrival ETag
-	/// * Resource by LastModified
+	/// Represents a message handler that implements with caching and supports
+	/// (loosely based on Glenn Block's ETagHandler)
+	/// * Resource retrieval by ETag
+	/// * Resource retrieval by LastModified
 	/// * If-Match and If-None-Match for GET operations
 	/// * If-Modified-Since and If-Unmodified-Since for GET operations
 	/// * If-Unmodified-Since and If-Match for PUT operations
 	/// * Will add ETag, LastModified and Vary headers in the response
+	/// * Allows caching to be turned off based on individual message
 	/// * Currently does not support If-Range headers
 	/// </summary>
     public class CachingHandler : DelegatingHandler
