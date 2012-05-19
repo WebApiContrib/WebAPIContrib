@@ -15,7 +15,7 @@ using WebApiContrib.Internal.Extensions;
 namespace WebApiContrib.Caching
 {
 	/// <summary>
-	/// Represents a message handler that implements with caching and supports
+	/// Represents a message handler that implements caching and supports
 	/// (loosely based on Glenn Block's ETagHandler)
 	/// * Resource retrieval by ETag
 	/// * Resource retrieval by LastModified
