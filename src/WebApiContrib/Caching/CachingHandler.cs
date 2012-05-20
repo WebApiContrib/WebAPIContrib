@@ -64,7 +64,13 @@ namespace WebApiContrib.Caching
 
 			EntityTagKeyGenerator = (resourceUri, headers) =>
 				new EntityTagKey(resourceUri, headers.SelectMany(h => h.Value));
-			CacheController = (request) => new CacheControlHeaderValue(){Private = true, MustRevalidate = true, NoTransform = true};
+			CacheController = (request) => new CacheControlHeaderValue()
+				{
+					Private = true, 
+					MustRevalidate = true, 
+					NoTransform = true,
+					MaxAge = TimeSpan.FromDays(7)
+				};
 		}
 
 		/// <summary>
