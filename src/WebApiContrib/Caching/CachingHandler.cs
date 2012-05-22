@@ -104,7 +104,7 @@ namespace WebApiContrib.Caching
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			EnusreRulesSetup();
+			EnsureRulesSetup();
 
 			var varyByHeaders = request.Headers.Where(h => _varyByHeaders.Any(
 				v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
