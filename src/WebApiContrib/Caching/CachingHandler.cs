@@ -171,7 +171,7 @@ namespace WebApiContrib.Caching
 			};
 		}
 
-		private void EnusreRulesSetup()
+		private void EnsureRulesSetup()
 		{
 			if (RequestInterceptionRules == null)
 			{
