@@ -46,7 +46,7 @@ namespace WebApiContribTests.Caching
 			var entityTagKey = new EntityTagKey(TestUrl, new string[0]);
 			cachingHandler.EntityTagKeyGenerator = (x, y) => entityTagKey;
 			cachingHandler.ETagValueGenerator = (x, y) => new EntityTagHeaderValue(entityTagHeaderValue.Tag);
-			entityTagStore.Expect(x => x.TryGet(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
+			entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
 				out Arg<TimedEntityTagHeaderValue>.Out(entityTagHeaderValue).Dummy)).Return(existsInStore);
 
 			if (!existsInStore  || request.Method == HttpMethod.Put || request.Method == HttpMethod.Post)

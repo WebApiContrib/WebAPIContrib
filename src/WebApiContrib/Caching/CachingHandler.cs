@@ -64,6 +64,9 @@ namespace WebApiContrib.Caching
 
 			EntityTagKeyGenerator = (resourceUri, headers) =>
 				new EntityTagKey(resourceUri, headers.SelectMany(h => h.Value));
+
+			LinkedUrlProvider = (uri, method) => new string[0]; // a dummy
+
 			CacheController = (request) => new CacheControlHeaderValue()
 				{
 					Private = true, 
@@ -102,6 +105,14 @@ namespace WebApiContrib.Caching
 		/// </summary>
 		public Func<HttpRequestMessage, CacheControlHeaderValue> CacheController { get; set; }
 
+		/// <summary>
+		/// This is a function to allow the clients to invalidate the cache
+		/// for related URLs.
+		/// Current resourceUri and HttpMethod is passed and a list of URLs
+		/// is retrieved and cache is invalidated for those URLs.
+		/// </summary>
+		public Func<string, HttpMethod, IEnumerable<string>> LinkedUrlProvider { get; set; }
+
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			EnsureRulesSetup();
@@ -129,10 +140,10 @@ namespace WebApiContrib.Caching
 		{
 			return task =>
 			{
-			    var httpResponse = task.Result;
+			    var response = task.Result;
 				var cacheControlHeaderValue = CacheController(request);
 				if (cacheControlHeaderValue == null)
-					return httpResponse;
+					return response;
 
 				string uri = request.RequestUri.ToString();
 			    var varyHeaders = request.Headers.Where(h => 
@@ -142,32 +153,59 @@ namespace WebApiContrib.Caching
 			    
 				TimedEntityTagHeaderValue eTagValue;
 
-			    if (!_entityTagStore.TryGet(eTagKey, out eTagValue) || request.Method == HttpMethod.Put ||
-			       	request.Method == HttpMethod.Post)
+				var linkedUrls = LinkedUrlProvider(uri, request.Method);
+
+				// cache invalidation in POST
+				if(request.Method == HttpMethod.Post)
+				{
+					// remove pattern
+					_entityTagStore.RemoveAllByRoutePattern(eTagKey.RoutePattern);
+
+					// remove all related URIs
+					linkedUrls.Select(x => _entityTagStore.RemoveAllByRoutePattern(x));
+
+					// if location header is set (for newly created resource), invalidate cache for it
+					if(response.Headers.Location!=null)
+					{
+						_entityTagStore.RemoveAllByRoutePattern(response.Headers.Location.ToString());						
+					}
+				}
+
+				// cache invalidation in PUT or DELETE
+				if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Delete)
+				{
+					// remove pattern
+					_entityTagStore.RemoveAllByRoutePattern(eTagKey.RoutePattern);
+
+					// remove all related URIs
+					linkedUrls.Select(x => _entityTagStore.RemoveAllByRoutePattern(x));
+				}
+
+
+				if (request.Method == HttpMethod.Get && !_entityTagStore.TryGetValue(eTagKey, out eTagValue))
 			    {
 					eTagValue = new TimedEntityTagHeaderValue(ETagValueGenerator(uri, varyHeaders));
 			       	_entityTagStore.AddOrUpdate(eTagKey, eTagValue );
-			    }
+					// set ETag
+					response.Headers.ETag = eTagValue.ToEntityTagHeaderValue();
 
-				// set ETag
-			    httpResponse.Headers.ETag = eTagValue.ToEntityTagHeaderValue();
-				
-				// set last-modified
-				if (AddLastModifiedHeader && httpResponse.Content != null && !httpResponse.Content.Headers.Any(x=>x.Key.Equals(HttpHeaderNames.LastModified, 
-					StringComparison.CurrentCultureIgnoreCase)))
-				{
-					httpResponse.Content.Headers.Add(HttpHeaderNames.LastModified, eTagValue.LastModified.ToString("r"));
+					// set last-modified
+					if (AddLastModifiedHeader && response.Content != null && !response.Content.Headers.Any(x => x.Key.Equals(HttpHeaderNames.LastModified,
+						StringComparison.CurrentCultureIgnoreCase)))
+					{
+						response.Content.Headers.Add(HttpHeaderNames.LastModified, eTagValue.LastModified.ToString("r"));
+					}
+
+					// set Vary
+					if (AddVaryHeader && _varyByHeaders != null && _varyByHeaders.Length > 0)
+					{
+						response.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
+					}
+
+					response.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl, cacheControlHeaderValue.ToString());
 				}
 
-				// set Vary
-				if(AddVaryHeader && _varyByHeaders!=null && _varyByHeaders.Length>0)
-				{
-					httpResponse.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
-				}
-
-				httpResponse.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl,cacheControlHeaderValue.ToString());
-
-				return httpResponse;
+				return response;
 			};
 		}
 
@@ -224,7 +262,7 @@ namespace WebApiContrib.Caching
 				TimedEntityTagHeaderValue actualEtag = null;
 
 				bool matchFound = false;
-				if (_entityTagStore.TryGet(entityTagKey, out actualEtag))
+				if (_entityTagStore.TryGetValue(entityTagKey, out actualEtag))
 				{
 					if (etags.Any(etag => etag.Tag == actualEtag.Tag))
 					{
@@ -262,7 +300,7 @@ namespace WebApiContrib.Caching
 			    TimedEntityTagHeaderValue actualEtag = null;
 
 			    bool isModified = false;
-			    if (_entityTagStore.TryGet(entityTagKey, out actualEtag))
+			    if (_entityTagStore.TryGetValue(entityTagKey, out actualEtag))
 			    {
 			       	isModified = actualEtag.LastModified > modifiedInQuestion;
 			    }
@@ -294,7 +332,7 @@ namespace WebApiContrib.Caching
 				TimedEntityTagHeaderValue actualEtag = null;
 
 				bool isModified = false;
-				if (_entityTagStore.TryGet(entityTagKey, out actualEtag))
+				if (_entityTagStore.TryGetValue(entityTagKey, out actualEtag))
 				{
 					isModified = actualEtag.LastModified > modifiedInQuestion;
 				}
@@ -322,7 +360,7 @@ namespace WebApiContrib.Caching
 				TimedEntityTagHeaderValue actualEtag = null;
 
 				bool matchFound = false;
-				if (_entityTagStore.TryGet(entityTagKey, out actualEtag))
+				if (_entityTagStore.TryGetValue(entityTagKey, out actualEtag))
 				{
 					if (matchTags.Any(etag => etag.Tag == actualEtag.Tag))
 					{

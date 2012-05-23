@@ -15,9 +15,10 @@ namespace WebApiContrib.Caching
 	/// </summary>
 	public interface IEntityTagStore
 	{
-		bool TryGet(EntityTagKey key, out TimedEntityTagHeaderValue eTag);
+		bool TryGetValue(EntityTagKey key, out TimedEntityTagHeaderValue eTag);
 		void AddOrUpdate(EntityTagKey key, TimedEntityTagHeaderValue eTag);
 		bool TryRemove(EntityTagKey key);
+		int RemoveAllByRoutePattern(string routePattern);
 		void Clear();
 	}
 }
