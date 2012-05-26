@@ -67,7 +67,7 @@ namespace WebApiContrib.Caching
 
 			LinkedUrlProvider = (uri, method) => new string[0]; // a dummy
 
-			CacheController = (request) => new CacheControlHeaderValue()
+			CacheControlHeaderProvider = (request) => new CacheControlHeaderValue()
 				{
 					Private = true, 
 					MustRevalidate = true, 
@@ -103,7 +103,7 @@ namespace WebApiContrib.Caching
 		/// Alternatively it can return a CacheControlHeaderValue which controls cache lifetime on the client.
 		/// By default value is set so that all requests are cachable with expiry of 1 week.
 		/// </summary>
-		public Func<HttpRequestMessage, CacheControlHeaderValue> CacheController { get; set; }
+		public Func<HttpRequestMessage, CacheControlHeaderValue> CacheControlHeaderProvider { get; set; }
 
 		/// <summary>
 		/// This is a function to allow the clients to invalidate the cache
@@ -112,6 +112,30 @@ namespace WebApiContrib.Caching
 		/// is retrieved and cache is invalidated for those URLs.
 		/// </summary>
 		public Func<string, HttpMethod, IEnumerable<string>> LinkedUrlProvider { get; set; }
+
+		protected void ExecuteCacheInvalidationRules(EntityTagKey entityTagKey,
+			HttpRequestMessage request,
+			HttpResponseMessage response)
+		{
+			new[]
+				{
+					InvalidateCache(entityTagKey, request, response), // general invalidation
+					PostInvalidationRule(entityTagKey, request, response)
+				}
+				.Chain()();
+		}
+
+		protected void ExecuteCacheAdditionRules(EntityTagKey entityTagKey,
+			HttpRequestMessage request,
+			HttpResponseMessage response,
+			IEnumerable<KeyValuePair<string, IEnumerable<string>>> varyHeaders)
+		{
+			new[]
+				{
+					AddCaching(entityTagKey, request, response, varyHeaders), // general caching
+				}
+				.Chain()();
+		}
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
@@ -126,8 +150,7 @@ namespace WebApiContrib.Caching
 			{
 				task = r(request);
 				return task != null;
-			});				
-	
+			});
 
 			if (task == null)
 				return base.SendAsync(request, cancellationToken)
@@ -136,74 +159,150 @@ namespace WebApiContrib.Caching
 				return task;
 		}
 
+		/// <summary>
+		/// This is a scenario where we have a POST to a resource
+		/// and it needs to invalidate the cache to that resource
+		/// and all its linked URLs
+		/// 
+		/// For example:
+		/// POST /api/cars => invalidate /api/cars
+		/// also it might invalidate /api/cars/fastest in which case
+		/// /api/cars/fastest must be one of the linked URLs
+		/// </summary>
+		/// <param name="entityTagKey">entityTagKey</param>
+		/// <param name="request">request</param>
+		/// <param name="response">response</param>
+		/// <returns>returns the function to execute</returns>
+		internal Action PostInvalidationRule(
+			EntityTagKey entityTagKey,
+			HttpRequestMessage request, 
+			HttpResponseMessage response)
+		{
+			return () =>
+			{
+				if(request.Method!=HttpMethod.Post)
+					return;
+
+				// if location header is set (for newly created resource), invalidate cache for it
+				// this normally should not be necessary as the item is new and should not be in the cache
+				// but releasing a non-existent item from cache should not have a big overhead
+				if (response.Headers.Location != null)
+				{
+					_entityTagStore.RemoveAllByRoutePattern(response.Headers.Location.ToString());
+				}
+
+			};
+		}
+
+		/// <summary>
+		/// Adds caching for GET and PUT if 
+		/// cache control provided is not null
+		/// With PUT, since cache has been alreay invalidated,
+		/// we provide the new ETag (old one has been cleared in invalidation phase)
+		/// </summary>
+		/// <param name="entityTagKey"></param>
+		/// <param name="request"></param>
+		/// <param name="response"></param>
+		/// <param name="varyHeaders"></param>
+		/// <returns></returns>
+		internal Action AddCaching(
+			EntityTagKey entityTagKey,
+			HttpRequestMessage request,
+			HttpResponseMessage response,
+			IEnumerable<KeyValuePair<string, IEnumerable<string>>> varyHeaders)
+		{
+			return
+				() =>
+				{
+
+					var cacheControlHeaderValue = CacheControlHeaderProvider(request);
+					if (cacheControlHeaderValue == null)
+						return;
+
+					TimedEntityTagHeaderValue eTagValue;
+
+					string uri = request.RequestUri.ToString();
+
+					// in case of GET and no ETag
+					// in case of PUT, we should return the new ETag of the resource
+					// NOTE: No need to check if it is in the cache. If it were, it would not get
+					// here
+					if (request.Method == HttpMethod.Get || request.Method == HttpMethod.Put)
+					{
+						eTagValue = new TimedEntityTagHeaderValue(ETagValueGenerator(uri, varyHeaders));
+						_entityTagStore.AddOrUpdate(entityTagKey, eTagValue);
+						// set ETag
+						response.Headers.ETag = eTagValue.ToEntityTagHeaderValue();
+
+						// set last-modified
+						if (AddLastModifiedHeader && response.Content != null && !response.Content.Headers.Any(x => x.Key.Equals(HttpHeaderNames.LastModified,
+							StringComparison.CurrentCultureIgnoreCase)))
+						{
+							response.Content.Headers.Add(HttpHeaderNames.LastModified, eTagValue.LastModified.ToString("r"));
+						}
+
+						// set Vary
+						if (AddVaryHeader && _varyByHeaders != null && _varyByHeaders.Length > 0)
+						{
+							response.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
+						}
+
+						response.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl, cacheControlHeaderValue.ToString());
+
+					}
+
+				};
+		}
+
+		/// <summary>
+		/// This invalidates the resource based on routePattern
+		/// for methods POST, PUT and DELETE.
+		/// It also removes for all linked URLs
+		/// </summary>
+		/// <param name="entityTagKey"></param>
+		/// <param name="request"></param>
+		/// <param name="response"></param>
+		/// <returns></returns>
+		internal Action InvalidateCache(
+			EntityTagKey entityTagKey,
+			HttpRequestMessage request,
+			HttpResponseMessage response)
+		{
+			return
+				() =>
+			{
+
+				if (!request.Method.Method.IsIn("PUT", "DELETE", "POST"))
+					return;
+
+				string uri = request.RequestUri.ToString();
+
+				// remove pattern
+				_entityTagStore.RemoveAllByRoutePattern(entityTagKey.RoutePattern);
+
+				// remove all related URIs
+				var linkedUrls = LinkedUrlProvider(uri, request.Method);
+				foreach (var linkedUrl in linkedUrls)
+					_entityTagStore.RemoveAllByRoutePattern(linkedUrl);
+
+			};
+
+		}
+
 		internal Func<Task<HttpResponseMessage>, HttpResponseMessage> GetCachingContinuation(HttpRequestMessage request)
 		{
 			return task =>
 			{
 			    var response = task.Result;
-				var cacheControlHeaderValue = CacheController(request);
-				if (cacheControlHeaderValue == null)
-					return response;
 
 				string uri = request.RequestUri.ToString();
-			    var varyHeaders = request.Headers.Where(h => 
-					_varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
+				var varyHeaders = request.Headers.Where(h =>
+						 _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
 
 				var eTagKey = EntityTagKeyGenerator(uri, varyHeaders);
 			    
-				TimedEntityTagHeaderValue eTagValue;
-
-				var linkedUrls = LinkedUrlProvider(uri, request.Method);
-
-				// cache invalidation in POST
-				if(request.Method == HttpMethod.Post)
-				{
-					// remove pattern
-					_entityTagStore.RemoveAllByRoutePattern(eTagKey.RoutePattern);
-
-					// remove all related URIs
-					linkedUrls.Select(x => _entityTagStore.RemoveAllByRoutePattern(x));
-
-					// if location header is set (for newly created resource), invalidate cache for it
-					if(response.Headers.Location!=null)
-					{
-						_entityTagStore.RemoveAllByRoutePattern(response.Headers.Location.ToString());						
-					}
-				}
-
-				// cache invalidation in PUT or DELETE
-				if (request.Method == HttpMethod.Post || request.Method == HttpMethod.Delete)
-				{
-					// remove pattern
-					_entityTagStore.RemoveAllByRoutePattern(eTagKey.RoutePattern);
-
-					// remove all related URIs
-					linkedUrls.Select(x => _entityTagStore.RemoveAllByRoutePattern(x));
-				}
-
-
-				if (request.Method == HttpMethod.Get && !_entityTagStore.TryGetValue(eTagKey, out eTagValue))
-			    {
-					eTagValue = new TimedEntityTagHeaderValue(ETagValueGenerator(uri, varyHeaders));
-			       	_entityTagStore.AddOrUpdate(eTagKey, eTagValue );
-					// set ETag
-					response.Headers.ETag = eTagValue.ToEntityTagHeaderValue();
-
-					// set last-modified
-					if (AddLastModifiedHeader && response.Content != null && !response.Content.Headers.Any(x => x.Key.Equals(HttpHeaderNames.LastModified,
-						StringComparison.CurrentCultureIgnoreCase)))
-					{
-						response.Content.Headers.Add(HttpHeaderNames.LastModified, eTagValue.LastModified.ToString("r"));
-					}
-
-					// set Vary
-					if (AddVaryHeader && _varyByHeaders != null && _varyByHeaders.Length > 0)
-					{
-						response.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
-					}
-
-					response.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl, cacheControlHeaderValue.ToString());
-				}
+				ExecuteCacheInvalidationRules(eTagKey, request, response);
+				ExecuteCacheAdditionRules(eTagKey, request, response, varyHeaders);
 
 				return response;
 			};

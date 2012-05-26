@@ -69,6 +69,8 @@
     <Compile Include="Caching\CachingHandler.cs" />
     <Compile Include="Caching\EntityTagKey.cs" />
     <Compile Include="Caching\TimedEntityTagHeaderValue.cs" />
+    <Compile Include="Internal\Extensions\ActionExtensions.cs" />
+    <Compile Include="Internal\Extensions\IsInExtensions.cs" />
     <Compile Include="Internal\HttpHeaderNames.cs" />
     <Compile Include="Caching\IEntityTagStore.cs" />
     <Compile Include="Caching\InMemoryEntityTagStore.cs" />
