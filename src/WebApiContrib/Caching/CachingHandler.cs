@@ -229,8 +229,13 @@ namespace WebApiContrib.Caching
 					// here
 					if (request.Method == HttpMethod.Get || request.Method == HttpMethod.Put)
 					{
-						eTagValue = new TimedEntityTagHeaderValue(ETagValueGenerator(uri, varyHeaders));
-						_entityTagStore.AddOrUpdate(entityTagKey, eTagValue);
+						// create new ETag only if it does not already exist
+						if (!_entityTagStore.TryGetValue(entityTagKey, out eTagValue))
+						{
+							eTagValue = new TimedEntityTagHeaderValue(ETagValueGenerator(uri, varyHeaders));
+							_entityTagStore.AddOrUpdate(entityTagKey, eTagValue);							
+						}
+
 						// set ETag
 						response.Headers.ETag = eTagValue.ToEntityTagHeaderValue();
 
