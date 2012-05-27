@@ -94,6 +94,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\CachingHandlerRulesTests.cs" />
+    <Compile Include="Caching\CachingHandlerTests.cs" />
+    <Compile Include="Caching\TimedEntityTagHeaderValueTests.cs" />
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatterTests.cs" />
     <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
@@ -142,9 +145,9 @@
       <Project>{AD84D9A8-0849-4461-A9A7-952722F9A6C9}</Project>
       <Name>WebApiContrib.Formatting.ServiceStack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.Autofac.csproj">
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.AutoFac.csproj">
       <Project>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</Project>
-      <Name>WebApiContrib.IoC.Autofac</Name>
+      <Name>WebApiContrib.IoC.AutoFac</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.CastleWindsor\WebApiContrib.IoC.CastleWindsor.csproj">
       <Project>{3735BC1C-6224-417B-8816-D6BC6498682F}</Project>

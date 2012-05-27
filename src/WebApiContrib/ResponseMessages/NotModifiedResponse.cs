@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Net.Http.Headers;
+using WebApiContrib.Internal;
 
 namespace WebApiContrib.ResponseMessages
 {
@@ -11,7 +14,14 @@ namespace WebApiContrib.ResponseMessages
         public NotModifiedResponse(IApiResource resource) : base(HttpStatusCode.NotModified, resource)
         {
         }
-    }
+
+		public NotModifiedResponse(EntityTagHeaderValue etag)
+			: base(HttpStatusCode.NotModified)
+		{
+			this.Headers.ETag = etag;
+		}
+ 
+	}
 
     public class NotModifiedResponse<T> : ResponseBase<T>
     {
