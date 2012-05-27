@@ -65,7 +65,8 @@ namespace WebApiContrib.Caching
 			EntityTagKeyGenerator = (resourceUri, headers) =>
 				new EntityTagKey(resourceUri, headers.SelectMany(h => h.Value));
 
-			LinkedUrlProvider = (uri, method) => new string[0]; // a dummy
+			LinkedRoutePatternProvider = (uri, method) => new string[0]; // a dummy
+			UriTrimmer = (uri) => uri.PathAndQuery;
 
 			CacheControlHeaderProvider = (request) => new CacheControlHeaderValue()
 				{
@@ -111,7 +112,13 @@ namespace WebApiContrib.Caching
 		/// Current resourceUri and HttpMethod is passed and a list of URLs
 		/// is retrieved and cache is invalidated for those URLs.
 		/// </summary>
-		public Func<string, HttpMethod, IEnumerable<string>> LinkedUrlProvider { get; set; }
+		public Func<string, HttpMethod, IEnumerable<string>> LinkedRoutePatternProvider { get; set; }
+
+		/// <summary>
+		/// A function that gets the Uri (normally request) and extracts important bits
+		/// for keys. By default it will return Uri.PathAndQuery
+		/// </summary>
+		public Func<Uri, string> UriTrimmer { get; set; }
 
 		protected void ExecuteCacheInvalidationRules(EntityTagKey entityTagKey,
 			HttpRequestMessage request,
@@ -221,7 +228,7 @@ namespace WebApiContrib.Caching
 
 					TimedEntityTagHeaderValue eTagValue;
 
-					string uri = request.RequestUri.ToString();
+					string uri = UriTrimmer(request.RequestUri);
 
 					// in case of GET and no ETag
 					// in case of PUT, we should return the new ETag of the resource
@@ -280,13 +287,13 @@ namespace WebApiContrib.Caching
 				if (!request.Method.Method.IsIn("PUT", "DELETE", "POST"))
 					return;
 
-				string uri = request.RequestUri.ToString();
+				string uri = UriTrimmer(request.RequestUri);
 
 				// remove pattern
 				_entityTagStore.RemoveAllByRoutePattern(entityTagKey.RoutePattern);
 
 				// remove all related URIs
-				var linkedUrls = LinkedUrlProvider(uri, request.Method);
+				var linkedUrls = LinkedRoutePatternProvider(uri, request.Method);
 				foreach (var linkedUrl in linkedUrls)
 					_entityTagStore.RemoveAllByRoutePattern(linkedUrl);
 
@@ -300,7 +307,7 @@ namespace WebApiContrib.Caching
 			{
 			    var response = task.Result;
 
-				string uri = request.RequestUri.ToString();
+				string uri = UriTrimmer(request.RequestUri);
 				var varyHeaders = request.Headers.Where(h =>
 						 _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
 
@@ -357,7 +364,7 @@ namespace WebApiContrib.Caching
 				var isNoneMatch = noneMatchTags.Count > 0;
 				var etags = isNoneMatch ? noneMatchTags : matchTags;
 
-				var resource = request.RequestUri.ToString();
+				var resource = UriTrimmer(request.RequestUri);
 				var headers =
 					request.Headers.Where(h => _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
 				var entityTagKey = EntityTagKeyGenerator(resource, headers);
@@ -398,7 +405,7 @@ namespace WebApiContrib.Caching
 
 				var headers =
 					request.Headers.Where(h => _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
-				var resource = request.RequestUri.ToString();
+				var resource = UriTrimmer(request.RequestUri);
 				var entityTagKey = EntityTagKeyGenerator(resource, headers);
 
 			    TimedEntityTagHeaderValue actualEtag = null;
@@ -431,7 +438,7 @@ namespace WebApiContrib.Caching
 
 				var headers =
 					request.Headers.Where(h => _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
-				var resource = request.RequestUri.ToString();
+				var resource = UriTrimmer(request.RequestUri);
 				var entityTagKey = EntityTagKeyGenerator(resource, headers);
 				TimedEntityTagHeaderValue actualEtag = null;
 
@@ -459,7 +466,7 @@ namespace WebApiContrib.Caching
 
 				var headers =
 					request.Headers.Where(h => _varyByHeaders.Any(v => v.Equals(h.Key, StringComparison.CurrentCultureIgnoreCase)));
-				var resource = request.RequestUri.ToString();
+				var resource = UriTrimmer(request.RequestUri);
 				var entityTagKey = EntityTagKeyGenerator(resource, headers);
 				TimedEntityTagHeaderValue actualEtag = null;
 

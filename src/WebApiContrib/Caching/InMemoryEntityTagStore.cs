@@ -20,7 +20,7 @@ namespace WebApiContrib.Caching
 		public void AddOrUpdate(EntityTagKey key, TimedEntityTagHeaderValue eTag)
 		{
 			_eTagCache.AddOrUpdate(key, eTag, (theKey, oldValue) => eTag);
-			_routePatternCache.AddOrUpdate(key.RoutePattern, new HashSet<EntityTagKey>(), 
+			_routePatternCache.AddOrUpdate(key.RoutePattern, new HashSet<EntityTagKey>() { key }, 
 				(routePattern, hashSet) =>
 					{
 						hashSet.Add(key);
@@ -41,7 +41,8 @@ namespace WebApiContrib.Caching
 			if(_routePatternCache.TryGetValue(routePattern, out keys))
 			{
 				count = keys.Count;
-				keys.Select(x => this.TryRemove(x));
+				foreach (var entityTagKey in keys)
+					this.TryRemove(entityTagKey);
 				_routePatternCache.TryRemove(routePattern, out keys);
 			}
 			return count;

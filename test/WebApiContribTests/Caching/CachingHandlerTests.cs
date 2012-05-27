@@ -31,7 +31,7 @@ namespace WebApiContribTests.Caching
 			var linkedUrls = new []{"url1", "url2"};
 			var cachingHandler = new CachingHandler(entityTagStore)
 			                     	{
-										LinkedUrlProvider = (url, mthd) => linkedUrls
+										LinkedRoutePatternProvider = (url, mthd) => linkedUrls
 			                     	};
 			var entityTagKey = new EntityTagKey(TestUrl, new string[0], routePattern);
 			var response = new HttpResponseMessage();
@@ -63,7 +63,7 @@ namespace WebApiContribTests.Caching
 			var linkedUrls = new[] { "url1", "url2" };
 			var cachingHandler = new CachingHandler(entityTagStore)
 			{
-				LinkedUrlProvider = (url, mthd) => linkedUrls
+				LinkedRoutePatternProvider = (url, mthd) => linkedUrls
 			};
 			var entityTagKey = new EntityTagKey(TestUrl, new string[0], routePattern);
 			var response = new HttpResponseMessage();

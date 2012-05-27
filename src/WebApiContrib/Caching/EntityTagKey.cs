@@ -28,7 +28,9 @@ namespace WebApiContrib.Caching
 		/// must be passed
 		/// </param>
 		/// <param name="routePattern">route pattern for the URI. by default it is the same
-		/// but in some case 
+		/// but in some cases it could be different.
+		/// For example /api/cars/fastest and /api/cars/mostExpensive can share tha pattern /api/cars/*
+		/// This will be used at the time of cache invalidation. 
 		/// </param>
 		public EntityTagKey(string resourceUri, IEnumerable<string> headerValues, string routePattern)
 		{
