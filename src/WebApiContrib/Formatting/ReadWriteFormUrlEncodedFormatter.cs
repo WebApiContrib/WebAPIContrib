@@ -17,25 +17,18 @@ namespace WebApiContrib.Formatting
 
     	public override bool CanWriteType(Type type)
         {
-            return base.CanWriteType(type) || type == typeof(JObject);
+            return type == typeof(JObject);
         }
 
     	public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
-            if (type == typeof(JObject))
-            {
-                return Task.Factory.StartNew(() =>
-                {
-                    var pairs = new List<string>();
-                    Flatten(pairs, value as IDictionary<string, JToken>);
-                    var bytes = encoding.GetBytes(string.Join("&", pairs));
-                    stream.Write(bytes, 0, bytes.Length);
-                });
-            }
-            else
-            {
-                return base.WriteToStreamAsync(type, value, stream, contentHeaders, transportContext);
-            }
+			return Task.Factory.StartNew(() =>
+			{
+				var pairs = new List<string>();
+				Flatten(pairs, value as IDictionary<string, JToken>);
+				var bytes = encoding.GetBytes(string.Join("&", pairs));
+				stream.Write(bytes, 0, bytes.Length);
+			});
         }
 
         private void Flatten(List<string> pairs, IDictionary<string, JToken> input)
@@ -108,7 +101,8 @@ namespace WebApiContrib.Formatting
                         }
                     }
 
-                    pairs.Add(string.Format("{0}={1}", Uri.EscapeDataString(name.ToString()), Uri.EscapeDataString(value)));
+					if (value != null)
+						pairs.Add(string.Format("{0}={1}", Uri.EscapeDataString(name.ToString()), Uri.EscapeDataString(value)));
 
                     break;
             }

@@ -51,13 +51,16 @@ namespace WebApiContribTests.Formatting
         void TestJObjectAndFormsEncodedConversion(string formUrlEncoded, JObject json, bool formsToJsonShouldSucceed)
         {
             var formatter = new ReadWriteFormUrlEncodedFormatter();
-            var ms = new MemoryStream();
-            formatter.WriteToStreamAsync(typeof(JObject), json, ms, null, null).Wait();
-            Assert.AreEqual(formUrlEncoded, Uri.UnescapeDataString(Encoding.UTF8.GetString(ms.ToArray())));
+			using (var ms = new MemoryStream())
+			{
+				formatter.WriteToStreamAsync(typeof(JObject), json, ms, null, null).Wait();
+				var actual = Encoding.UTF8.GetString(ms.ToArray());
+        		Assert.AreEqual(formUrlEncoded, Uri.UnescapeDataString(actual));
+			}
 
             if (formsToJsonShouldSucceed)
             {
-            	var jo = formatter.ReadFromStreamAsync(typeof(JObject), new MemoryStream(Encoding.UTF8.GetBytes(formUrlEncoded)), null, null);
+            	var jo = formatter.ReadFromStreamAsync(typeof(JObject), new MemoryStream(Encoding.UTF8.GetBytes(formUrlEncoded)), null, null).Result;
                 Assert.AreEqual(json.ToString(), Uri.UnescapeDataString(jo.ToString()));
             }
         }
