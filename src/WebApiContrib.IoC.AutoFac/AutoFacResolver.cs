@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http.Dependencies;
 using Autofac;
 
@@ -22,16 +23,10 @@ namespace WebApiContrib.IoC.Autofac
 			if (scope == null)
 				throw new ObjectDisposedException("this", "This scope has already been disposed.");
 
-			if (scope.IsRegistered(serviceType))
-			{
-				var service = scope.Resolve(serviceType);
-
-				return service;
-			}
-			else
-			{
+			if (!scope.IsRegistered(serviceType))
 				return null;
-			}
+
+			return scope.Resolve(serviceType);
 		}
 
 		public IEnumerable<object> GetServices(Type serviceType)
@@ -39,16 +34,10 @@ namespace WebApiContrib.IoC.Autofac
 			if (scope == null)
 				throw new ObjectDisposedException("this", "This scope has already been disposed.");
 
-			if (scope.IsRegistered(serviceType))
-			{
-				var services = (IEnumerable<object>) scope.Resolve(typeof (IEnumerable<>).MakeGenericType(new[] {serviceType}));
+			if (!scope.IsRegistered(serviceType))
+                return Enumerable.Empty<object>();
 
-				return services;
-			}
-			else
-			{
-				return null;
-			}
+			return (IEnumerable<object>) scope.Resolve(typeof (IEnumerable<>).MakeGenericType(serviceType));
 		}
 
     	public void Dispose()
