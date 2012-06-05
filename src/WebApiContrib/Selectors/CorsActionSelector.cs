@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
@@ -68,7 +67,7 @@ namespace WebApiContrib.Selectors
                 get { return originalAction.ActionName; }
             }
 
-            public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments, CancellationToken cancellationToken)
+            public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments)
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK);
                 response.Headers.Add(accessControlAllowMethods, prefilghtAccessControlRequestMethod);
@@ -93,7 +92,7 @@ namespace WebApiContrib.Selectors
                 get { return typeof(HttpResponseMessage); }
             }
 
-            public override Collection<FilterInfo> GetFilterPipeline()
+        	public override Collection<FilterInfo> GetFilterPipeline()
             {
                 return originalAction.GetFilterPipeline();
             }
