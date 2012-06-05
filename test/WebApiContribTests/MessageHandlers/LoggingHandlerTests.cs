@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading;
 using System.Web.Http;
 using NUnit.Framework;
 using WebApiContrib.Formatting;
@@ -38,20 +37,14 @@ namespace WebApiContribTests.MessageHandlers
 
         	var request = new HttpRequestMessage();
 			request.Content = new ObjectContent(typeof(List<Contact>), content, new ProtoBufFormatter(), ProtoBufFormatter.DefaultMediaType.MediaType);
-            var response = client.PostAsync("http://anything/api/contacts", request.Content).Result;
-
-            Assert.IsNotNull(response);
-
-            // Note: Because content within the logging handler can be extracted as an async
-            // operation, there is no guarantee that that handler is called directly after we
-            // get the response. So we have a sleep to give it time to execute.
-            //TODO: Find better way of ensuring all logging requests are done.
-
-            Thread.Sleep(1000);
-
-            Assert.AreEqual(2, dummyRepository.LogMessageCount);
-            Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
-            Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
+        	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
+        	{
+        		var response = task.Result;
+				Assert.IsNotNull(response);
+				Assert.AreEqual(2, dummyRepository.LogMessageCount);
+				Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
+				Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
+        	});
         }
     }
 }

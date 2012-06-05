@@ -35,10 +35,12 @@ namespace WebApiContribTests.MessageHandlers
 
         	var request = new HttpRequestMessage();
 			request.Content = new ObjectContent(typeof(List<Contact>), content, new ProtoBufFormatter(), ProtoBufFormatter.DefaultMediaType.MediaType);
-            var response = client.PostAsync("http://anything/api/contacts", request.Content).Result;
-
-            Assert.IsNotNull(response);
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
+        	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
+        	{
+        		var response = task.Result;
+				Assert.IsNotNull(response);
+				Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
+        	});
         }
     }
 }
