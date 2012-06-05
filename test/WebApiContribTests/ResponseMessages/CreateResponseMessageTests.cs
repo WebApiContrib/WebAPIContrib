@@ -25,16 +25,16 @@ namespace WebApiContribTests.ResponseMessages
             response.Headers.Location.ShouldEqual(apiResource.Location);
         }
 
-        [Test]
-        public void Should_add_content_to_message_when_its_a_typed_response_message()
-        {
-            var apiResource = new TestResource();
-            var response = new CreateResponse<TestResource>(apiResource);
-            AssertExpectedStatus(response);
-            response.Headers.Location.ShouldEqual(apiResource.Location);
-            response.Content.ShouldNotBeNull();
-            response.Content.ObjectType.ShouldEqual(typeof(TestResource));
-        }
+		////[Test]
+		////public void Should_add_content_to_message_when_its_a_typed_response_message()
+		////{
+		////    var apiResource = new TestResource();
+		////    var response = new CreateResponse<TestResource>(apiResource);
+		////    AssertExpectedStatus(response);
+		////    response.Headers.Location.ShouldEqual(apiResource.Location);
+		////    response.Content.ShouldNotBeNull();
+		////    response.Content.ObjectType.ShouldEqual(typeof(TestResource));
+		////}
 
         protected override HttpStatusCode? ExpectedStatusCode
         {

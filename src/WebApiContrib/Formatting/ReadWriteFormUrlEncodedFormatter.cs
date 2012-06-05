@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Json;
 using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace WebApiContrib.Formatting
 {
@@ -15,30 +15,23 @@ namespace WebApiContrib.Formatting
     {
         private readonly static Encoding encoding = new UTF8Encoding(false);
 
-        protected override bool CanWriteType(Type type)
+    	public override bool CanWriteType(Type type)
         {
-            return base.CanWriteType(type) || type == typeof(JsonObject);
+            return type == typeof(JObject);
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, TransportContext transportContext)
+    	public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
-            if (type == typeof(JsonObject))
-            {
-                return Task.Factory.StartNew(() =>
-                {
-                    var pairs = new List<string>();
-                    Flatten(pairs, value as JsonObject);
-                    var bytes = encoding.GetBytes(string.Join("&", pairs));
-                    stream.Write(bytes, 0, bytes.Length);
-                });
-            }
-            else
-            {
-                return base.OnWriteToStreamAsync(type, value, stream, contentHeaders, formatterContext, transportContext);
-            }
+			return Task.Factory.StartNew(() =>
+			{
+				var pairs = new List<string>();
+				Flatten(pairs, value as IDictionary<string, JToken>);
+				var bytes = encoding.GetBytes(string.Join("&", pairs));
+				stream.Write(bytes, 0, bytes.Length);
+			});
         }
 
-        private void Flatten(List<string> pairs, JsonObject input)
+        private void Flatten(List<string> pairs, IDictionary<string, JToken> input)
         {
             var stack = new List<object>();
 
@@ -55,17 +48,18 @@ namespace WebApiContrib.Formatting
             }
         }
 
-        private static void Flatten(List<string> pairs, JsonValue input, List<object> indices)
+        private static void Flatten(List<string> pairs, JToken input, List<object> indices)
         {
             if (input == null)
             {
                 return; // null values aren't serialized
             }
 
-            switch (input.JsonType)
+            switch (input.Type)
             {
-                case JsonType.Array:
-                    for (int i = 0; i < input.Count; i++)
+                case JTokenType.Array:
+            		var count = ((ICollection<JToken>) input).Count;
+                    for (int i = 0; i < count; i++)
                     {
                         indices.Add(i);
                         Flatten(pairs, input[i], indices);
@@ -73,8 +67,9 @@ namespace WebApiContrib.Formatting
                     }
 
                     break;
-                case JsonType.Object:
-                    foreach (var kvp in input)
+                case JTokenType.Object:
+            		var dict = (IDictionary<string, JToken>) input;
+                    foreach (var kvp in dict)
                     {
                         indices.Add(kvp.Key);
                         Flatten(pairs, kvp.Value, indices);
@@ -83,7 +78,7 @@ namespace WebApiContrib.Formatting
 
                     break;
                 default:
-                    var value = input.ReadAs<string>();
+                    var value = input.Value<string>();
                     var name = new StringBuilder();
 
                     for (int i = 0; i < indices.Count; i++)
@@ -106,7 +101,8 @@ namespace WebApiContrib.Formatting
                         }
                     }
 
-                    pairs.Add(string.Format("{0}={1}", Uri.EscapeDataString(name.ToString()), Uri.EscapeDataString(value)));
+					if (value != null)
+						pairs.Add(string.Format("{0}={1}", Uri.EscapeDataString(name.ToString()), Uri.EscapeDataString(value)));
 
                     break;
             }

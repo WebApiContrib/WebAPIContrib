@@ -3,11 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.Http;
-using System.Web.Http.WebHost;
-using System.Web.Http.WebHost.Routing;
-using System.Web.Routing;
+using System.Web.Http.Routing;
+using WebApiContrib.Routing;
 
-namespace WebApiContrib.Routing
+namespace WebApiContrib.SelfHost.Routing
 {
     /// <summary>
     /// Route table builder that uses the <see cref="HttpRouteAttribute"/> instances found on the controllers
@@ -20,10 +19,10 @@ namespace WebApiContrib.Routing
         /// attributes found on the controllers in the current web application.
         /// </summary>
         /// <param name="routes">Route collection to append the routes to</param>
-        public static void BuildTable(RouteCollection routes)
+        public static void BuildTable(HttpRouteCollection routes)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            BuildTable(routes,assembly);
+            BuildTable(routes, assembly);
         }
 
         /// <summary>
@@ -32,10 +31,9 @@ namespace WebApiContrib.Routing
         /// </summary>
         /// <param name="routes">Route collection to append the routes to</param>
         /// <param name="assembly">Assembly to scan for routes</param>
-        public static void BuildTable(RouteCollection routes,Assembly assembly)
+        public static void BuildTable(HttpRouteCollection routes, Assembly assembly)
         {
-            var controllerTypes = assembly.GetExportedTypes()
-                .Where(type => typeof(ApiController).IsAssignableFrom(type));
+            var controllerTypes = assembly.GetExportedTypes().Where(type => typeof(ApiController).IsAssignableFrom(type));
 
             // Find all the controller types and extract the HTTP route attributes from 
             // the public methods that can be found on the controller.
@@ -58,10 +56,9 @@ namespace WebApiContrib.Routing
         /// </summary>
         /// <param name="routes"></param>
         /// <param name="controllerType"></param>
-        private static void BuildControllerRoutes(RouteCollection routes, Type controllerType)
+        private static void BuildControllerRoutes(HttpRouteCollection routes, Type controllerType)
         {
-            HttpRouteAttribute[] attributes = (HttpRouteAttribute[])controllerType.GetCustomAttributes(
-                typeof(HttpRouteAttribute), true);
+            var attributes = (HttpRouteAttribute[]) controllerType.GetCustomAttributes(typeof(HttpRouteAttribute), true);
 
             string controller = controllerType.Name;
 
@@ -74,12 +71,11 @@ namespace WebApiContrib.Routing
 
             foreach (var attribute in attributes)
             {
-                RouteValueDictionary routeValuesDictionary = new RouteValueDictionary();
+                var routeValuesDictionary = new HttpRouteValueDictionary();
                 routeValuesDictionary.Add("controller", controller);
 
                 // Create the route and attach the default route handler to it.
-                HttpWebRoute route = new HttpWebRoute(attribute.UriTemplate, routeValuesDictionary,
-                    new RouteValueDictionary(), new RouteValueDictionary(), HttpControllerRouteHandler.Instance);
+            	var route = new HttpRoute(attribute.UriTemplate, routeValuesDictionary, new HttpRouteValueDictionary(), new HttpRouteValueDictionary());
 
                 routes.Add(Guid.NewGuid().ToString(), route);
             }
@@ -92,11 +88,10 @@ namespace WebApiContrib.Routing
         /// <param name="routes"></param>
         /// <param name="controllerType"></param>
         /// <param name="method"></param>
-        private static void BuildControllerMethodRoutes(RouteCollection routes, Type controllerType, MethodInfo method)
+        private static void BuildControllerMethodRoutes(HttpRouteCollection routes, Type controllerType, MethodInfo method)
         {
             // Grab the http route attributes from the current method.
-            HttpRouteAttribute[] attributes = (HttpRouteAttribute[])method.GetCustomAttributes(
-                typeof(HttpRouteAttribute), true);
+            var attributes = (HttpRouteAttribute[]) method.GetCustomAttributes(typeof(HttpRouteAttribute), true);
 
             if (attributes.Length != 0)
             {
@@ -115,7 +110,7 @@ namespace WebApiContrib.Routing
                 // Generate a route for every HTTP route attribute found on the method
                 foreach (var attribute in attributes)
                 {
-                    var routeValueDictionary = new RouteValueDictionary();
+                    var routeValueDictionary = new HttpRouteValueDictionary();
 
                     routeValueDictionary.Add("controller", controller);
                     routeValueDictionary.Add("action", action);
@@ -123,8 +118,7 @@ namespace WebApiContrib.Routing
                     ResolveOptionalRouteParameters(attribute.UriTemplate, method, routeValueDictionary);
 
                     // Create the route and attach the default route handler to it.
-                    HttpWebRoute route = new HttpWebRoute(attribute.UriTemplate, routeValueDictionary,
-                        new RouteValueDictionary(), new RouteValueDictionary(), HttpControllerRouteHandler.Instance);
+                    var route = new HttpRoute(attribute.UriTemplate, routeValueDictionary, new HttpRouteValueDictionary(), new HttpRouteValueDictionary());
 
                     routes.Add(Guid.NewGuid().ToString(), route);
                 }
@@ -137,7 +131,7 @@ namespace WebApiContrib.Routing
         /// <param name="uriTemplate"></param>
         /// <param name="method"></param>
         /// <param name="routeValueDictionary"></param>
-        private static void ResolveOptionalRouteParameters(string uriTemplate, MethodInfo method, RouteValueDictionary routeValueDictionary)
+        private static void ResolveOptionalRouteParameters(string uriTemplate, MethodInfo method, HttpRouteValueDictionary routeValueDictionary)
         {
             Regex pattern = new Regex(@"{(\S+)}");
             var methodParameters = method.GetParameters();
@@ -156,5 +150,4 @@ namespace WebApiContrib.Routing
             }
         }
     }
-
 }

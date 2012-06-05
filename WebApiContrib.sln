@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Unity", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.JavaScriptSerializer", "src\WebApiContrib.Formatting.JavaScriptSerializer\WebApiContrib.Formatting.JavaScriptSerializer.csproj", "{9641B6A6-278A-479F-B9F5-46B2E6B9657E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.JsonNet", "src\WebApiContrib.Formatting.JsonNet\WebApiContrib.Formatting.JsonNet.csproj", "{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.ProtoBuf", "src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj", "{2537E1C1-0212-4595-9F73-C0DEAE31BD62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Testing", "src\WebApiContrib.Testing\WebApiContrib.Testing.csproj", "{DDEB5F68-7E22-4F54-9B04-63518083B83E}"
@@ -34,6 +32,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.CastleWindsor", "src\WebApiContrib.IoC.CastleWindsor\WebApiContrib.IoC.CastleWindsor.csproj", "{3735BC1C-6224-417B-8816-D6BC6498682F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.StructureMap", "src\WebApiContrib.IoC.StructureMap\WebApiContrib.IoC.StructureMap.csproj", "{B295E165-A947-4027-8245-02AB24C7E840}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.SelfHost", "src\WebApiContrib.SelfHost\WebApiContrib.SelfHost.csproj", "{6E81CA91-1228-4A48-8A33-D7960D97557D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.WebHost", "src\WebApiContrib.WebHost\WebApiContrib.WebHost.csproj", "{2544C950-013F-4287-B5F4-8D1D0AEC44E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,10 +71,6 @@ Global
 		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9641B6A6-278A-479F-B9F5-46B2E6B9657E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CA2C8C9-DC23-4214-984A-9CB1FF0C2435}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2537E1C1-0212-4595-9F73-C0DEAE31BD62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2537E1C1-0212-4595-9F73-C0DEAE31BD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2537E1C1-0212-4595-9F73-C0DEAE31BD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,6 +95,14 @@ Global
 		{B295E165-A947-4027-8245-02AB24C7E840}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B295E165-A947-4027-8245-02AB24C7E840}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B295E165-A947-4027-8245-02AB24C7E840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2544C950-013F-4287-B5F4-8D1D0AEC44E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2544C950-013F-4287-B5F4-8D1D0AEC44E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2544C950-013F-4287-B5F4-8D1D0AEC44E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2544C950-013F-4287-B5F4-8D1D0AEC44E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
