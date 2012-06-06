@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -13,6 +14,25 @@ namespace WebApiContrib.MessageHandlers
     {
         private const string allMediaTypesRange = "*/*";
 
+    	private readonly HttpConfiguration configuration;
+
+		public NotAcceptableMessageHandler(HttpConfiguration configuration)
+		{
+			if (configuration == null)
+				throw new ArgumentNullException("configuration");
+
+			this.configuration = configuration;
+		}
+
+		public NotAcceptableMessageHandler(HttpConfiguration configuration, HttpMessageHandler innerHandler)
+			: base(innerHandler)
+		{
+			if (configuration == null)
+				throw new ArgumentNullException("configuration");
+
+			this.configuration = configuration;
+		}
+
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var acceptHeader = request.Headers.Accept;
@@ -23,10 +43,9 @@ namespace WebApiContrib.MessageHandlers
             return base.SendAsync(request, cancellationToken);
         }
 
-        private static bool IsRequestedMediaTypeAccepted(HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> acceptHeader)
+        private bool IsRequestedMediaTypeAccepted(HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> acceptHeader)
         {
-            return GlobalConfiguration
-                .Configuration
+            return configuration
                 .Formatters
                 .Any(formatter => acceptHeader.Any(mediaType => FormatterSuportsMediaType(mediaType, formatter)));
         }

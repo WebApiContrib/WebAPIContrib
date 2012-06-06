@@ -9,41 +9,38 @@ namespace WebApiContrib.Conneg
 {
     public static class ContentNegotiation
     {
-        public static string Negotiate(
-            this IFormatterSelector formatterSelector,
-            IEnumerable<string> supportedMediaTypes,
-            string accept)
+        public static string Negotiate(this IContentNegotiator contentNegotiator, IEnumerable<string> supportedMediaTypes, string accept)
         {
-            return Negotiate(
-                formatterSelector,
-                supportedMediaTypes,
-                accept.Split(',').Select(MediaTypeWithQualityHeaderValue.Parse));
+            return Negotiate(contentNegotiator, supportedMediaTypes, accept.Split(',').Select(MediaTypeWithQualityHeaderValue.Parse));
         }
 
-        public static string Negotiate(
-            this IFormatterSelector formatterSelector,
-            IEnumerable<string> supportedMediaTypes,
-            IEnumerable<string> accept)
+        public static string Negotiate(this IContentNegotiator contentNegotiator, IEnumerable<string> supportedMediaTypes, IEnumerable<string> accept)
         {
-            return Negotiate(
-                formatterSelector,
-                supportedMediaTypes,
-                accept.Select(MediaTypeWithQualityHeaderValue.Parse));
+            return Negotiate(contentNegotiator, supportedMediaTypes, accept.Select(MediaTypeWithQualityHeaderValue.Parse));
         }
 
-        public static string Negotiate(
-            this IFormatterSelector formatterSelector,
-            IEnumerable<string> supportedMediaTypes,
-            IEnumerable<MediaTypeWithQualityHeaderValue> accept)
+        public static string Negotiate(this IContentNegotiator contentNegotiator, IEnumerable<string> supportedMediaTypes, IEnumerable<MediaTypeWithQualityHeaderValue> accept)
         {
             var formatters = supportedMediaTypes.Select(mt => new ConnegFormatter(mt));
-            var response = new HttpResponseMessage { RequestMessage = new HttpRequestMessage() };
-            foreach (var header in accept)
-                response.RequestMessage.Headers.Accept.Add(header);
+            using (var request = new HttpRequestMessage())
+            {
+                foreach (var header in accept)
+                    request.Headers.Accept.Add(header);
 
-            MediaTypeHeaderValue mediaType;
-            formatterSelector.SelectWriteFormatter(typeof(object), new FormatterContext(response, false), formatters, out mediaType);
-            return mediaType.MediaType;
+            	var result = contentNegotiator.Negotiate(typeof (object), request, formatters);
+                return result.MediaType.MediaType;
+            }
+        }
+
+        public static ContentNegotiationResult Negotiate(this IContentNegotiator contentNegotiator, IEnumerable<MediaTypeFormatter> formatters, IEnumerable<MediaTypeWithQualityHeaderValue> accept)
+        {
+            using (var request = new HttpRequestMessage())
+            {
+                foreach (var header in accept)
+                    request.Headers.Accept.Add(header);
+
+            	return contentNegotiator.Negotiate(typeof (object), request, formatters);
+            }
         }
 
         private class ConnegFormatter : MediaTypeFormatter
@@ -53,12 +50,12 @@ namespace WebApiContrib.Conneg
                 SupportedMediaTypes.Add(new MediaTypeHeaderValue(mediaType));
             }
 
-            protected override bool CanReadType(Type type)
+        	public override bool CanReadType(Type type)
             {
                 return true;
             }
 
-            protected override bool CanWriteType(Type type)
+            public override bool CanWriteType(Type type)
             {
                 return true;
             }

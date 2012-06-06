@@ -32,7 +32,7 @@ namespace WebApiContribTests.Formatting
             contentHeader.Clear();
             var memoryStream = new MemoryStream();
 
-            var resultTask = formatter.WriteToStreamAsync(typeof(RootClass), value, memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.ApplicationJson, isRead: false), transportContext: null);
+            var resultTask = formatter.WriteToStreamAsync(typeof(RootClass), value, memoryStream, contentHeader, transportContext: null);
 
             resultTask.Wait();
 
@@ -56,7 +56,7 @@ namespace WebApiContribTests.Formatting
             contentHeader.Clear();
             var memoryStream = new MemoryStream();
 
-            var resultTask = formatter.WriteToStreamAsync(typeof(RootClass), value, memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.ApplicationJson, isRead: false), transportContext: null);
+            var resultTask = formatter.WriteToStreamAsync(typeof(RootClass), value, memoryStream, contentHeader, transportContext: null);
 
             resultTask.Wait();
 
@@ -85,7 +85,7 @@ namespace WebApiContribTests.Formatting
             var contentHeader = new StringContent(string.Empty).Headers;
             contentHeader.Clear();
 
-            var resultTask = formatter.ReadFromStreamAsync(typeof(RootClass), memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.ApplicationJson, isRead: false));
+            var resultTask = formatter.ReadFromStreamAsync(typeof(RootClass), memoryStream, contentHeader, null);
 
             resultTask.Wait();
 
@@ -118,7 +118,7 @@ namespace WebApiContribTests.Formatting
             var contentHeader = new StringContent(string.Empty).Headers;
             contentHeader.Clear();
 
-            var resultTask = formatter.ReadFromStreamAsync(typeof(RootClass), memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.ApplicationJson, isRead: false));
+            var resultTask = formatter.ReadFromStreamAsync(typeof(RootClass), memoryStream, contentHeader, null);
 
             resultTask.Wait();
 

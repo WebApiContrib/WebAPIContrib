@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 
 namespace WebApiContrib.ResponseMessages
 {
@@ -14,14 +16,11 @@ namespace WebApiContrib.ResponseMessages
         }
     }
 
-    public class ConflictResponse<T> : HttpResponseMessage<T>
-    {
-        public ConflictResponse() : base(HttpStatusCode.Conflict)
-        {
-        }
-
-        public ConflictResponse(T resource) : base(resource, HttpStatusCode.Conflict)
-        {
-        }
-    }
+	public class ConflictResponse<T> : ResourceResponseBase<T>
+	{
+		public ConflictResponse(T resource, IEnumerable<MediaTypeWithQualityHeaderValue> accept, IEnumerable<MediaTypeFormatter> formatters)
+			: base(HttpStatusCode.Conflict, resource, accept, formatters)
+		{
+		}
+	}
 }

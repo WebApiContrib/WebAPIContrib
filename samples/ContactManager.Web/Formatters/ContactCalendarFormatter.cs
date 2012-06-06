@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using ContactManager.Models;
@@ -14,7 +13,7 @@ namespace ContactManager.Web.Formatters
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/calendar"));
         }
 
-        protected override void OnWriteToStream(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, TransportContext transportContext)
+    	public override void WriteToStream(Type type, object value, Stream stream, HttpContentHeaders contentHeaders)
         {
             var singleContact = value as Contact;
 
@@ -24,7 +23,12 @@ namespace ContactManager.Web.Formatters
             }
         }
 
-        protected override bool CanWriteType(Type type)
+    	public override bool CanReadType(Type type)
+    	{
+    		return false;
+    	}
+
+    	public override bool CanWriteType(Type type)
         {
             return (type == typeof (Contact));
         }

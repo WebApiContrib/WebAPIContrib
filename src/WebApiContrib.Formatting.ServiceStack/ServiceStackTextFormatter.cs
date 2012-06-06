@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
@@ -23,12 +24,12 @@ namespace WebApiContrib.Formatting
         {
             SupportedMediaTypes.Add(MediaTypeConstants.ApplicationJson);
 
-            Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+            SupportedEncodings.Add(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
 
             //TODO: Add XHR Header mapping. Will add this after a discussion with aspnetwebstack team: See: http://aspnetwebstack.codeplex.com/discussions/350758
         }
 
-        protected override Task<object> OnReadFromStreamAsync(Type type, System.IO.Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext)
+    	public override Task<object> ReadFromStreamAsync(Type type, System.IO.Stream stream, HttpContentHeaders contentHeaders, IFormatterLogger formatterLogger)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -39,7 +40,7 @@ namespace WebApiContrib.Formatting
             });
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, System.IO.Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, System.Net.TransportContext transportContext)
+    	public override Task WriteToStreamAsync(Type type, object value, System.IO.Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -49,7 +50,7 @@ namespace WebApiContrib.Formatting
             });
         }
 
-        protected override bool CanReadType(Type type)
+    	public override bool CanReadType(Type type)
         {
             if (type == null)
             {
@@ -59,7 +60,7 @@ namespace WebApiContrib.Formatting
             return true;
         }
 
-        protected override bool CanWriteType(Type type)
+    	public override bool CanWriteType(Type type)
         {
             if (type == null)
             {
