@@ -79,9 +79,39 @@ namespace WebApiContribTests.IoC
 
             var config = new HttpConfiguration();
             config.DependencyResolver = new AutofacResolver(container);
-            var instance = config.DependencyResolver.GetService(typeof(IHttpActionSelector));
+            var instance = config.Services.GetService(typeof(IHttpActionSelector));
 
             Assert.IsNotNull(instance);
+        }
+
+        [Test]
+        public void AutofacResolver_DoesNot_Resolve_NonRegistered_ContactRepositories_Test()
+        {
+        	var builder = new ContainerBuilder();
+        	var container = builder.Build();
+
+            var config = new HttpConfiguration();
+            config.DependencyResolver = new AutofacResolver(container);
+            var repositories = config.DependencyResolver.GetServices(typeof(IContactRepository));
+
+            repositories.Count().ShouldEqual(0);
+        }
+
+        [Test]
+        public void AutofacResolver_Resolves_Registered_Both_Instaces_Of_IContactRepository()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<InMemoryContactRepository>().As<IContactRepository>();
+            builder.RegisterType<FileContactRepository>().As<IContactRepository>();
+            var container = builder.Build();
+
+            var config = new HttpConfiguration();
+            var resolver = new AutofacResolver(container);
+
+            config.DependencyResolver = resolver;
+            var repositories = config.DependencyResolver.GetServices(typeof(IContactRepository));
+
+            repositories.Count().ShouldEqual(2);
         }
 
         [Test]
@@ -134,7 +164,7 @@ namespace WebApiContribTests.IoC
 
             var config = new HttpConfiguration();
             config.DependencyResolver = new NinjectResolver(kernel);
-            var instance = config.DependencyResolver.GetService(typeof(IHttpActionSelector));
+            var instance = config.Services.GetService(typeof(IHttpActionSelector));
 
             Assert.IsNotNull(instance);
         }
@@ -177,9 +207,11 @@ namespace WebApiContribTests.IoC
             var server = new HttpServer(config);
             var client = new HttpClient(server);
 
-            var response = client.GetAsync("http://anything/api/contacts").Result;
-
-            Assert.IsNotNull(response.Content);
+        	client.GetAsync("http://anything/api/contacts").ContinueWith(task =>
+        	{
+        		var response = task.Result;
+        		Assert.IsNotNull(response.Content);
+        	});
         }
 
         [Test]
@@ -189,7 +221,7 @@ namespace WebApiContribTests.IoC
 
             var config = new HttpConfiguration();
             config.DependencyResolver = new UnityResolver(container);
-            var instance = config.DependencyResolver.GetService(typeof(IHttpActionSelector));
+            var instance = config.Services.GetService(typeof(IHttpActionSelector));
 
             Assert.IsNotNull(instance);
         }
@@ -238,9 +270,11 @@ namespace WebApiContribTests.IoC
                 var server = new HttpServer(config);
                 var client = new HttpClient(server);
 
-                var response = client.GetAsync("http://anything/api/contacts").Result;
-
-                Assert.IsNotNull(response.Content);
+				client.GetAsync("http://anything/api/contacts").ContinueWith(task =>
+				{
+					var response = task.Result;
+					Assert.IsNotNull(response.Content);
+				});
             }
         }
 
@@ -252,7 +286,7 @@ namespace WebApiContribTests.IoC
 
                 var config = new HttpConfiguration();
                 config.DependencyResolver = new WindsorResolver(container);
-                var instance = config.DependencyResolver.GetService(typeof (IHttpActionSelector));
+                var instance = config.Services.GetService(typeof (IHttpActionSelector));
 
                 Assert.IsNotNull(instance);
             }
@@ -273,7 +307,7 @@ namespace WebApiContribTests.IoC
 
             config.DependencyResolver = resolver;
 
-            var actualActivator = config.DependencyResolver.GetService(typeof (IHttpControllerActivator));
+            var actualActivator = config.Services.GetService(typeof (IHttpControllerActivator));
 
             actualActivator.ShouldBeSameAs(resolver);
         }
@@ -290,8 +324,8 @@ namespace WebApiContribTests.IoC
             var resolver = new StructureMapResolver(container);
 
             config.DependencyResolver = resolver;
-
             var repositories = config.DependencyResolver.GetServices(typeof(IContactRepository));
+
             repositories.Count().ShouldEqual(2);
         }
 
@@ -302,8 +336,8 @@ namespace WebApiContribTests.IoC
             var resolver = new StructureMapResolver(new Container());
 
             config.DependencyResolver = resolver;
-
             var repositories = config.DependencyResolver.GetServices(typeof(IContactRepository));
+
             repositories.Count().ShouldEqual(0);
         }
 
