@@ -102,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
-    <Compile Include="Formatting\ReadWriteFormUrlEncodedFormatterTests.cs" />
     <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
     <Compile Include="Formatting\ViewEngineTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
