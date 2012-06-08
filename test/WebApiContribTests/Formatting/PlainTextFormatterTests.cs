@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Text;
 using NUnit.Framework;
 using Should;
 using WebApiContrib.Formatting;
@@ -33,7 +29,7 @@ namespace WebApiContribTests.Formatting
             contentHeader.Clear();
             var memoryStream = new MemoryStream();
             var value = "Hello World";
-            var resultTask = formatter.WriteToStreamAsync(typeof(string), value, memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.TextPlain, isRead: false), transportContext: null);
+            var resultTask = formatter.WriteToStreamAsync(typeof(string), value, memoryStream, contentHeader, transportContext: null);
 
             resultTask.Wait();
 
@@ -59,7 +55,7 @@ namespace WebApiContribTests.Formatting
             var contentHeader = new StringContent(string.Empty).Headers;
             contentHeader.Clear();
 
-            var resultTask = formatter.ReadFromStreamAsync(typeof(string), memoryStream, contentHeader, new FormatterContext(StandardMediaTypeHeaderValues.ApplicationJson, isRead: false));
+            var resultTask = formatter.ReadFromStreamAsync(typeof(string), memoryStream, contentHeader, null);
 
             resultTask.Wait();
 

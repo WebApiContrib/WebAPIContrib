@@ -35,10 +35,10 @@ namespace WebApiContrib.Content
 
             foreach (KeyValuePair<string, IEnumerable<string>> header in originalContent.Headers)
             {
-                this.Headers.AddWithoutValidation(header.Key, header.Value);
+                Headers.TryAddWithoutValidation(header.Key, header.Value);
             }
 
-            this.Headers.ContentEncoding.Add(encodingType);
+            Headers.ContentEncoding.Add(encodingType);
         }
 
         protected override bool TryComputeLength(out long length)

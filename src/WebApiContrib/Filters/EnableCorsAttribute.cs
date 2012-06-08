@@ -17,7 +17,7 @@ namespace WebApiContrib.Filters
 
                 if (!string.IsNullOrEmpty(originHeader))
                 {
-                    actionExecutedContext.Result.Headers.Add(accessControlAllowOrigin, originHeader);
+                    actionExecutedContext.Response.Headers.Add(accessControlAllowOrigin, originHeader);
                 }
             }
         }

@@ -11,6 +11,7 @@ namespace WebApiContrib.Formatting
 {
     public class JsonpMediaTypeFormatter : JsonMediaTypeFormatter
     {
+        private readonly HttpRequestMessage request;
         private string callbackQueryParameter;
 
         public JsonpMediaTypeFormatter()
@@ -21,45 +22,55 @@ namespace WebApiContrib.Formatting
             MediaTypeMappings.Add(new UriPathExtensionMapping("jsonp", DefaultMediaType));
         }
 
+        public JsonpMediaTypeFormatter(HttpRequestMessage request)
+            : this()
+        {
+            this.request = request;
+        }
+
         public string CallbackQueryParameter
         {
             get { return callbackQueryParameter ?? "callback"; }
             set { callbackQueryParameter = value; }
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream,
-                                                     HttpContentHeaders contentHeaders,
-                                                     FormatterContext formatterContext,
-                                                     TransportContext transportContext)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        {
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (request == null)
+                throw new ArgumentNullException("request");
+
+            return new JsonpMediaTypeFormatter(request);
+        }
+
+        public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
             string callback;
-
-            if (IsJsonpRequest(formatterContext.Response.RequestMessage, out callback))
+            if (IsJsonpRequest(request, out callback))
             {
                 return Task.Factory.StartNew(() =>
-                        {
-                            var writer = new StreamWriter(stream);
-                            writer.Write(callback + "(");
-                            writer.Flush();
+                {
+                    var writer = new StreamWriter(stream);
+                    writer.Write(callback + "(");
+                    writer.Flush();
 
-                            base.OnWriteToStreamAsync(type, value, stream, contentHeaders,
-                                                    formatterContext, transportContext).Wait();
-                           
-                            writer.Write(")");
-                            writer.Flush();
-                        });
+                    base.WriteToStreamAsync(type, value, stream, contentHeaders, transportContext).ContinueWith(_ =>
+                    {
+                        writer.Write(")");
+                        writer.Flush();
+                    });
+                });
             }
-            else
-            {
-                return base.OnWriteToStreamAsync(type, value, stream, contentHeaders, formatterContext, transportContext);
-            }
+
+            return base.WriteToStreamAsync(type, value, stream, contentHeaders, transportContext);
         }
 
         private bool IsJsonpRequest(HttpRequestMessage request, out string callback)
         {
             callback = null;
 
-            if (request.Method != HttpMethod.Get)
+            if (request == null || request.Method != HttpMethod.Get)
             {
                 return false;
             }

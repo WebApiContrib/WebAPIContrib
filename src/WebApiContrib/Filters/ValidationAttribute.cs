@@ -1,9 +1,10 @@
-﻿using System.Json;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Newtonsoft.Json.Linq;
 
 namespace WebApiContrib.Filters
 {
@@ -15,7 +16,7 @@ namespace WebApiContrib.Filters
 
             if (!modelState.IsValid)
             {
-                dynamic errors = new JsonObject();
+                dynamic errors = new JObject();
 
                 foreach (var key in modelState.Keys)
                 {
@@ -23,11 +24,16 @@ namespace WebApiContrib.Filters
 
                     if (state.Errors.Any())
                     {
-                        errors[key] = state.Errors.First().ErrorMessage;
+                    	errors[key] = state.Errors.First().ErrorMessage;
                     }
                 }
 
-                context.Response = new HttpResponseMessage<JsonValue>(errors, HttpStatusCode.BadRequest);
+            	var contentNegotiator = (IContentNegotiator) context.ControllerContext.Configuration.Services.GetService(typeof (IContentNegotiator));
+            	var result = contentNegotiator.Negotiate(typeof (object), context.Request, context.ControllerContext.Configuration.Formatters);
+            	context.Response = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            	{
+            		Content = new ObjectContent(typeof (JValue), errors, result.Formatter, result.MediaType.MediaType)
+            	};
             }
         }
     }

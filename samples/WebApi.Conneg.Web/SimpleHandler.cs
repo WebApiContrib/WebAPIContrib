@@ -10,13 +10,13 @@ namespace WebApi.Conneg.Web
 {
 	public class SimpleHandler : DelegatingHandler
 	{
-		private readonly IFormatterSelector _formatterSelector;
-		private readonly IDictionary<string, string> _formatters;
+		private readonly IContentNegotiator contentNegotiator;
+		private readonly IDictionary<string, string> formatters;
 
 		public SimpleHandler()
 		{
-			_formatterSelector = new FormatterSelector();
-			_formatters = new Dictionary<string, string>
+			contentNegotiator = new DefaultContentNegotiator();
+			formatters = new Dictionary<string, string>
 			{
 				{ "application/xml", @"<?xml version=""1.0""?>
 <root>
@@ -43,7 +43,7 @@ namespace WebApi.Conneg.Web
 
 		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			var mediaType = _formatterSelector.Negotiate(_formatters.Keys, request.Headers.Accept);
+			var mediaType = contentNegotiator.Negotiate(formatters.Keys, request.Headers.Accept);
 			var tcs = new TaskCompletionSource<HttpResponseMessage>();
 			tcs.SetResult(new HttpResponseMessage
 			{
@@ -55,7 +55,7 @@ namespace WebApi.Conneg.Web
 		private HttpContent ApplyTemplate(string content, string mediaType)
 		{
 			// This could run Razor or some other template engine.
-			var result = string.Format(_formatters[mediaType], content);
+			var result = string.Format(formatters[mediaType], content);
 			return new StringContent(result, Encoding.UTF8, mediaType);
 		}
 	}

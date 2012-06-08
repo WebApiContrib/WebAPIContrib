@@ -25,17 +25,17 @@ namespace WebApiContrib.Formatting
             get { return mediaType; }
         }
 
-        protected override bool CanReadType(Type type)
+    	public override bool CanReadType(Type type)
         {
             return CanReadTypeCore(type);
         }
 
-        protected override bool CanWriteType(Type type)
+    	public override bool CanWriteType(Type type)
         {
             return CanReadTypeCore(type);
         }
 
-        protected override Task<object> OnReadFromStreamAsync(Type type, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext)
+    	public override Task<object> ReadFromStreamAsync(Type type, Stream stream, HttpContentHeaders contentHeaders, IFormatterLogger formatterLogger)
         {
             var tcs = new TaskCompletionSource<object>();
 
@@ -52,7 +52,7 @@ namespace WebApiContrib.Formatting
             return tcs.Task;
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, TransportContext transportContext)
+    	public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
             var tcs = new TaskCompletionSource<object>();
 
@@ -71,11 +71,6 @@ namespace WebApiContrib.Formatting
 
         private static bool CanReadTypeCore(Type type)
         {
-            if (type == typeof(IKeyValueModel))
-            {
-                return false;
-            }
-
             return true;
         }
     }

@@ -16,7 +16,7 @@ namespace ContactManager.Web.Formatters
                 new MediaTypeHeaderValue("image/png"));
         }
 
-        protected override void OnWriteToStream(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, TransportContext context)
+    	public override void WriteToStream(Type type, object value, Stream stream, HttpContentHeaders contentHeaders)
         {
             var contact = value as Contact;
 
@@ -39,7 +39,12 @@ namespace ContactManager.Web.Formatters
             }
         }
 
-        protected override bool CanWriteType(Type type)
+    	public override bool CanReadType(Type type)
+    	{
+    		return false;
+    	}
+
+    	public override bool CanWriteType(Type type)
         {
             return true;
         }

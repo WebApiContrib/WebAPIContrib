@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace WebApiContrib.Formatting.RazorViewEngine
 {
-
-
     public class ViewEngineFormatter : MediaTypeFormatter
     {
         private readonly IViewEngine _viewEngine;
@@ -22,27 +21,32 @@ namespace WebApiContrib.Formatting.RazorViewEngine
             }
         }
 
-        protected override bool CanReadType(Type type)
+        public override bool CanReadType(Type type)
         {
             return false;
         }
 
-        protected override bool CanWriteType(Type type)
+        public override bool CanWriteType(Type type)
         {
-            
             return typeof(View) == type;
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, System.Net.TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
         {
-            var view = (View)value;
-            view.WriteToStream(stream, _viewEngine);
             var tcs = new TaskCompletionSource<Stream>();
-            tcs.SetResult(stream);
+
+            var view = (View) value;
+            try
+            {
+                view.WriteToStream(stream, _viewEngine);
+                tcs.SetResult(stream);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+
             return tcs.Task;
         }
-
-        
-
     }
 }

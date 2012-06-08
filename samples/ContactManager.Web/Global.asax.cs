@@ -22,7 +22,6 @@ namespace ContactManager.Web
             var serializerSettings = new JsonSerializerSettings();
             serializerSettings.Converters.Add(new IsoDateTimeConverter());
 
-            config.Formatters[0] = new JsonNetFormatter(serializerSettings);
             config.Formatters.Add(new ProtoBufFormatter()); 
             config.Formatters.Add(new ContactPngFormatter());
             config.Formatters.Add(new VCardFormatter());
@@ -33,7 +32,7 @@ namespace ContactManager.Web
             //var loggingRepo = config.ServiceResolver.GetService(typeof(ILoggingRepository)) as ILoggingRepository;
             //config.MessageHandlers.Add(new LoggingHandler(loggingRepo));
 
-            config.MessageHandlers.Add(new NotAcceptableMessageHandler());
+            config.MessageHandlers.Add(new NotAcceptableMessageHandler(config));
 
             ConfigureResolver(config);
 
@@ -49,7 +48,7 @@ namespace ContactManager.Web
             kernel.Bind<IContactRepository>().ToConstant(new InMemoryContactRepository());
             kernel.Bind<IHttpActionSelector>().ToConstant(new CorsActionSelector());
 
-            config.ServiceResolver.SetResolver(new NinjectResolver(kernel));            
+        	config.DependencyResolver = new NinjectResolver(kernel);
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

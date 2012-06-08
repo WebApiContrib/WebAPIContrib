@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.IO;
 using NUnit.Framework;
 using WebApiContrib.Formatting.RazorViewEngine;
 
@@ -14,23 +7,18 @@ namespace WebApiContribTests.Formatting
     [TestFixture]
     public class ViewEngineTests
     {
-
         [Test]
         public void render_simple_template()
         {
-
-
             var formatter = new ViewEngineFormatter(new RazorViewEngine());
 
             MemoryStream templateStream = GetStreamFromString("Hello @Model.Name! Welcome to Razor!");
 
             var outputStream = new MemoryStream();
 
-            
             var view = new View(templateStream, new {Name = "foo"});
-
             
-            var task = formatter.WriteToStreamAsync(typeof(View), view, outputStream, null, new FormatterContext(new MediaTypeHeaderValue("text/html"), true), null);
+            var task = formatter.WriteToStreamAsync(typeof(View), view, outputStream, null, null);
 
             task.Wait();
 
@@ -41,13 +29,9 @@ namespace WebApiContribTests.Formatting
             Assert.AreEqual("Hello foo! Welcome to Razor!",output);
         }
 
-
         [Test]
         public void render_template_with_embedded_layout()
         {
-            
-            
-
             MemoryStream templateStream = GetStreamFromString(@"@{_Layout = ""~/Embed.cshtml"";}Hello @Model.Name! Welcome to Razor!");
 
             var outputStream = new MemoryStream();
@@ -56,8 +40,7 @@ namespace WebApiContribTests.Formatting
 
             var view = new View(templateStream, new { Name = "foo" });
 
-
-            var task = formatter.WriteToStreamAsync(typeof(View), view, outputStream, null, new FormatterContext(new MediaTypeHeaderValue("text/html"), true), null);
+            var task = formatter.WriteToStreamAsync(typeof(View), view, outputStream, null, null);
 
             task.Wait();
 
@@ -67,8 +50,6 @@ namespace WebApiContribTests.Formatting
 
             Assert.AreEqual("<html>Hello foo! Welcome to Razor!</html>", output);
         }
-
-
 
         private MemoryStream GetStreamFromString(string helloModelNameWelcomeToRazor)
         {
