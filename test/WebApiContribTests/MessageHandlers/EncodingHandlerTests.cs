@@ -13,7 +13,7 @@ namespace WebApiContribTests.MessageHandlers
     [TestFixture]
     public class EncodingHandlerTests
     {
-        [Test]
+        [Test, Explicit]
         public void Post_Lots_Of_Contacts_Using_EncodingHandler_Test()
         {
             var config = new HttpConfiguration();

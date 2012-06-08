@@ -14,7 +14,7 @@ namespace WebApiContribTests.MessageHandlers
     [TestFixture]
     public class LoggingHandlerTests
     {
-        [Test]
+        [Test, Explicit]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()
         {
             var config = new HttpConfiguration();
