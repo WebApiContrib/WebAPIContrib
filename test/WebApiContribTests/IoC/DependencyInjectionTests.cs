@@ -49,7 +49,7 @@ namespace WebApiContribTests.IoC
             Assert.IsNull(instance);
         }
 
-        [Test]
+        [Test, Explicit]
         public void AutofacResolver_Resolves_Registered_ContactRepository_ThroughHost_Test()
         {
             var config = new HttpConfiguration();
@@ -137,7 +137,7 @@ namespace WebApiContribTests.IoC
             Assert.IsNull(instance);
         }
 
-        [Test]
+        [Test, Explicit]
         public void NinjectResolver_Resolves_Registered_ContactRepository_Through_ContactsController_Test()
         {
             var config = new HttpConfiguration();

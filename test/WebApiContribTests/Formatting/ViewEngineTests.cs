@@ -7,7 +7,7 @@ namespace WebApiContribTests.Formatting
     [TestFixture]
     public class ViewEngineTests
     {
-        [Test]
+        [Test, Explicit]
         public void render_simple_template()
         {
             var formatter = new ViewEngineFormatter(new RazorViewEngine());
@@ -29,7 +29,7 @@ namespace WebApiContribTests.Formatting
             Assert.AreEqual("Hello foo! Welcome to Razor!",output);
         }
 
-        [Test]
+        [Test, Explicit]
         public void render_template_with_embedded_layout()
         {
             MemoryStream templateStream = GetStreamFromString(@"@{_Layout = ""~/Embed.cshtml"";}Hello @Model.Name! Welcome to Razor!");
