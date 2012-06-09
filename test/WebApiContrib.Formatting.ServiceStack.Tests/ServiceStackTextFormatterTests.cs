@@ -9,7 +9,7 @@ using ServiceStack.Text;
 using Should;
 using WebApiContrib.Formatting;
 
-namespace WebApiContribTests.Formatting
+namespace WebApiContrib.Formatting.ServiceStack.Tests
 {
     [TestFixture]
     public class ServiceStackTextFormatterTests
