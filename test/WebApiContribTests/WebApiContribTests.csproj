@@ -65,10 +65,6 @@
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.7.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Text.3.7.6\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="Should">
       <HintPath>..\..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
     </Reference>
@@ -105,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
-    <Compile Include="Formatting\ServiceStackTextFormatterTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
     <Compile Include="Helpers\ContactsController.cs" />
     <Compile Include="Helpers\IContactRepository.cs" />
@@ -137,10 +132,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ServiceStack\WebApiContrib.Formatting.ServiceStack.csproj">
-      <Project>{AD84D9A8-0849-4461-A9A7-952722F9A6C9}</Project>
-      <Name>WebApiContrib.Formatting.ServiceStack</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.IoC.AutoFac\WebApiContrib.IoC.Autofac.csproj">
       <Project>{AA772346-54BD-48C4-AEC0-CCF54A7E45FF}</Project>
       <Name>WebApiContrib.IoC.Autofac</Name>
