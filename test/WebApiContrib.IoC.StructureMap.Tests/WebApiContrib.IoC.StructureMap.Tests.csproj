@@ -8,8 +8,8 @@
     <ProjectGuid>{960EDBC5-0C46-4CD7-B0B6-B4D5F30B9092}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApiContribTests</RootNamespace>
-    <AssemblyName>WebApiContribTests</AssemblyName>
+    <RootNamespace>WebApiContrib.IoC.StructureMap.Tests</RootNamespace>
+    <AssemblyName>WebApiContrib.IoC.StructureMap.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -44,6 +48,9 @@
     </Reference>
     <Reference Include="Should">
       <HintPath>..\..\packages\Should.1.1.12.0\lib\Should.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,60 +67,26 @@
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.20505.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
     <Compile Include="Helpers\ContactsController.cs" />
     <Compile Include="Helpers\IContactRepository.cs" />
     <Compile Include="Helpers\InMemoryContactRepository.cs" />
     <Compile Include="Helpers\PrecannedMessageHandler.cs" />
-    <Compile Include="MessageHandlers\EncodingHandlerTests.cs" />
-    <Compile Include="MessageHandlers\ETagHandlerTests.cs" />
-    <Compile Include="MessageHandlers\HeadMessageHandlerTests.cs" />
-    <Compile Include="MessageHandlers\LoggingHandlerTests.cs" />
-    <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
-    <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
-    <Compile Include="ResponseMessages\ConflictResponseMessageTests.cs" />
-    <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
-    <Compile Include="ResponseMessages\HttpResponseMessageTester.cs" />
-    <Compile Include="ResponseMessages\NotModifiedResponseTests.cs" />
-    <Compile Include="ResponseMessages\OkResponseMessageTests.cs" />
-    <Compile Include="ResponseMessages\MovedPermanentlyResponseMessageTests.cs" />
-    <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
-    <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
-    <Compile Include="Routing\HttpRouteTableBuilderTests.cs" />
-    <Compile Include="Routing\Mockups\FakeController.cs" />
-    <Compile Include="TestBase.cs" />
-    <Compile Include="Conneg\ContentNegotiationTests.cs" />
-    <Compile Include="TestHelpers.cs" />
+    <Compile Include="DependencyInjectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
-      <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
-      <Name>WebApiContrib.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\WebApiContrib.WebHost\WebApiContrib.WebHost.csproj">
-      <Project>{2544C950-013F-4287-B5F4-8D1D0AEC44E2}</Project>
-      <Name>WebApiContrib.WebHost</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
-      <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
-      <Name>WebApiContrib</Name>
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.StructureMap\WebApiContrib.IoC.StructureMap.csproj">
+      <Project>{b295e165-a947-4027-8245-02ab24c7e840}</Project>
+      <Name>WebApiContrib.IoC.StructureMap</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
