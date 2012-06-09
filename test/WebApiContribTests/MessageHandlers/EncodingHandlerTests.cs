@@ -13,13 +13,12 @@ namespace WebApiContribTests.MessageHandlers
     [TestFixture]
     public class EncodingHandlerTests
     {
-        [Test, Explicit]
+        [Test]
         public void Post_Lots_Of_Contacts_Using_EncodingHandler_Test()
         {
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute("default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
             config.MessageHandlers.Add(new EncodingHandler());
-            config.Formatters.Add(new ProtoBufFormatter());
 
             var server = new HttpServer(config);
             var client = new HttpClient(new EncodingHandler(server));
@@ -34,7 +33,7 @@ namespace WebApiContribTests.MessageHandlers
             }
 
         	var request = new HttpRequestMessage();
-			request.Content = new ObjectContent(typeof(List<Contact>), content, new ProtoBufFormatter(), ProtoBufFormatter.DefaultMediaType.MediaType);
+            request.Content = new ObjectContent(typeof(List<Contact>), content, config.Formatters.JsonFormatter);
         	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
         	{
         		var response = task.Result;

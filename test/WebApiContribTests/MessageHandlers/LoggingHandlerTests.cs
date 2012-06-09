@@ -14,7 +14,7 @@ namespace WebApiContribTests.MessageHandlers
     [TestFixture]
     public class LoggingHandlerTests
     {
-        [Test, Explicit]
+        [Test]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()
         {
             var config = new HttpConfiguration();
@@ -22,9 +22,7 @@ namespace WebApiContribTests.MessageHandlers
 
             var dummyRepository = new DummyLoggingRepository();
             config.MessageHandlers.Add(new LoggingHandler(dummyRepository));
-
             config.MessageHandlers.Add(new EncodingHandler());
-            config.Formatters.Add(new ProtoBufFormatter());
 
             var server = new HttpServer(config);
             var client = new HttpClient(new EncodingHandler(server));
@@ -36,7 +34,7 @@ namespace WebApiContribTests.MessageHandlers
             content.Add(c);
 
         	var request = new HttpRequestMessage();
-			request.Content = new ObjectContent(typeof(List<Contact>), content, new ProtoBufFormatter(), ProtoBufFormatter.DefaultMediaType.MediaType);
+            request.Content = new ObjectContent(typeof(List<Contact>), content, config.Formatters.JsonFormatter);
         	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
         	{
         		var response = task.Result;

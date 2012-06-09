@@ -139,10 +139,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebApiContrib.Formatting.ProtoBuf\WebApiContrib.Formatting.ProtoBuf.csproj">
-      <Project>{2537E1C1-0212-4595-9F73-C0DEAE31BD62}</Project>
-      <Name>WebApiContrib.Formatting.ProtoBuf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib.Formatting.RazorViewEngine\WebApiContrib.Formatting.RazorViewEngine.csproj">
       <Project>{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}</Project>
       <Name>WebApiContrib.Formatting.RazorViewEngine</Name>
