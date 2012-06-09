@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using WebApiContrib.Formatting.RazorViewEngine;
 
-namespace WebApiContribTests.Formatting
+namespace WebApiContrib.Formatting.RazorViewEngine.Tests
 {
     [TestFixture]
     public class ViewEngineTests
@@ -29,7 +29,7 @@ namespace WebApiContribTests.Formatting
             Assert.AreEqual("Hello foo! Welcome to Razor!",output);
         }
 
-        [Test, Explicit]
+        [Test]
         public void render_template_with_embedded_layout()
         {
             MemoryStream templateStream = GetStreamFromString(@"@{_Layout = ""~/Embed.cshtml"";}Hello @Model.Name! Welcome to Razor!");

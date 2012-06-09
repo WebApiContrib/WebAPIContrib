@@ -72,10 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatting\ViewEngineTests.cs" />
+    <Compile Include="ViewEngineTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formatting\Embed.cshtml" />
+    <EmbeddedResource Include="Embed.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
