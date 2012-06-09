@@ -7,7 +7,7 @@ namespace WebApiContribTests.Formatting
     [TestFixture]
     public class ViewEngineTests
     {
-        [Test, Explicit]
+        [Test]
         public void render_simple_template()
         {
             var formatter = new ViewEngineFormatter(new RazorViewEngine());

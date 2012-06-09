@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.Unity", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Testing", "src\WebApiContrib.Testing\WebApiContrib.Testing.csproj", "{DDEB5F68-7E22-4F54-9B04-63518083B83E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.Formatting.RazorViewEngine", "src\WebApiContrib.Formatting.RazorViewEngine\WebApiContrib.Formatting.RazorViewEngine.csproj", "{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.CastleWindsor", "src\WebApiContrib.IoC.CastleWindsor\WebApiContrib.IoC.CastleWindsor.csproj", "{3735BC1C-6224-417B-8816-D6BC6498682F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiContrib.IoC.StructureMap", "src\WebApiContrib.IoC.StructureMap\WebApiContrib.IoC.StructureMap.csproj", "{B295E165-A947-4027-8245-02AB24C7E840}"
@@ -53,10 +51,6 @@ Global
 		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E81CA91-1228-4A48-8A33-D7960D97557D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75FA4F0E-ACC6-424A-8809-B25E7AB17EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
