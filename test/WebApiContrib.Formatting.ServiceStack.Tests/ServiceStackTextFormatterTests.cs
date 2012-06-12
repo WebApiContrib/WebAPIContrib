@@ -2,13 +2,14 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Text;
 using NUnit.Framework;
 using ServiceStack.Text;
 using Should;
 using WebApiContrib.Formatting;
 
-namespace WebApiContribTests.Formatting
+namespace WebApiContrib.Formatting.ServiceStack.Tests
 {
     [TestFixture]
     public class ServiceStackTextFormatterTests
@@ -19,7 +20,7 @@ namespace WebApiContribTests.Formatting
             var formatter = new ServiceStackTextFormatter();
 
             formatter.SupportedMediaTypes.Count.ShouldEqual(1);
-            formatter.SupportedMediaTypes.ShouldContain(StandardMediaTypeHeaderValues.ApplicationJson);
+            formatter.SupportedMediaTypes.ShouldContain(new MediaTypeHeaderValue("application/json"));
         }
 
         [Test]
@@ -169,6 +170,5 @@ namespace WebApiContribTests.Formatting
             public double DoubleProperty { get; set; }
             public bool BooleanProperty { get; set; }
         }
-
     }
 }

@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using ServiceStack.Text;
-using WebApiContrib.Internal;
 
 namespace WebApiContrib.Formatting
 {
@@ -22,7 +21,7 @@ namespace WebApiContrib.Formatting
 
         public ServiceStackTextFormatter()
         {
-            SupportedMediaTypes.Add(MediaTypeConstants.ApplicationJson);
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
 
             SupportedEncodings.Add(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
 
