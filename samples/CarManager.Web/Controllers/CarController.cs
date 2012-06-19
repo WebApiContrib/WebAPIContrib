@@ -11,6 +11,12 @@ namespace CarManager.Web.Controllers
     {
     	private ICarRepository _repository;
 
+		public CarController()
+		{
+			_repository = new CarRepository(); // TODO: add DI
+		}
+
+
     	public CarController(ICarRepository repository)
     	{
     		_repository = repository;

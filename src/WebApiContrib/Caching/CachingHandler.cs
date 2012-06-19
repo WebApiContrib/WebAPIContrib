@@ -259,7 +259,7 @@ namespace WebApiContrib.Caching
 							response.Headers.Add(HttpHeaderNames.Vary, _varyByHeaders);
 						}
 
-						response.Headers.AddWithoutValidation(HttpHeaderNames.CacheControl, cacheControlHeaderValue.ToString());
+						response.Headers.TryAddWithoutValidation(HttpHeaderNames.CacheControl, cacheControlHeaderValue.ToString());
 
 					}
 

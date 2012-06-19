@@ -5,16 +5,11 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
-using System.Web.Optimization;
 using System.Web.Routing;
 using CarManager.Data;
 using CarManager.Web.Controllers;
 using Ninject;
 using WebApiContrib.Caching;
-using Autofac;
-using WebApiContrib.IoC.Autofac;
-using WebApiContrib.IoC.Ninject;
-using IFilterProvider = System.Web.Http.Filters.IFilterProvider;
 
 namespace CarManager.Web
 {
@@ -23,9 +18,7 @@ namespace CarManager.Web
 
 	public class WebApiApplication : System.Web.HttpApplication
 	{
-		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-		{
-		}
+		
 
 		public static void RegisterRoutes(RouteCollection routes)
 		{
@@ -70,13 +63,7 @@ namespace CarManager.Web
 																}
 			                     	};
 			GlobalConfiguration.Configuration.MessageHandlers.Add(cachingHandler);
-			var kernel = new StandardKernel();
-			kernel.Bind<ICarRepository>().ToConstant(new CarRepository());
-			GlobalConfiguration.Configuration.ServiceResolver.SetResolver(new NinjectResolver(kernel));            
-
-
 			RegisterRoutes(RouteTable.Routes);
-			BundleTable.Bundles.RegisterTemplateBundles();
 		}
 	}
 }

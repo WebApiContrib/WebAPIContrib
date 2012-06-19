@@ -40,7 +40,7 @@ namespace WebApiContribTests.Caching
 			TimedEntityTagHeaderValue entityTagHeaderValue = new TimedEntityTagHeaderValue("\"12345678\"");
 
 			if(values.Length>0) // if 
-				entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
+				entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == entityTagHandler.UriTrimmer(new Uri(TestUrl))),
 					out Arg<TimedEntityTagHeaderValue>.Out(entityTagHeaderValue).Dummy)).Return(existsInStore);
 
 			mocks.ReplayAll();
@@ -112,8 +112,8 @@ namespace WebApiContribTests.Caching
 			request.Headers.Add(headerName, lastModifiedInQuestion.ToString("r"));
 			var entityTagHeaderValue = new TimedEntityTagHeaderValue("\"12345678\"")
 				{LastModified = lastChanged};
-			
-			entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
+
+			entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == entityTagHandler.UriTrimmer(new Uri(TestUrl))),
 				out Arg<TimedEntityTagHeaderValue>.Out(entityTagHeaderValue).Dummy)).Return(true);
 
 			mocks.ReplayAll();
@@ -200,7 +200,7 @@ namespace WebApiContribTests.Caching
 			request.Headers.Add(HttpHeaderNames.IfUnmodifiedSince, lastModifiedInQuestion.ToString("r"));
 			TimedEntityTagHeaderValue entityTagHeaderValue = new TimedEntityTagHeaderValue("\"12345678\"") { LastModified = lastChanged };
 
-			entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
+			entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == entityTagHandler.UriTrimmer(new Uri(TestUrl))),
 				out Arg<TimedEntityTagHeaderValue>.Out(entityTagHeaderValue).Dummy)).Return(true);
 
 			mocks.ReplayAll();
@@ -238,7 +238,7 @@ namespace WebApiContribTests.Caching
 			TimedEntityTagHeaderValue entityTagHeaderValue = new TimedEntityTagHeaderValue("\"12345678\"");
 
 			if (values.Length > 0) // if 
-				entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == TestUrl),
+				entityTagStore.Expect(x => x.TryGetValue(Arg<EntityTagKey>.Matches(etg => etg.ResourceUri == entityTagHandler.UriTrimmer(new Uri(TestUrl))),
 					out Arg<TimedEntityTagHeaderValue>.Out(entityTagHeaderValue).Dummy)).Return(existsInStore);
 
 			mocks.ReplayAll();

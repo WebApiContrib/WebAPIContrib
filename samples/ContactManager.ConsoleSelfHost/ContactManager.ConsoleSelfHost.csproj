@@ -73,9 +73,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\WebApiContrib.IoC.Ninject\WebApiContrib.IoC.Ninject.csproj">
+      <Project>{7AFAC6AB-9B5F-41B7-9AB7-84053FC19A7E}</Project>
+      <Name>WebApiContrib.IoC.Ninject</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ContactManager.APIs\ContactManager.APIs.csproj">
       <Project>{823DDCBC-F7BF-4AA6-A285-236FD482D40C}</Project>
       <Name>ContactManager.APIs</Name>

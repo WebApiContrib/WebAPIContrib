@@ -33,30 +33,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\..\packages\AspNetWebApi.4.0.20126.16343\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
+	<Reference Include="Microsoft.CSharp" />
+	<Reference Include="Newtonsoft.Json">
+	  <HintPath>..\..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+	</Reference>
+	<Reference Include="System" />
+	<Reference Include="System.Configuration" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Data" />
+	<Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+	  <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+	</Reference>
+	<Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+	  <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+	</Reference>
+	<Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+	  <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+	</Reference>
+	<Reference Include="System.ServiceModel" />
+	<Reference Include="System.Web" />
+	<Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+	  <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caching\CachingHandler.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="Routing\HttpRouteAttribute.cs" />
     <Compile Include="Routing\OptionalRouteParameterAttribute.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
-    <Compile Include="ReadAsSingleObjectPolicy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResponseMessages\NotModifiedResponse.cs" />

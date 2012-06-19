@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Http.SelfHost;
 using ContactManager.Models;
 using Ninject;
+using WebApiContrib.IoC.Ninject;
 
 namespace ContactManager.ConsoleSelfHost
 {
@@ -29,11 +30,9 @@ namespace ContactManager.ConsoleSelfHost
         {
             var ninjectKernel = new StandardKernel();
             ninjectKernel.Bind<IContactRepository>().To<InMemoryContactRepository>();
-
+			
             var configuration = new HttpSelfHostConfiguration(url);
-            configuration.ServiceResolver.SetResolver(
-                t => ninjectKernel.TryGet(t),
-                t => ninjectKernel.GetAll(t));
+        	configuration.DependencyResolver = new NinjectResolver(ninjectKernel);
 
             configuration.Routes.MapHttpRoute(
                 "Default",
