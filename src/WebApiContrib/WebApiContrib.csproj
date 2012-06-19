@@ -54,13 +54,24 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\..\packages\AspNetWebApi.4.0.20126.16343\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\CachingHandler.cs" />
+    <Compile Include="Caching\EntityTagKey.cs" />
+    <Compile Include="Caching\TimedEntityTagHeaderValue.cs" />
+    <Compile Include="Internal\Extensions\ActionExtensions.cs" />
+    <Compile Include="Internal\Extensions\IsInExtensions.cs" />
+    <Compile Include="Internal\HttpHeaderNames.cs" />
+    <Compile Include="Caching\IEntityTagStore.cs" />
+    <Compile Include="Caching\InMemoryEntityTagStore.cs" />
     <Compile Include="Configuration\ConfigurationExtensions.cs" />
     <Compile Include="Formatting\CSVMediaTypeFormatter.cs" />
     <Compile Include="Formatting\JsonpFormatter.cs" />
     <Compile Include="Formatting\PlainTextFormatter.cs" />
+    <Compile Include="Internal\Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Internal\MediaTypeConstants.cs" />
     <Compile Include="Conneg\ContentNegotiation.cs" />
     <Compile Include="Content\CompressedContent.cs" />
@@ -96,6 +107,7 @@
     <Compile Include="Routing\HttpRouteAttribute.cs" />
     <Compile Include="Routing\OptionalRouteParameterAttribute.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
+    <Compile Include="ReadAsSingleObjectPolicy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResponseMessages\NotModifiedResponse.cs" />

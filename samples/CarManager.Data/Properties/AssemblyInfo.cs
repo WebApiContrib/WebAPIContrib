@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WebApiContrib")]
-[assembly: AssemblyDescription("Community Contributions for ASP.NET Web API")]
+[assembly: AssemblyTitle("CarManager.Data")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("WebApiContrib")]
-[assembly: AssemblyProduct("WebApiContrib")]
-[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CarManager.Data")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c125ec1c-0f72-45bf-9903-9d42b28ee1cf")]
+[assembly: Guid("c005d5d6-a587-4a7a-a64e-bc6bb5a71ad1")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,6 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly: InternalsVisibleTo("WebApiContribTests")]
-[assembly: InternalsVisibleTo("Rhino.Mocks")]
