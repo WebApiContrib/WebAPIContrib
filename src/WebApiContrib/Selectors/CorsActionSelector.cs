@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using WebApiContrib.Filters;
@@ -12,6 +13,8 @@ using WebApiContrib.Filters;
 namespace WebApiContrib.Selectors
 {
     // Code based on: http://code.msdn.microsoft.com/Implementing-CORS-support-418970ee
+    // and updated by: http://pastebin.com/tNdS5P5A
+    // For a more complete solution, see http://nuget.org/Packages/Thinktecture.IdentityModel.Http
     public class CorsActionSelector : ApiControllerActionSelector
     {
         private const string origin = "Origin";
@@ -38,13 +41,8 @@ namespace WebApiContrib.Selectors
                     var actualDescriptor = base.SelectAction(controllerContext);
                     controllerContext.Request = originalRequest;
 
-                    if (actualDescriptor != null)
-                    {
-                        if (actualDescriptor.GetFilters().OfType<EnableCorsAttribute>().Any())
-                        {
-                            return new PreflightActionDescriptor(actualDescriptor, accessControlRequestMethod);
-                        }
-                    }
+                    if (actualDescriptor != null && actualDescriptor.GetFilters().OfType<EnableCorsAttribute>().Any())
+                        return new PreflightActionDescriptor(actualDescriptor, accessControlRequestMethod);
                 }
             }
 
@@ -92,7 +90,7 @@ namespace WebApiContrib.Selectors
                 get { return typeof(HttpResponseMessage); }
             }
 
-        	public override Collection<FilterInfo> GetFilterPipeline()
+            public override Collection<FilterInfo> GetFilterPipeline()
             {
                 return originalAction.GetFilterPipeline();
             }
@@ -104,7 +102,16 @@ namespace WebApiContrib.Selectors
 
             public override Collection<T> GetCustomAttributes<T>()
             {
+                if (typeof(T).IsAssignableFrom(typeof(AllowAnonymousAttribute)))
+                    return new Collection<T> { new AllowAnonymousAttribute() as T };
+
                 return originalAction.GetCustomAttributes<T>();
+            }
+
+            public override HttpActionBinding ActionBinding
+            {
+                get { return originalAction.ActionBinding; }
+                set { originalAction.ActionBinding = value; }
             }
         }
     }
