@@ -36,7 +36,7 @@ Task PrepareForTest {
 Task RunUnitTests -depends PrepareForTest, Build {
 	$test_result = "$build_artifacts_dir\UnitTestsResult.xml"
 	
-	& "$nunitConsole" "$build_artifacts_dir\WebApiContribTests.dll" /nologo /nodots "/xml=$test_result"
+	& "$nunitConsole" "$build_artifacts_dir\WebApiContribTests.dll" /nologo /nodots /framework:net-4.0 "/xml=$test_result"
 	
 	if ($lastexitcode -gt 0)
 	{
