@@ -61,7 +61,7 @@ namespace WebApiContrib.IoC.CastleWindsor
     	public IDependencyScope BeginScope()
     	{
     		var scope = new WindsorContainer();
-			container.AddChildContainer(container);
+			container.AddChildContainer(scope);
 			return new WindsorDependencyScope(scope);
     	}
     }
