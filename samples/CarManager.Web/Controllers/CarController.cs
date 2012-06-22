@@ -9,13 +9,18 @@ namespace CarManager.Web.Controllers
 {
     public class CarController : ApiController
     {
-    	private ICarRepository _repository;
+    	private static ICarRepository _repository;
+
+		static CarController()
+		{
+			_repository = new CarRepository(); // TODO: add DI
+			
+		}
 
 		public CarController()
 		{
-			_repository = new CarRepository(); // TODO: add DI
+			
 		}
-
 
     	public CarController(ICarRepository repository)
     	{
