@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarManager.Data", "samples\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarManager.Web", "samples\CarManager.Web\CarManager.Web.csproj", "{83CD81E0-6373-4EF1-8C39-1295E8CF36F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarManager.CachingClient", "samples\CarManager.CachingClient\CarManager.CachingClient.csproj", "{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -277,6 +279,16 @@ Global
 		{83CD81E0-6373-4EF1-8C39-1295E8CF36F4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{83CD81E0-6373-4EF1-8C39-1295E8CF36F4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{83CD81E0-6373-4EF1-8C39-1295E8CF36F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Debug|x86.ActiveCfg = Debug|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Debug|x86.Build.0 = Debug|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Release|Any CPU.ActiveCfg = Release|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Release|x86.ActiveCfg = Release|x86
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -305,5 +317,6 @@ Global
 		{F36FD487-5F92-483F-94CC-5F59E0338FCE} = {C2615BF4-1BA8-479C-A4EA-F2F19CB6016A}
 		{E02C72E3-CD4C-4633-A91F-B49595A46182} = {103B787A-04AF-4AC5-8C34-851263924AE5}
 		{83CD81E0-6373-4EF1-8C39-1295E8CF36F4} = {103B787A-04AF-4AC5-8C34-851263924AE5}
+		{96EE12B6-AEE7-4F23-B226-DF3CD09C31F1} = {103B787A-04AF-4AC5-8C34-851263924AE5}
 	EndGlobalSection
 EndGlobal

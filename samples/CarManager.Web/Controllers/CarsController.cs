@@ -15,8 +15,9 @@ namespace CarManager.Web.Controllers
 
 		public CarsController()
 		{
-			_repository = new CarRepository(); // TODO: add DI
+			_repository = CarRepository.Instance; // TODO: add DI instead of singleton
 		}
+
 
     	public CarsController(ICarRepository repository)
     	{
@@ -67,7 +68,9 @@ namespace CarManager.Web.Controllers
 		{
 			_repository.Add(car);
 			var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.Created);
-			httpResponseMessage.Headers.Location = new Uri(Request.RequestUri.ToString() + "/" + car.Id.ToString());
+			httpResponseMessage.Headers.Location = new Uri(Request.RequestUri.ToString()
+				.Replace("Cars", "Car")
+				+ "/" + car.Id.ToString());
 			return httpResponseMessage;
 		}
     }

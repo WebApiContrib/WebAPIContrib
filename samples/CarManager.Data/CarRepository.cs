@@ -7,10 +7,12 @@ namespace CarManager.Data
 {
 	public class CarRepository : ICarRepository
 	{
+		private static readonly CarRepository _instance = new CarRepository();
+
 		private Dictionary<int, Car> _cars = new Dictionary<int, Car>();
 		private int _nextId = 11;
 
-		public CarRepository()
+		private CarRepository()
 		{
 			_cars.Add(1, new Car(){BuildYear = 1997, Id = 1, Make = "Vauxhall",
 								Model = "Astra", MaxSpeed = 90, Price = 175, WarrantyProvided = false								
@@ -44,6 +46,11 @@ namespace CarManager.Data
 			             	});
 
 
+		}
+
+		public static CarRepository Instance
+		{
+			get { return _instance; }
 		}
 
 		public void Add(Car car)
