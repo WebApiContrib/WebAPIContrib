@@ -383,7 +383,7 @@ namespace WebApiContrib.Caching
 						matchFound = true;
 					}
 				}				
-				return matchFound ^ isNoneMatch ? null : new NotModifiedResponse(actualEtag).ToTask();
+				return matchFound ^ isNoneMatch ? null : new NotModifiedResponse(actualEtag.ToEntityTagHeaderValue()).ToTask();
 			};
 			
 		}
@@ -420,7 +420,7 @@ namespace WebApiContrib.Caching
 			    }
 
 			    return isModified ^ ifModified
-			       		? new NotModifiedResponse(actualEtag).ToTask()
+			       		? new NotModifiedResponse(actualEtag.ToEntityTagHeaderValue()).ToTask()
 			       		: null;
 
 			};
