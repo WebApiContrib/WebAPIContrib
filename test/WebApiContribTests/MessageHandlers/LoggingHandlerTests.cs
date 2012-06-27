@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using NUnit.Framework;
-using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 using WebApiContrib.Testing;
 using WebApiContribTests.Helpers;
@@ -29,20 +28,14 @@ namespace WebApiContribTests.MessageHandlers
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var content = new List<Contact>();
-            var c = new Contact { Id = 1, Birthday = DateTime.Now.AddYears(-20) };
-            content.Add(c);
+            var content = new List<Contact> { new Contact { Id = 1, Birthday = DateTime.Now.AddYears(-20) } };
+            var request = new HttpRequestMessage { Content = new ObjectContent(typeof (List<Contact>), content, config.Formatters.JsonFormatter) };
+            var response = client.PostAsync("http://anything/api/contacts", request.Content).Result;
 
-        	var request = new HttpRequestMessage();
-            request.Content = new ObjectContent(typeof(List<Contact>), content, config.Formatters.JsonFormatter);
-        	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
-        	{
-        		var response = task.Result;
-				Assert.IsNotNull(response);
-				Assert.AreEqual(2, dummyRepository.LogMessageCount);
-				Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
-				Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
-        	});
+            Assert.IsNotNull(response);
+            Assert.AreEqual(2, dummyRepository.LogMessageCount);
+            Assert.IsTrue(dummyRepository.HasRequestMessageTypeBeenReceived, "No request message has been logged");
+            Assert.IsTrue(dummyRepository.HasResponseMessageTypeBeenReceived, "No Response message has been received");
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using WebApiContrib.Data;
 using WebApiContrib.Messages;
@@ -24,21 +26,19 @@ namespace WebApiContrib.MessageHandlers
             _repository = repository;
         }
 
-        protected override System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             // Log the request information
             LogRequestLoggingInfo(request);
 
             // Execute the request
-            var response = base.SendAsync(request, cancellationToken);
-
-            response.ContinueWith((responseMsg) =>
+            return base.SendAsync(request, cancellationToken).ContinueWith(task =>
             {
+            	var response = task.Result;
                 // Extract the response logging info then persist the information
-                LogResponseLoggingInfo(responseMsg.Result);
+                LogResponseLoggingInfo(response);
+            	return response;
             });
-
-            return response;
         }
 
         private void LogRequestLoggingInfo(HttpRequestMessage request)
@@ -54,9 +54,9 @@ namespace WebApiContrib.MessageHandlers
             if (request.Content != null)
             {
                 request.Content.ReadAsByteArrayAsync()
-                    .ContinueWith((task) =>
+                    .ContinueWith(task =>
                     {
-                        info.BodyContent = System.Text.UTF8Encoding.UTF8.GetString(task.Result);
+                        info.BodyContent = Encoding.UTF8.GetString(task.Result);
                         _repository.Log(info);
 
                     });
@@ -82,9 +82,9 @@ namespace WebApiContrib.MessageHandlers
             if (response.Content != null)
             {
                 response.Content.ReadAsByteArrayAsync()
-                    .ContinueWith(t =>
+                    .ContinueWith(task =>
                     {
-                        var responseMsg = System.Text.UTF8Encoding.UTF8.GetString(t.Result);
+                        var responseMsg = Encoding.UTF8.GetString(task.Result);
                         info.BodyContent = responseMsg;
                         _repository.Log(info);
                     });
