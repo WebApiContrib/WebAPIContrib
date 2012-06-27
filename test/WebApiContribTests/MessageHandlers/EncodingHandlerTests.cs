@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using NUnit.Framework;
-using WebApiContrib.Formatting;
 using WebApiContrib.MessageHandlers;
 using WebApiContribTests.Helpers;
 
@@ -32,14 +31,12 @@ namespace WebApiContribTests.MessageHandlers
                 content.Add(c);
             }
 
-        	var request = new HttpRequestMessage();
+            var request = new HttpRequestMessage();
             request.Content = new ObjectContent(typeof(List<Contact>), content, config.Formatters.JsonFormatter);
-        	client.PostAsync("http://anything/api/contacts", request.Content).ContinueWith(task =>
-        	{
-        		var response = task.Result;
-				Assert.IsNotNull(response);
-				Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
-        	});
+            var response = client.PostAsync("http://anything/api/contacts", request.Content).Result;
+
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.StatusCode == HttpStatusCode.Created);
         }
     }
 }
