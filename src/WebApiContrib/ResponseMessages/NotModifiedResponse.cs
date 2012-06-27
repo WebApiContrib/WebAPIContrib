@@ -14,7 +14,14 @@ namespace WebApiContrib.ResponseMessages
         public NotModifiedResponse(IApiResource resource) : base(HttpStatusCode.NotModified, resource)
         {
         }
-    }
+
+		public NotModifiedResponse(EntityTagHeaderValue etag)
+			: base(HttpStatusCode.NotModified)
+		{
+			this.Headers.ETag = etag;
+		}
+ 
+	}
 
 	public class NotModifiedResponse<T> : ResourceResponseBase<T>
 	{
