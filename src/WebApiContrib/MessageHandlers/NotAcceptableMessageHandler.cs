@@ -35,36 +35,20 @@ namespace WebApiContrib.MessageHandlers
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var acceptHeader = request.Headers.Accept;
-
-            if (!IsRequestedMediaTypeAccepted(acceptHeader))
+            if (!IsRequestedMediaTypeAccepted(request))
                 return Task<HttpResponseMessage>.Factory.StartNew(() => new HttpResponseMessage(HttpStatusCode.NotAcceptable));
 
             return base.SendAsync(request, cancellationToken);
         }
 
-        private bool IsRequestedMediaTypeAccepted(HttpHeaderValueCollection<MediaTypeWithQualityHeaderValue> acceptHeader)
+        private bool IsRequestedMediaTypeAccepted(HttpRequestMessage request)
         {
+            var acceptHeader = request.Headers.Accept;
+
             return configuration
                 .Formatters
-                .Any(formatter => acceptHeader.Any(mediaType => FormatterSuportsMediaType(mediaType, formatter)));
-        }
-
-        private static bool FormatterSuportsMediaType(MediaTypeWithQualityHeaderValue mediaType, MediaTypeFormatter formatter)
-        {
-            var supportsMediaType = formatter.SupportedMediaTypes.Contains(mediaType);
-            var supportsTypeGroup = formatter.SupportedMediaTypes.Any(mt =>
-                                                                          {
-                                                                              var splitMediaType = mt.MediaType.Split('/');
-                                                                              var type = splitMediaType.First();
-                                                                              return mediaType.MediaType.StartsWith(type);
-                                                                          });
-
-            var isTypeGroup = mediaType.MediaType.Split('/').Last() == "*";
-            var isAllMediaType = mediaType.MediaType == allMediaTypesRange;
-
-
-            return isAllMediaType || supportsMediaType || (isTypeGroup && supportsTypeGroup);
+                .Any(formatter => acceptHeader.Any(mediaType => formatter.SupportedMediaTypes.Contains(mediaType)) //eg text/html is requested, text/html is a supported type
+                    || formatter.MediaTypeMappings.Any(m=> m.TryMatchMediaType(request) > 0)); // eg text/* is requested and text/* -> text/html is a media type mapping
         }
     }
 }
