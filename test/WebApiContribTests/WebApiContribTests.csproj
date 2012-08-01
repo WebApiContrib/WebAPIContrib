@@ -80,6 +80,8 @@
     <Compile Include="Formatting\PlainTextFormatterTests.cs" />
     <Compile Include="Helpers\Contact.cs" />
     <Compile Include="Helpers\ContactsController.cs" />
+    <Compile Include="Helpers\DeepComparer.cs" />
+    <Compile Include="Helpers\DeepComparerTests.cs" />
     <Compile Include="Helpers\IContactRepository.cs" />
     <Compile Include="Helpers\InMemoryContactRepository.cs" />
     <Compile Include="Helpers\PrecannedMessageHandler.cs" />
@@ -98,6 +100,9 @@
     <Compile Include="ResponseMessages\MovedPermanentlyResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
+    <Compile Include="Routing\HttpRouteTableBuilderTests.cs" />
+    <Compile Include="Routing\Mockups\FakeController.cs" />
+    <Compile Include="Serialization\SerialisationTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
