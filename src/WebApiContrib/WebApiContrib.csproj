@@ -109,6 +109,8 @@
     <Compile Include="ResponseMessages\ResourceResponseBase.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
+    <Compile Include="Serialization\IHttpMessageSerializer.cs" />
+    <Compile Include="Serialization\MessageContentHttpMessageSerializer.cs" />
     <Compile Include="Tracing\TraceWriterExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
