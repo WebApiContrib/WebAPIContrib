@@ -1,27 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
+using WebApiContrib.Serialization;
+using WebApiContribTests.Helpers;
 
 namespace WebApiContribTests.Serialization
 {
 	[TestFixture]
 	public class SerialisationTests
 	{
+
+
 		[Test]
-		public void TestRequest()
+		public void Response_Deserialize_Serialize()
 		{
-			var a = new MyStruct(){X = 5, Y = 3};
-			var b = new MyStruct(){X = 5, Y = 3};
-			Assert.AreEqual(a, b);
-			
+			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Response.bin");
+			var serializer = new MessageContentHttpMessageSerializer();
+			var response = serializer.DeserializeToResponse(stream);
+
+			var memoryStream = new MemoryStream();
+			serializer.Serialize(response, memoryStream);
+
+			memoryStream.Position = 0;
+			var response2 = serializer.DeserializeToResponse(memoryStream);
+			var result = DeepComparer.Compare(response, response2);
+			if(result.Count()>0)
+				Assert.Fail(string.Join("\r\n", result));
 		}
 
-		private struct MyStruct
+		[Test]
+		public void Request_Deserialize_Serialize()
 		{
-			public int X;
-			public int Y;
+			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Request.bin");
+			var serializer = new MessageContentHttpMessageSerializer();
+			var request = serializer.DeserializeToRequest(stream);
+
+			var memoryStream = new MemoryStream();
+			serializer.Serialize(request, memoryStream);
+
+			memoryStream.Position = 0;
+			var request2 = serializer.DeserializeToRequest(memoryStream);
+			var result = DeepComparer.Compare(request, request2);
+			if (result.Count() > 0)
+				Assert.Fail(string.Join("\r\n", result));
 		}
+
+	
+
 	}
 }

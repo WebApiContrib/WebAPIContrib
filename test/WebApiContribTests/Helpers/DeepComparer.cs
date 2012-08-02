@@ -9,9 +9,6 @@ namespace WebApiContribTests.Helpers
 	public class DeepComparer
 	{
 
-		
-
-
 		public static IEnumerable<string> Compare<T>(T a, T b)
 		{
 			var errors = new List<string>();
