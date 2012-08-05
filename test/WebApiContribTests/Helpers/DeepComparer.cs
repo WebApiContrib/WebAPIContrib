@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,12 +13,16 @@ namespace WebApiContribTests.Helpers
 		public static IEnumerable<string> Compare<T>(T a, T b)
 		{
 			var errors = new List<string>();
-			RecursiveCompare(".", a, b, errors);
+			RecursiveCompare(string.Empty, a, b, errors);
 			return errors;
 		}
 
 		private static void RecursiveCompare(string name, object a, object b, List<string> errors)
 		{
+			
+			if(name.Split('.').Count()>=10)
+				return;
+
 			if(a == b)
 				return;
 
@@ -62,11 +67,12 @@ namespace WebApiContribTests.Helpers
 			foreach (var propertyInfo in type.GetProperties( BindingFlags.Public | BindingFlags.Instance))
 			{
 				var methodInfo = propertyInfo.GetGetMethod();
-				RecursiveCompare(name +"." + propertyInfo.Name,
-					methodInfo.Invoke(a, null),
-					methodInfo.Invoke(b, null),
-					errors
-					);
+				if(methodInfo.GetParameters().Length==0)
+					RecursiveCompare(name +"." + propertyInfo.Name,
+						methodInfo.Invoke(a, null),
+						methodInfo.Invoke(b, null),
+						errors
+						);
 				propCount++;
 			}
 
