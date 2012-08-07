@@ -1,40 +1,28 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using Newtonsoft.Json.Linq;
+using WebApiContrib.Messages;
 
 namespace WebApiContrib.Filters
 {
     public class ValidationAttribute : ActionFilterAttribute
     {
-        public override void OnActionExecuting(HttpActionContext context)
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var modelState = context.ModelState;
-
-            if (!modelState.IsValid)
+            if (!actionContext.ModelState.IsValid)
             {
-                dynamic errors = new JObject();
-
-                foreach (var key in modelState.Keys)
-                {
-                    var state = modelState[key];
-
-                    if (state.Errors.Any())
+                var errors = actionContext.ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .Select(e => new Error 
                     {
-                    	errors[key] = state.Errors.First().ErrorMessage;
-                    }
-                }
+                        Name = e.Key,
+                        Message = e.Value.Errors.First().ErrorMessage
+                    }).ToArray();
 
-            	var contentNegotiator = (IContentNegotiator) context.ControllerContext.Configuration.Services.GetService(typeof (IContentNegotiator));
-            	var result = contentNegotiator.Negotiate(typeof (object), context.Request, context.ControllerContext.Configuration.Formatters);
-            	context.Response = new HttpResponseMessage(HttpStatusCode.BadRequest)
-            	{
-            		Content = new ObjectContent(typeof (JValue), errors, result.Formatter, result.MediaType.MediaType)
-            	};
-            }
+            	actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+            } 
         }
     }
 }
