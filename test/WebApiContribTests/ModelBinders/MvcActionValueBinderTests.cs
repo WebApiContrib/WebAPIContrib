@@ -28,7 +28,6 @@ namespace WebApiContribTests.ModelBinders
 		}
 	}
 
-	[HttpControllerConfiguration(ActionValueBinder = typeof(MvcActionValueBinder))]
 	public class MvcController : ApiController
 	{
 		[HttpGet]
