@@ -97,8 +97,6 @@
     <Compile Include="ResponseMessages\MovedPermanentlyResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
-    <Compile Include="Routing\HttpRouteTableBuilderTests.cs" />
-    <Compile Include="Routing\Mockups\FakeController.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
@@ -111,10 +109,6 @@
     <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
       <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
       <Name>WebApiContrib.Testing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\WebApiContrib.WebHost\WebApiContrib.WebHost.csproj">
-      <Project>{2544C950-013F-4287-B5F4-8D1D0AEC44E2}</Project>
-      <Name>WebApiContrib.WebHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\WebApiContrib\WebApiContrib.csproj">
       <Project>{C8EBEB5F-1664-4B36-9FA0-9979830EC5B8}</Project>
