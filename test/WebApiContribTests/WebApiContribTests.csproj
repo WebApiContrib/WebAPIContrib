@@ -89,6 +89,7 @@
     <Compile Include="MessageHandlers\LoggingHandlerTests.cs" />
     <Compile Include="MessageHandlers\MessageHandlerTester.cs" />
     <Compile Include="MessageHandlers\NotAcceptableMessageHandlerTests.cs" />
+    <Compile Include="ModelBinders\MvcActionValueBinderTests.cs" />
     <Compile Include="ResponseMessages\ConflictResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\CreateResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\HttpResponseMessageTester.cs" />
