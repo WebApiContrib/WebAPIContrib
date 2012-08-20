@@ -82,6 +82,8 @@
     <Compile Include="Filters\ValidationAttribute.cs" />
     <Compile Include="Internal\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Internal\ReflectionHelper.cs" />
+    <Compile Include="Internal\Extensions\TaskHelperExtensions.cs" />
+    <Compile Include="Internal\TaskHelpers.cs" />
     <Compile Include="MessageHandlers\BasicAuthenticationHandler.cs" />
     <Compile Include="MessageHandlers\EncodingHandler.cs" />
     <Compile Include="MessageHandlers\ETagHandler.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
     <Compile Include="Serialization\IHttpMessageSerializer.cs" />
+    <Compile Include="Serialization\IHttpMessageSerializerAsync.cs" />
     <Compile Include="Serialization\MessageContentHttpMessageSerializer.cs" />
     <Compile Include="Tracing\TraceWriterExtensions.cs" />
   </ItemGroup>
