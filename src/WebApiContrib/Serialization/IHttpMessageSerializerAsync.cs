@@ -10,10 +10,10 @@ namespace WebApiContrib.Serialization
 {
 	public interface IHttpMessageSerializerAsync
 	{
-		Task Serialize(Task<HttpResponseMessage> response, Stream stream);
-		void Serialize(HttpRequestMessage request, Stream stream);
-		Task<HttpResponseMessage> DeserializeToResponse(Stream stream);
-		Task<HttpRequestMessage> DeserializeToRequest(Stream stream);
+		Task SerializeAsync(Task<HttpResponseMessage> response, Stream stream);
+		Task SerializeAsync(HttpRequestMessage request, Stream stream);
+		Task<HttpResponseMessage> DeserializeToResponseAsync(Stream stream);
+		Task<HttpRequestMessage> DeserializeToRequestAsync(Stream stream);
 
 	}
 }

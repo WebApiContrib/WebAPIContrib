@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebApiContrib.Serialization
 {
-	public class MessageContentHttpMessageSerializer : IHttpMessageSerializerAsync, IHttpMessageSerializer
+	public class MessageContentHttpMessageSerializer : IHttpMessageSerializerAsync
 	{
 		private bool _bufferContent;
 
@@ -23,85 +23,73 @@ namespace WebApiContrib.Serialization
 			_bufferContent = bufferContent;
 		}
 
-
-		public void Serialize(HttpResponseMessage response, Stream stream)
-		{
-			byte[] assuranceBuffer = null;
-			if (_bufferContent && response.Content != null)
-				assuranceBuffer = response.Content.ReadAsByteArrayAsync().Result; // make sure it is buffered
-
-			var httpMessageContent = new HttpMessageContent(response);
-			var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-			stream.Write(buffer, 0, buffer.Length);
-		}
-
-		public Task Serialize(Task<HttpResponseMessage> response, Stream stream)
+		public Task SerializeAsync(Task<HttpResponseMessage> response, Stream stream)
 		{
 			return response.Then(r =>
-			        {
-			           	if(r.Content!=null)
-			           	{
-			           		return r.Content.LoadIntoBufferAsync()
-			           			.Then(() =>
-			           			      	{
-											var httpMessageContent = new HttpMessageContent(r);
-											// All in-memory and CPU-bound so no need to async
-											var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-											return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
-												buffer, 0, buffer.Length, null, TaskCreationOptions.None);
-										});
-			           	}
-			           	else
-			           	{
+			{
+				if (r.Content != null)
+				{
+					return r.Content.LoadIntoBufferAsync()
+						.Then(() =>
+						{
 							var httpMessageContent = new HttpMessageContent(r);
 							// All in-memory and CPU-bound so no need to async
 							var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-			           		return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite, 
+							return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
 								buffer, 0, buffer.Length, null, TaskCreationOptions.None);
-			           	}
-			        }
+						});
+				}
+				else
+				{
+					var httpMessageContent = new HttpMessageContent(r);
+					// All in-memory and CPU-bound so no need to async
+					var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
+					return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
+						buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+				}
+			}
 				);
 		}
 
-		public void Serialize(HttpRequestMessage request, Stream stream)
+		public Task SerializeAsync(HttpRequestMessage request, Stream stream)
 		{
-			byte[] assuranceBuffer = null;
-			if (_bufferContent && request.Content != null)
-				assuranceBuffer = request.Content.ReadAsByteArrayAsync().Result; // make sure it is buffered
+			if (request.Content != null)
+			{
+				return request.Content.LoadIntoBufferAsync()
+					.Then(() =>
+					{
+						var httpMessageContent = new HttpMessageContent(request);
+						// All in-memory and CPU-bound so no need to async
+						var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
+						return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
+							buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+					});
+			}
+			else
+			{
+				var httpMessageContent = new HttpMessageContent(request);
+				// All in-memory and CPU-bound so no need to async
+				var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
+				return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
+					buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+			}
 
-			var httpMessageContent = new HttpMessageContent(request);
-			var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-			stream.Write(buffer, 0, buffer.Length);
 		}
 
-		Task<HttpResponseMessage> IHttpMessageSerializerAsync.DeserializeToResponse(Stream stream)
-		{
-			throw new NotImplementedException();
-		}
-
-		Task<HttpRequestMessage> IHttpMessageSerializerAsync.DeserializeToRequest(Stream stream)
-		{
-			throw new NotImplementedException();
-		}
-
-		public HttpResponseMessage DeserializeToResponse(Stream stream)
+		public Task<HttpResponseMessage> DeserializeToResponseAsync(Stream stream)
 		{
 			var response = new HttpResponseMessage();
-			var memoryStream = new MemoryStream();
-			stream.CopyTo(memoryStream);
-			response.Content = new ByteArrayContent(memoryStream.ToArray());
+			response.Content = new StreamContent(stream);
 			response.Content.Headers.Add("Content-Type", "application/http;msgtype=response");
-			return response.Content.ReadAsHttpResponseMessageAsync().Result;
+			return response.Content.ReadAsHttpResponseMessageAsync();
 		}
 
-		public HttpRequestMessage DeserializeToRequest(Stream stream)
+		public Task<HttpRequestMessage> DeserializeToRequestAsync(Stream stream)
 		{
 			var request = new HttpRequestMessage();
-			var memoryStream = new MemoryStream();
-			stream.CopyTo(memoryStream);
-			request.Content = new ByteArrayContent(memoryStream.ToArray());
+			request.Content = new StreamContent(stream);
 			request.Content.Headers.Add("Content-Type", "application/http;msgtype=request");
-			return request.Content.ReadAsHttpRequestMessageAsync().Result;
+			return request.Content.ReadAsHttpRequestMessageAsync();
 		}
 	}
 }
