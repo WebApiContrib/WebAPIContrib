@@ -45,7 +45,6 @@ namespace WebApiContribTests.MessageHandlers
 
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("text/*"), new MediaTypeHeaderValue("text/vnd.webapi.contrib+xml"));
 
             config.Formatters.Add(customXmlFormatter);
 
@@ -79,7 +78,6 @@ namespace WebApiContribTests.MessageHandlers
 
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("*/*"), new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
             config.Formatters.Add(customXmlFormatter);
 
@@ -114,7 +112,6 @@ namespace WebApiContribTests.MessageHandlers
             
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("application/*"),new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
             config.Formatters.Add(customXmlFormatter);
 
@@ -136,7 +133,6 @@ namespace WebApiContribTests.MessageHandlers
             
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("*/*"),new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
             config.Formatters.Add(customXmlFormatter);
 
