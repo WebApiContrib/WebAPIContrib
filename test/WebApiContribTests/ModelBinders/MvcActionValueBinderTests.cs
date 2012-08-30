@@ -1,10 +1,9 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using System.Web.Http.Controllers;
 using NUnit.Framework;
 using WebApiContrib.ModelBinders;
-using System;
 
 namespace WebApiContribTests.ModelBinders
 {
@@ -28,6 +27,7 @@ namespace WebApiContribTests.ModelBinders
 		}
 	}
 
+	[MvcStyleBinding]
 	public class MvcController : ApiController
 	{
 		[HttpGet]

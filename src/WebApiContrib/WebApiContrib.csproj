@@ -96,6 +96,7 @@
     <Compile Include="MessageHandlers\TraceMessageHandler.cs" />
     <Compile Include="ModelBinders\MvcActionValueBinder.cs" />
     <Compile Include="Messages\Error.cs" />
+    <Compile Include="ModelBinders\MvcStyleBindingAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseMessages\ConflictResponse.cs" />
     <Compile Include="ResponseMessages\CreateResponse.cs" />
