@@ -12,10 +12,25 @@ namespace WebApiContribTests.MessageHandlers
     [TestFixture]
     public class NotAcceptableMessageHandlerTests : MessageHandlerTester
     {
+	    private HttpConfiguration configuration;
+
+		[TestFixtureSetUp]
+		public void Initialize()
+		{
+			configuration = new HttpConfiguration();
+            configuration.Services.Replace(typeof(IContentNegotiator), new DefaultContentNegotiator(excludeMatchOnTypeOnly: true));
+		}
+
+		[TestFixtureTearDown]
+		public void TearDown()
+		{
+			configuration.Dispose();
+		}
+
         [Test]   
         public void Should_return_NotAcceptable_when_media_type_is_not_supported()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
             
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -28,7 +43,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_media_type_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
             
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
@@ -41,15 +56,12 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_type_group_is_accepted()
         {
-            var config = new HttpConfiguration();
-
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("text/*"), new MediaTypeHeaderValue("text/vnd.webapi.contrib+xml"));
 
-            config.Formatters.Add(customXmlFormatter);
+            configuration.Formatters.Add(customXmlFormatter);
 
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(config);
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/*"));
@@ -62,7 +74,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_NotAcceptable_when_type_group_is_not_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/*"));
@@ -75,15 +87,12 @@ namespace WebApiContribTests.MessageHandlers
         [Test] 
         public void Should_return_OK_when_all_media_types_is_accepted()
         {
-            var config = new HttpConfiguration();
-
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("*/*"), new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
-            config.Formatters.Add(customXmlFormatter);
+            configuration.Formatters.Add(customXmlFormatter);
 
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(config);
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
@@ -96,7 +105,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_accepted()
         {
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(new HttpConfiguration());
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -110,15 +119,12 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_a_accepted_type_group()
         {
-            var config  = new HttpConfiguration();
-            
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("application/*"),new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
-            config.Formatters.Add(customXmlFormatter);
+            configuration.Formatters.Add(customXmlFormatter);
 
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(config);
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
          
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));
@@ -132,15 +138,12 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Should_return_OK_when_one_of_the_media_types_is_all_media_types()
         {
-            var config  = new HttpConfiguration();
-            
             var customXmlFormatter = new XmlMediaTypeFormatter();
             customXmlFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
-            customXmlFormatter.AddMediaRangeMapping(new MediaTypeHeaderValue("*/*"),new MediaTypeHeaderValue("application/vnd.webapi.contrib+xml"));
 
-            config.Formatters.Add(customXmlFormatter);
+            configuration.Formatters.Add(customXmlFormatter);
 
-            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(config);
+            var notAcceptableMessageHandler = new NotAcceptableMessageHandler(configuration);
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "foo/bar");
             requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("weird/type"));

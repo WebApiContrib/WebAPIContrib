@@ -25,11 +25,11 @@ namespace WebApiContribTests.Formatting
             var formatter = new PlainTextFormatter();
             
 
-            var contentHeader = new StringContent(string.Empty).Headers;
-            contentHeader.Clear();
+            var content = new StringContent(string.Empty);
+            content.Headers.Clear();
             var memoryStream = new MemoryStream();
             var value = "Hello World";
-            var resultTask = formatter.WriteToStreamAsync(typeof(string), value, memoryStream, contentHeader, transportContext: null);
+            var resultTask = formatter.WriteToStreamAsync(typeof(string), value, memoryStream, content, transportContext: null);
 
             resultTask.Wait();
 
@@ -52,10 +52,10 @@ namespace WebApiContribTests.Formatting
             sr.Write(value);
             sr.Flush();
             memoryStream.Position = 0;
-            var contentHeader = new StringContent(string.Empty).Headers;
-            contentHeader.Clear();
+            var content = new StringContent(string.Empty);
+            content.Headers.Clear();
 
-            var resultTask = formatter.ReadFromStreamAsync(typeof(string), memoryStream, contentHeader, null);
+            var resultTask = formatter.ReadFromStreamAsync(typeof(string), memoryStream, content, null);
 
             resultTask.Wait();
 
