@@ -6,47 +6,19 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using WebApiContrib.Internal;
 
 namespace WebApiContrib.Filters
 {
-    public class BasicAuthenticationAttribute : ActionFilterAttribute
+    public abstract class BasicAuthenticationAttribute : ActionFilterAttribute
     {
-        internal struct BasicCredentials
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-
-            public override string ToString()
-            {
-                return String.Format("{0}:{1}", Username, Password);
-            }
-        }
-
-        public BasicAuthenticationAttribute(string realm)
-        {
-            this.Realm = realm;
-        }
-
-        public string Realm { get; private set; }
-
-        private BasicCredentials ParseCredentials(AuthenticationHeaderValue authHeader)
-        {
-            var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.Parameter)).Split(':');
-
-            return new BasicCredentials
-            {
-                Username = credentials[0],
-                Password = credentials[1]
-            };
-        }
-
         protected MemoryCache Cache { get { return MemoryCache.Default; } }
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             if (isBasicAuthentication(actionContext))
             {
-                var credentials = ParseCredentials(actionContext.Request.Headers.Authorization);
+                var credentials = parseCredentials(actionContext.Request.Headers.Authorization);
                 if (Cache.Contains(credentials.ToString()))
                     return;
 
@@ -58,6 +30,17 @@ namespace WebApiContrib.Filters
             }
 
             unauthorizedResponse(actionContext);
+        }
+
+        private BasicCredentials parseCredentials(AuthenticationHeaderValue authHeader)
+        {
+            var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.Parameter)).Split(':');
+
+            return new BasicCredentials
+            {
+                Username = credentials[0],
+                Password = credentials[1]
+            };
         }
 
         private bool isBasicAuthentication(HttpActionContext actionContext)
@@ -72,9 +55,7 @@ namespace WebApiContrib.Filters
             actionContext.Response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", Realm));
         }
 
-        public virtual bool Authorize(string username, string password)
-        {
-            return true;
-        }
+        public abstract string Realm { get; }
+        public abstract bool Authorize(string username, string password);
     }
 }

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using WebApiContrib.Internal;
 
 namespace WebApiContrib.MessageHandlers
 {
@@ -51,12 +52,6 @@ namespace WebApiContrib.MessageHandlers
             catch { }
 
             return new BasicCredentials();
-        }
-
-        internal struct BasicCredentials
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
         }
     }
 }
