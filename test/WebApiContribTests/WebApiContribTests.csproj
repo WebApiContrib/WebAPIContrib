@@ -100,8 +100,6 @@
     <Compile Include="ResponseMessages\MovedPermanentlyResponseMessageTests.cs" />
     <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
-    <Compile Include="Routing\HttpRouteTableBuilderTests.cs" />
-    <Compile Include="Routing\Mockups\FakeController.cs" />
     <Compile Include="Serialization\SerialisationTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
@@ -110,10 +108,11 @@
     <Compile Include="Testing\RouteTestingExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Response.bin" />
     <EmbeddedResource Include="Data\Request.bin" />
+    <EmbeddedResource Include="Data\Response.bin" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
       <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
@@ -124,7 +123,6 @@
       <Name>WebApiContrib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
