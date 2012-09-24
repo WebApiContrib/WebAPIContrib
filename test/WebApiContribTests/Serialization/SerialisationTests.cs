@@ -48,9 +48,8 @@ namespace WebApiContribTests.Serialization
 			var request2 = serializer.DeserializeToRequestAsync(memoryStream).Result;
 			var result = DeepComparer.Compare(request, request2);
 
-			// !! Ignore this until RTM since this is fixed. See http://aspnetwebstack.codeplex.com/workitem/303
-			//if (result.Count() > 0)
-				//Assert.Fail(string.Join("\r\n", result));
+			if (result.Count() > 0)
+				Assert.Fail(string.Join("\r\n", result));
 		}
 
 	

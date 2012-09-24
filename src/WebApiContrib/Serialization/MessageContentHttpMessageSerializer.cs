@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace WebApiContrib.Serialization
 {
+	/// <summary>
+	/// Default implementation of IHttpMessageSerializer using proprietry format
+	/// Does not close the stream since the stream can be used to store other objects
+	/// so it has to be closed in the client
+	/// </summary>
 	public class MessageContentHttpMessageSerializer : IHttpMessageSerializerAsync
 	{
 		private bool _bufferContent;
@@ -29,15 +34,22 @@ namespace WebApiContrib.Serialization
 			{
 				if (r.Content != null)
 				{
+
 					return r.Content.LoadIntoBufferAsync()
 						.Then(() =>
 						{
 							var httpMessageContent = new HttpMessageContent(r);
 							// All in-memory and CPU-bound so no need to async
-							var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
+							return httpMessageContent.ReadAsByteArrayAsync();
+						})
+						.Then(buffer =>
+						{
 							return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
-								buffer, 0, buffer.Length, null, TaskCreationOptions.None);
-						});
+								buffer, 0, buffer.Length, null, TaskCreationOptions.AttachedToParent);
+						}
+								);
+
+					;
 				}
 				else
 				{
@@ -45,7 +57,7 @@ namespace WebApiContrib.Serialization
 					// All in-memory and CPU-bound so no need to async
 					var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
 					return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
-						buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+						buffer, 0, buffer.Length, null, TaskCreationOptions.AttachedToParent);
 				}
 			}
 				);
@@ -60,18 +72,26 @@ namespace WebApiContrib.Serialization
 					{
 						var httpMessageContent = new HttpMessageContent(request);
 						// All in-memory and CPU-bound so no need to async
-						var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-						return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
-							buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+						httpMessageContent.ReadAsByteArrayAsync().Then(
+							buffer =>
+							{
+								return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
+									buffer, 0, buffer.Length, null, TaskCreationOptions.AttachedToParent);
+							});
 					});
 			}
 			else
 			{
 				var httpMessageContent = new HttpMessageContent(request);
 				// All in-memory and CPU-bound so no need to async
-				var buffer = httpMessageContent.ReadAsByteArrayAsync().Result;
-				return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
-					buffer, 0, buffer.Length, null, TaskCreationOptions.None);
+				return httpMessageContent.ReadAsByteArrayAsync().Then(
+					buffer =>
+					{
+						return Task.Factory.FromAsync(stream.BeginWrite, stream.EndWrite,
+							  buffer, 0, buffer.Length, null, TaskCreationOptions.AttachedToParent);
+					}
+					);
+
 			}
 
 		}
