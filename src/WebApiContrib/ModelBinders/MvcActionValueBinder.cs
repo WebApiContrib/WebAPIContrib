@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -38,12 +37,13 @@ namespace WebApiContrib.ModelBinders
         {
             HttpConfiguration config = parameter.Configuration;
             var attr = new ModelBinderAttribute(); // use default settings
+
             ModelBinderProvider provider = attr.GetModelBinderProvider(config);
+            IModelBinder binder = provider.GetBinder(config, parameter.ParameterType);
 
             // Alternatively, we could put this ValueProviderFactory in the global config.
             var vpfs = new List<ValueProviderFactory>(attr.GetValueProviderFactories(config)) { new BodyValueProviderFactory() };
-			var valueProviderFactories = new List<ValueProviderFactory> { new CompositeValueProviderFactory(vpfs) };
-            return new ModelBinderParameterBinding(parameter, provider, valueProviderFactories);
+            return new ModelBinderParameterBinding(parameter, binder, vpfs);
         }
 
         // Derive from ActionBinding so that we have a chance to read the body once and then share that with all the parameters.
@@ -59,10 +59,7 @@ namespace WebApiContrib.ModelBinders
                     FormDataCollection fd = content.ReadAsAsync<FormDataCollection>().Result;
                     if (fd != null)
                     {
-                        NameValueCollection nvc = fd.ReadAsNameValueCollection();
-
-                        IValueProvider vp = new NameValueCollectionValueProvider(nvc, CultureInfo.InvariantCulture);
-
+                        IValueProvider vp = new NameValuePairsValueProvider(fd, CultureInfo.InvariantCulture);
                         request.Properties.Add(Key, vp);
                     }
                 }

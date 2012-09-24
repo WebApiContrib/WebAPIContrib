@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Collections;
@@ -41,14 +42,14 @@ namespace WebApiContrib.Formatting {
             return IsTypeOfIEnumerable(type);
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContent content, TransportContext transportContext)
         {
-            return Task.Factory.StartNew(() => WriteStream(type, value, stream, contentHeaders));
+            return Task.Factory.StartNew(() => WriteStream(type, value, stream, content));
         }
 
         //private utils
 
-        private static void WriteStream(Type type, object value, Stream stream, HttpContentHeaders contentHeaders) 
+        private static void WriteStream(Type type, object value, Stream stream, HttpContent content) 
         {
             //NOTE: We have check the type inside CanWriteType method
             //If request comes this far, the type is IEnumerable. We are safe.
