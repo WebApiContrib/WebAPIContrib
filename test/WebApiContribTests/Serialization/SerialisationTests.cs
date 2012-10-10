@@ -20,7 +20,7 @@ namespace WebApiContribTests.Serialization
 		[Test]
 		public void Response_Deserialize_Serialize()
 		{
-			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Response.txt");
+			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Response.cs");
 			var serializer = new MessageContentHttpMessageSerializer();
 			var response = serializer.DeserializeToResponseAsync(stream).Result;
 
@@ -37,7 +37,7 @@ namespace WebApiContribTests.Serialization
 		[Test]
 		public void Request_Deserialize_Serialize()
 		{
-			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Request.txt");
+			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WebApiContribTests.Data.Request.cs");
 			var serializer = new MessageContentHttpMessageSerializer();
 			var request = serializer.DeserializeToRequestAsync(stream).Result;
 

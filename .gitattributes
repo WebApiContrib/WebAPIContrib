@@ -41,7 +41,6 @@
 *.fs text
 *.fsx text
 *.hs text
-*.txt text
 
 *.csproj text merge=union 
 *.vbproj text merge=union 
