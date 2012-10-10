@@ -105,8 +105,8 @@
     <Compile Include="TestHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Request.bin" />
-    <EmbeddedResource Include="Data\Response.bin" />
+    <EmbeddedResource Include="Data\Request.txt" />
+    <EmbeddedResource Include="Data\Response.txt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
