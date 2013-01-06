@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Modified from http://mvccontrib.codeplex.com/ to work with Web API
+// Copyright 2007-2010 Eric Hexter, Jeffrey Palermo
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
