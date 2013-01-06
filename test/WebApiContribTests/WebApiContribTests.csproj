@@ -41,6 +41,7 @@
       <HintPath>..\..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="Should">
@@ -100,6 +101,7 @@
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
+    <Compile Include="Testing\RouteTestingExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
