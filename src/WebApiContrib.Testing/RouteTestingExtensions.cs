@@ -1,30 +1,32 @@
-﻿// Modified from http://mvccontrib.codeplex.com/ to work with Web API
+﻿// Modified from http://mvccontrib.codeplex.com to work with Web API
 // Copyright 2007-2010 Eric Hexter, Jeffrey Palermo
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web;
 using System.Web.Http;
-using HttpVerbs = System.Web.Mvc.HttpVerbs;
-using UrlParameter = System.Web.Mvc.UrlParameter;
 using System.Web.Routing;
-using MvcContrib.TestHelper;
+using Rhino.Mocks;
+using WebApiContrib.Testing.Internal.Extensions;
 
 namespace WebApiContrib.Testing
 {
     /// <summary>
-    /// Allows testing that a url routes to the appropriate controller action
+    /// Allows testing that a url is routed to the appropriate controller action
     /// </summary>
     public static class RouteTestingExtensions
     {
-        private static readonly Dictionary<HttpVerbs, Type> HttpMethodLookup = new Dictionary<HttpVerbs, Type>
+        private static readonly Dictionary<string, Type> httpMethodLookup = new Dictionary<string, Type>
             {
-                {HttpVerbs.Get, typeof(HttpGetAttribute)},
-                {HttpVerbs.Post, typeof(HttpPostAttribute)},
-                {HttpVerbs.Delete, typeof(HttpDeleteAttribute)},
-                {HttpVerbs.Put, typeof(HttpPutAttribute)}
+                {"GET", typeof(HttpGetAttribute)},
+                {"POST", typeof(HttpPostAttribute)},
+                {"DELETE", typeof(HttpDeleteAttribute)},
+                {"PUT", typeof(HttpPutAttribute)},
+                {"HEAD", typeof(HttpHeadAttribute)},
+                {"PATCH", typeof(HttpPatchAttribute)},
+                {"OPTIONS", typeof(HttpOptionsAttribute)},
             };
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace WebApiContrib.Testing
         /// <param name="relativeUrl">The url to verify</param>
         /// <param name="action">The expected action that the url should map to</param>
         /// <param name="httpMethod">The HTTP method, e.g. Get, Post, Put, Delete</param>
-        public static RouteData ShouldMapTo<TController>(this string relativeUrl, Expression<Func<TController, object>> action, HttpVerbs httpMethod = HttpVerbs.Get) where TController : ApiController
+        public static RouteData ShouldMapTo<TController>(this string relativeUrl, Expression<Func<TController, object>> action, string httpMethod = "GET") where TController : ApiController
         {
             return relativeUrl.Route(httpMethod).ShouldMapTo(action, httpMethod);
         }
@@ -43,36 +45,37 @@ namespace WebApiContrib.Testing
         private static RouteData ShouldMapTo<TController>(this RouteData routeData) where TController : ApiController
         {
             //strip out the word 'Controller' from the type
-            string expected = typeof(TController).Name;
-            if (expected.EndsWith("Controller"))
+            string expectedController = typeof(TController).Name;
+            if (expectedController.EndsWith("Controller"))
             {
-                expected = expected.Substring(0, expected.LastIndexOf("Controller", StringComparison.Ordinal));
+                expectedController = expectedController.Substring(0, expectedController.LastIndexOf("Controller", StringComparison.Ordinal));
             }
 
             //get the key (case insensitive)
-            string actual = routeData.Values.GetValue("controller").ToString();
+            string actualController = routeData.Values.GetValue("controller").ToString();
 
-            actual.AssertSameStringAs(expected);
+            Assert.AreSameString(actualController, expectedController);
             return routeData;
         }
 
-        private static RouteData ShouldMapTo<TController>(this RouteData routeData, Expression<Func<TController, object>> action, HttpVerbs httpMethod) where TController : ApiController
+        private static RouteData ShouldMapTo<TController>(this RouteData routeData, Expression<Func<TController, object>> action, string httpMethod) where TController : ApiController
         {
-            routeData.ShouldNotBeNull("The URL did not match any route");
+            Assert.IsNotNull(routeData, "The URL did not match any route");
 
             //check controller
             routeData.ShouldMapTo<TController>();
 
             //check action
             var methodCall = (MethodCallExpression)action.Body;
-            string actualAction = (routeData.Values.GetValue("action") ?? httpMethod.ToString()).ToString();
+            string actualAction = (routeData.Values.GetValue("action") ?? httpMethod).ToString();
             string expectedAction = methodCall.Method.ActionName();
-            actualAction.AssertSameStringAs(expectedAction);
+            Assert.AreSameString(expectedAction, actualAction);
 
             // If convention is not being used, verify that the correct httpMethod attribute is present
-            if (string.Compare(httpMethod.ToString(), actualAction, StringComparison.OrdinalIgnoreCase) != 0)
+            if (string.Compare(httpMethod, actualAction, StringComparison.OrdinalIgnoreCase) != 0)
             {
-                methodCall.Method.HasAttribute(HttpMethodLookup[httpMethod]).ShouldBe(true);
+                bool hasHttpMethodAttribute = methodCall.Method.HasAttribute(httpMethodLookup[httpMethod]);
+                Assert.IsTrue(hasHttpMethodAttribute);
             }
 
             //check parameters
@@ -123,8 +126,8 @@ namespace WebApiContrib.Testing
                 }
 
                 // this is only sufficient while System.Web.Mvc.UrlParameter has only a single value.
-                if (actualValue == UrlParameter.Optional ||
-                    (actualValue != null && actualValue.ToString().Equals("System.Web.Mvc.UrlParameter")))
+                if (actualValue == RouteParameter.Optional ||
+                    (actualValue != null && actualValue.ToString().Equals(typeof(RouteParameter).FullName)))
                 {
                     actualValue = null;
                 }
@@ -148,59 +151,63 @@ namespace WebApiContrib.Testing
                     errorMsgFmt += "; no value found in the route context action parameter named '{0}' - does your matching route contain a token called '{0}'?";
                 }
 
-                actualValue.ShouldEqual(expectedValue, String.Format(errorMsgFmt, controllerParameterName, expectedValue, actualValue));
+                Assert.AreEqual(expectedValue, actualValue, String.Format(errorMsgFmt, controllerParameterName, expectedValue, actualValue));
             }
 
             return routeData;
         }
-    }
 
-    internal static class MemberInfoExtensions
-    {
-        public static IEnumerable<T> GetAttribute<T>(this MemberInfo member)
-            where T : class
+        /// <summary>
+        /// Gets a value from the <see cref="RouteValueDictionary" /> by key. Does a culture and case insensitive search on the keys.
+        /// </summary>
+        /// <param name="routeValues">The route values</param>
+        /// <param name="key">The key from which to retrieve the value</param>
+        /// <returns>Returns the requested route value or null the key is not present</returns>
+        public static object GetValue(this RouteValueDictionary routeValues, string key)
         {
-            return GetAttribute(member, typeof(T)).OfType<T>();
+            foreach(var routeValueKey in routeValues.Keys)
+            {
+                if(!string.Equals(routeValueKey, key, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                
+                if(routeValues[routeValueKey] == null)
+                    return null;
+
+                return routeValues[routeValueKey].ToString();
+            }
+
+            return null;
         }
 
-        public static IEnumerable<object> GetAttribute(this MemberInfo member, Type attributeType)
+        /// <summary>
+        /// Find the route for a URL and an Http Method
+        /// </summary>
+        /// <param name="url">The URL to route</param>
+        /// <param name="httpMethod">The HTTP method (e.g. GET, PUT, etc)</param>
+        /// <returns>The route or null if not route matched</returns>
+        public static RouteData Route(this string url, string httpMethod = "GET")
         {
-            return member.GetCustomAttributes(attributeType, true);
-        }
+            var mockRequest = MockRepository.GeneratePartialMock<HttpRequestBase>();
+            mockRequest
+                .Expect(x => x.AppRelativeCurrentExecutionFilePath)
+                .Return(url)
+                .Repeat.Any();
+            mockRequest
+                .Expect(x => x.PathInfo)
+                .Return(string.Empty)
+                .Repeat.Any();
+            mockRequest
+                .Expect(x => x.HttpMethod)
+                .Return(httpMethod)
+                .Repeat.Any();
 
-        public static bool HasAttribute<T>(this MemberInfo member)
-            where T : class
-        {
-            return HasAttribute(member, typeof(T));
-        }
+            var mockContext = MockRepository.GeneratePartialMock<HttpContextBase>();
+            mockContext
+                .Expect(x => x.Request)
+                .Return(mockRequest)
+                .Repeat.Any();
 
-        public static bool HasAttribute(this MemberInfo member, Type attributeType)
-        {
-            return member.GetAttribute(attributeType).Any();
-        }
-    }
-
-    internal static class TypeExtensions
-    {
-        public static Type GetTypeFromNullable(this Type type)
-        {
-            if (!type.IsGenericType)
-                return type;
-
-            if (type.GetGenericTypeDefinition() != typeof(Nullable<>))
-                return type;
-
-            return type.GetGenericArguments()[0];
-        }
-
-        public static object GetDefault(this Type type)
-        {
-            return typeof(TypeExtensions).GetMethod("GetDefaultGeneric").MakeGenericMethod(type).Invoke(null, null);
-        }
-
-        public static T GetDefaultGeneric<T>()
-        {
-            return default(T);
+            return RouteTable.Routes.GetRouteData(mockContext);
         }
     }
 }
