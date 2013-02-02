@@ -50,18 +50,10 @@ namespace WebApiContribTests.Testing
             {
                 return new List<int>();
             }
-        }
 
-        public class RestfulController : ApiController
-        {
-            public List<int> Get()
+            public bool Post(string foobar)
             {
-                return new List<int>();
-            }
-
-            public List<int> Get(int id)
-            {
-                return new List<int>();
+                return true;
             }
         }
 
@@ -204,6 +196,13 @@ namespace WebApiContribTests.Testing
         {
             const string url = "~/api/sample/filter";
             url.ShouldMapTo<SampleController>(x => x.Filter(default(int)));
+        }
+
+        [Test]
+        public void ShouldMapTo_IgnoresReturnTypeOfAction()
+        {
+            const string url = "~/api/foobar";
+            url.ShouldMapTo<FoobarController>(x => x.Post(null), "POST");
         }
     }
 }

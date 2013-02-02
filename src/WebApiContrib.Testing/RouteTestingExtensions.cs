@@ -37,7 +37,7 @@ namespace WebApiContrib.Testing
         /// <param name="relativeUrl">The url to verify</param>
         /// <param name="action">The expected action that the url should map to</param>
         /// <param name="httpMethod">The HTTP method, e.g. Get, Post, Put, Delete</param>
-        public static RouteData ShouldMapTo<TController>(this string relativeUrl, Expression<Func<TController, object>> action, string httpMethod = "GET") where TController : ApiController
+        public static RouteData ShouldMapTo<TController>(this string relativeUrl, Expression<Action<TController>> action, string httpMethod = "GET") where TController : ApiController
         {
             return relativeUrl.Route(httpMethod).ShouldMapTo(action, httpMethod);
         }
@@ -58,7 +58,7 @@ namespace WebApiContrib.Testing
             return routeData;
         }
 
-        private static RouteData ShouldMapTo<TController>(this RouteData routeData, Expression<Func<TController, object>> action, string httpMethod) where TController : ApiController
+        private static RouteData ShouldMapTo<TController>(this RouteData routeData, Expression<Action<TController>> action, string httpMethod) where TController : ApiController
         {
             Assert.IsNotNull(routeData, "The URL did not match any route");
 
