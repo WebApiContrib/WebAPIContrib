@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WebApiContrib")]
-[assembly: AssemblyDescription("Community Contributions for ASP.NET Web API")]
+[assembly: AssemblyTitle("WebApiContrib.Testing")]
+[assembly: AssemblyDescription("This library contains useful methods to help you test against ASP.NET Web API.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("WebApiContrib")]
-[assembly: AssemblyProduct("WebApiContrib")]
-[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("WebApiContrib.Testing")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c125ec1c-0f72-45bf-9903-9d42b28ee1cf")]
+[assembly: Guid("a78b681c-1c51-47f3-a797-b16eb8e472d8")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,11 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly: InternalsVisibleTo("WebApiContribTests")]
-[assembly: InternalsVisibleTo("Rhino.Mocks")]
+[assembly: AssemblyVersion("0.7.12")]
+[assembly: AssemblyFileVersion("0.7.12")]
