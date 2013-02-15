@@ -14,7 +14,6 @@ namespace WebApiContrib.MessageHandlers
     public class RequireHttpsHandler : DelegatingHandler
     {
         private readonly int _httpsPort;
-        private readonly TaskFactory _taskFactory;
 
         /// <summary>Initializes a new instance of the <see cref="RequireHttpsHandler" /> class.</summary>
         public RequireHttpsHandler()
@@ -27,7 +26,6 @@ namespace WebApiContrib.MessageHandlers
         public RequireHttpsHandler(int httpsPort)
         {
             _httpsPort = httpsPort;
-            _taskFactory = new TaskFactory();
         }
 
         /// <summary>Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.</summary>
@@ -39,7 +37,10 @@ namespace WebApiContrib.MessageHandlers
             if (request.RequestUri.Scheme == Uri.UriSchemeHttps)
                 return base.SendAsync(request, cancellationToken);
 
-            return _taskFactory.StartNew(() => CreateResponse(request));
+            var response = CreateResponse(request);
+            var tcs = new TaskCompletionSource<HttpResponseMessage>();
+            tcs.SetResult(response);
+            return tcs.Task;
         }
 
         /// <summary>Creates the response based on the request method.</summary>
