@@ -392,7 +392,7 @@ namespace WebApiContrib.Caching
 		{
 			return (request) =>
 			{
-			    if (request.Method != HttpMethod.Get)
+                if (request.Method != HttpMethod.Get && request.Headers != null)
 			       	return null;
 
 			    DateTimeOffset? ifModifiedSince = request.Headers.IfModifiedSince;
