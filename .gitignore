@@ -33,3 +33,4 @@ deploy/
 docs/
 nuget/
 packages/
+*.nupkg
