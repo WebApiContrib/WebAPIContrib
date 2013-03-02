@@ -7,7 +7,7 @@ Expires: Thu, 02 Aug 2012 10:30:01 GMT
 Date: Thu, 02 Aug 2012 10:30:01 GMT
 Content-Type: text/html
 Server: Apache
-Vary: Cookie,X-CDN
+Vary: Cookie,X-CDN,J
 Cache-Control: max-age=0
 Access-Control-Allow-Origin: *
 Keep-Alive: timeout=5, max=780
