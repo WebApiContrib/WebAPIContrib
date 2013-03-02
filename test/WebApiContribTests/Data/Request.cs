@@ -1,5 +1,5 @@
 GET /news/ HTTP/1.1
-Host: www.bbc.co.uk
+Host: www2.bbc.co.uk
 Proxy-Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
