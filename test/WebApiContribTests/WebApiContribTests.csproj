@@ -108,8 +108,8 @@
     <Compile Include="Testing\RouteTestingExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Request" />
-    <None Include="Data\Response" />
+    <EmbeddedResource Include="Data\Request" />
+    <EmbeddedResource Include="Data\Response" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
