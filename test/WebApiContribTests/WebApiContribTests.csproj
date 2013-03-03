@@ -101,6 +101,7 @@
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
+    <Compile Include="Testing\ApiControllerExtensionsTests.cs" />
     <Compile Include="Testing\RouteTestingExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
