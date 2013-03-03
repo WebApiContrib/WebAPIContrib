@@ -10,6 +10,9 @@ using System.Web.Http.Routing;
 
 namespace WebApiContrib.Testing
 {
+    //Credits to the following individuals for their posts which inspired this code
+    //Pablo Cibraro: http://weblogs.asp.net/cibrax/archive/2012/10/10/unit-testing-asp-net-web-api-controllers-that-rely-on-the-urlhelper.aspx
+    //Peter Provost: http://www.peterprovost.org/blog/2012/06/16/unit-testing-asp-dot-net-web-api
     public static class ApiControllerExtensions
     {
         public static void ConfigureForTesting(this ApiController controller, HttpMethod method, string uri, 
