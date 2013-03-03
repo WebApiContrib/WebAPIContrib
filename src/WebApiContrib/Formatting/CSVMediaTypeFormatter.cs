@@ -101,7 +101,7 @@ namespace WebApiContrib.Formatting {
                 	stringWriter.WriteLine(valueLine.TrimEnd(','));
                 }
 
-                var streamWriter = new StreamWriter(stream);
+                using (var streamWriter = new StreamWriter(stream))
                     streamWriter.Write(stringWriter.ToString());
             }
         }
