@@ -85,6 +85,7 @@
     <Compile Include="Helpers\IContactRepository.cs" />
     <Compile Include="Helpers\InMemoryContactRepository.cs" />
     <Compile Include="Helpers\PrecannedMessageHandler.cs" />
+    <Compile Include="MessageHandlers\ThrottlingHandlerTests.cs" />
     <Compile Include="MessageHandlers\EncodingHandlerTests.cs" />
     <Compile Include="MessageHandlers\ETagHandlerTests.cs" />
     <Compile Include="MessageHandlers\HeadMessageHandlerTests.cs" />

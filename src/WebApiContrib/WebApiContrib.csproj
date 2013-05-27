@@ -62,7 +62,11 @@
     <Compile Include="App_Packages\TaskHelpers.Sources.0.1\TaskHelpersExtensions.cs" />
     <Compile Include="Caching\CachingHandler.cs" />
     <Compile Include="Caching\EntityTagKey.cs" />
+    <Compile Include="Caching\InMemoryThrottleStore.cs" />
+    <Compile Include="Caching\IThrottleStore.cs" />
+    <Compile Include="Caching\ThrottleEntry.cs" />
     <Compile Include="Caching\TimedEntityTagHeaderValue.cs" />
+    <Compile Include="HttpRequestMessageExtensions.cs" />
     <Compile Include="Http\HttpRequestMessageExtensions.cs" />
     <Compile Include="Internal\Extensions\ActionExtensions.cs" />
     <Compile Include="Internal\Extensions\IsInExtensions.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="MessageHandlers\NotAcceptableMessageHandler.cs" />
     <Compile Include="MessageHandlers\RequireHttpsHandler.cs" />
     <Compile Include="MessageHandlers\SimpleCorsHandler.cs" />
+    <Compile Include="MessageHandlers\ThrottlingHandler.cs" />
     <Compile Include="MessageHandlers\UriFormatExtensionHandler.cs" />
     <Compile Include="Messages\ApiLoggingInfo.cs" />
     <Compile Include="MessageHandlers\HeadMessageHandler.cs" />
