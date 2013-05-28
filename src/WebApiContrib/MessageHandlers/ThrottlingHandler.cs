@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.ServiceModel.Channels;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WebApiContrib.Caching;
+using WebApiContrib.Http;
 
 namespace WebApiContrib.MessageHandlers
 {
-
     public class ThrottlingHandler
         : DelegatingHandler
     {

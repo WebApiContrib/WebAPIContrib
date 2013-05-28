@@ -66,7 +66,6 @@
     <Compile Include="Caching\IThrottleStore.cs" />
     <Compile Include="Caching\ThrottleEntry.cs" />
     <Compile Include="Caching\TimedEntityTagHeaderValue.cs" />
-    <Compile Include="HttpRequestMessageExtensions.cs" />
     <Compile Include="Http\HttpRequestMessageExtensions.cs" />
     <Compile Include="Internal\Extensions\ActionExtensions.cs" />
     <Compile Include="Internal\Extensions\IsInExtensions.cs" />
