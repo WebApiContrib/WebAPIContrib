@@ -11,6 +11,9 @@
     <projectUrl>https://github.com/WebApiContrib/WebApiContrib.Testing</projectUrl>
     <licenseUrl>https://raw.github.com/WebApiContrib/WebApiContrib.Testing/master/LICENSE.txt</licenseUrl>
     <copyright>Copyright © WebApiContrib 2012 - 2013</copyright>
+    <dependencies>
+      <dependency id="WebApiContrib" version="0.9" />
+    </dependencies>
     <tags>webapi webapicontrib test testing</tags>
   </metadata>
 </package>
