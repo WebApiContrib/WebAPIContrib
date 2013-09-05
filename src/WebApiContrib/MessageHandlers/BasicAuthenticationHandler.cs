@@ -40,12 +40,13 @@ namespace WebApiContrib.MessageHandlers
         {
             try
             {
-                var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.ToString().Substring(6))).Split(':');
+                var credentials = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.ToString().Substring(6)));
+                int splitOn = credentials.IndexOf(':');
 
                 return new BasicCredentials
                 {
-                    Username = credentials[0],
-                    Password = credentials[1]
+                    Username = credentials.Substring(0, splitOn),
+                    Password = credentials.Substring(splitOn + 1)
                 };
             }
             catch { }
