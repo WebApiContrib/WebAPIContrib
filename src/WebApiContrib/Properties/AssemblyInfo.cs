@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WebApiContrib")]
 [assembly: AssemblyProduct("WebApiContrib")]
-[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012")]
+[assembly: AssemblyCopyright("Copyright © WebApiContrib 2012 - 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,8 +31,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.9.12")]
-[assembly: AssemblyFileVersion("0.9.12")]
+[assembly: AssemblyVersion("0.9.13")]
+[assembly: AssemblyFileVersion("0.9.13")]
 
 [assembly: InternalsVisibleTo("WebApiContribTests")]
 [assembly: InternalsVisibleTo("Rhino.Mocks")]
