@@ -4,14 +4,19 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
+
 
 namespace WebApiContrib.Formatting
 {
     public class PlainTextFormatter : MediaTypeFormatter
     {
-        public PlainTextFormatter()
+        private readonly Encoding _encoding;
+
+        public PlainTextFormatter(Encoding encoding = null)
         {
+            this._encoding = encoding ?? Encoding.Default;
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
         }
 
@@ -27,7 +32,7 @@ namespace WebApiContrib.Formatting
 
     	public override Task<object> ReadFromStreamAsync(Type type, Stream stream, HttpContent content, IFormatterLogger formatterLogger)
         {
-            var reader = new StreamReader(stream);
+            var reader = new StreamReader(stream, _encoding);
             string value = reader.ReadToEnd();
 
             var tcs = new TaskCompletionSource<object>();
@@ -37,7 +42,7 @@ namespace WebApiContrib.Formatting
 
     	public override Task WriteToStreamAsync(Type type, object value, Stream stream, HttpContent content, TransportContext transportContext)
         {
-            var writer = new StreamWriter(stream);
+            var writer = new StreamWriter(stream, _encoding);
             writer.Write((string) value);
             writer.Flush();
             
