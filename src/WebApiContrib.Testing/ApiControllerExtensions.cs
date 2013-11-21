@@ -39,6 +39,7 @@ namespace WebApiContrib.Testing
             controller.Request = request;
             controller.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
             controller.Request.Properties[HttpPropertyKeys.HttpRouteDataKey] = routeData;
+            controller.RequestContext = new HttpRequestContext { Configuration = config, RouteData = routeData, Url = new UrlHelper(controller.Request) };
         }
     }
 }
