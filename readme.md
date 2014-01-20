@@ -9,7 +9,7 @@ WebAPIContrib is a collection of open source projects to help improve your work 
 
 ## Formatters
 
-* [WebApiContrib.Formatting.Bson](https://github.com/WebApiContrib/WebApiContrib.Formatting.Bson)
+* [WebApiContrib.Formatting.Bson](http://github.com/WebApiContrib/WebApiContrib.Formatting.Bson)
 * [WebApiContrib.Formatting.Html](http://github.com/WebApiContrib/WebApiContrib.Formatting.Html)
 * [WebApiContrib.Formatting.JavaScriptSerializer](http://github.com/WebApiContrib/WebApiContrib.Formatting.JavaScriptSerializer)
 * [WebApiContrib.Formatting.Jsonp](http://github.com/WebApiContrib/WebApiContrib.Formatting.Jsonp)
