@@ -11,7 +11,7 @@ WebAPIContrib is a collection of open source projects to help improve your work 
 
 * [WebApiContrib.Formatting.Bson](https://github.com/WebApiContrib/WebApiContrib.Formatting.Bson)
 * [WebApiContrib.Formatting.Html](http://github.com/WebApiContrib/WebApiContrib.Formatting.Html)
-* [WebApiContrib.Formatting.JavaScriptSerializer](http://github.com/WebApiContrib/WebApiContrib.JavaScripotSerializer)
+* [WebApiContrib.Formatting.JavaScriptSerializer](https://github.com/WebApiContrib/WebApiContrib.Formatting.JavaScriptSerializer)
 * [WebApiContrib.Formatting.Jsonp](http://github.com/WebApiContrib/WebApiContrib.Formatting.Jsonp)
 * [WebApiContrib.Formatting.MsgPack](http://github.com/WebApiContrib/WebApiContrib.Formatting.MsgPack)
 * [WebApiContrib.Formatting.ProtoBuf](http://github.com/WebApiContrib/WebApiContrib.Formatting.ProtoBuf)
