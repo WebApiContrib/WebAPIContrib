@@ -17,6 +17,7 @@ WebAPIContrib is a collection of open source projects to help improve your work 
 * [WebApiContrib.Formatting.ProtoBuf](http://github.com/WebApiContrib/WebApiContrib.Formatting.ProtoBuf)
 * [WebApiContrib.Formatting.Razor](http://github.com/WebApiContrib/WebApiContrib.Formatting.Razor)
 * [WebApiContrib.Formatting.ServiceStack](http://github.com/WebApiContrib/WebApiContrib.Formatting.ServiceStack)
+* [WebApiContrib.Formatting.Xlsx](http://github.com/WebApiContrib/WebApiContrib.Formatting.Xlsx)
 
 ## Inversion of Control
 
