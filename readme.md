@@ -41,3 +41,7 @@ WebAPIContrib is a collection of open source projects to help improve your work 
 
 ### Contributing
 If you would like to contribute, feel free to fork the projects or get in touch with the mailing list: https://groups.google.com/group/webapicontrib
+
+### Want to transfer your project to WebApiContrib?
+
+You created your own project and now want to transfer it to WebApiContrib? Awesome! [We've got you covered](https://github.com/WebApiContrib/WebAPIContrib/wiki/Guidelines-for-transferring-projects-to-Web-API-Contrib). It is easy peasy.
