@@ -7,6 +7,7 @@ namespace WebApiContrib.Http
     {
         private const string HttpContext = "MS_HttpContext";
         private const string RemoteEndpointMessage = "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
+        private const string OwinContext = "MS_OwinContext";
 
         public static bool IsLocal(this HttpRequestMessage request)
         {
@@ -16,6 +17,7 @@ namespace WebApiContrib.Http
 
         public static string GetClientIpAddress(this HttpRequestMessage request)
         {
+            //Web-hosting
             if (request.Properties.ContainsKey(HttpContext))
             {
                 dynamic ctx = request.Properties[HttpContext];
@@ -24,7 +26,7 @@ namespace WebApiContrib.Http
                     return ctx.Request.UserHostAddress;
                 }
             }
-
+            //Self-hosting
             if (request.Properties.ContainsKey(RemoteEndpointMessage))
             {
                 dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
@@ -33,7 +35,15 @@ namespace WebApiContrib.Http
                     return remoteEndpoint.Address;
                 }
             }
-
+            //Owin-hosting
+            if (request.Properties.ContainsKey(OwinContext))
+            {
+                dynamic ctx = request.Properties[OwinContext];
+                if (ctx != null)
+                {
+                    return ctx.Request.RemoteIpAddress;
+                }
+            }
             return null;
         }
     }
