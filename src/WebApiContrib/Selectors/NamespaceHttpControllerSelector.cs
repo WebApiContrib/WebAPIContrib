@@ -8,6 +8,8 @@ using System.Web.Http.Dispatcher;
 
 namespace WebApiContrib.Selectors
 {
+    //originally created for Umbraco https://github.com/umbraco/Umbraco-CMS/blob/7.2.0/src/Umbraco.Web/WebApi/NamespaceHttpControllerSelector.cs
+    //adapted from there, does not recreate HttpControllerDescriptors, instead caches them
     public class NamespaceHttpControllerSelector : DefaultHttpControllerSelector
     {
         private const string ControllerKey = "controller";
@@ -53,8 +55,6 @@ namespace WebApiContrib.Selectors
                 return base.SelectController(request);
 
             return found.Descriptor;
-
-            //return new HttpControllerDescriptor(_configuration, controllerNameAsString, found);
         }
 
         private HashSet<NamespacedHttpControllerMetadata> InitializeNamespacedHttpControllerMetadata()
