@@ -114,6 +114,7 @@
     <Compile Include="ResponseMessages\ResourceResponseBase.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponse.cs" />
     <Compile Include="Selectors\CorsActionSelector.cs" />
+    <Compile Include="Selectors\NamespaceHttpControllerSelector.cs" />
     <Compile Include="Serialization\IHttpMessageSerializerAsync.cs" />
     <Compile Include="Serialization\MessageContentHttpMessageSerializer.cs" />
     <Compile Include="Tracing\TraceWriterExtensions.cs" />
