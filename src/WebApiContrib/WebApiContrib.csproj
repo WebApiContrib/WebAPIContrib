@@ -117,6 +117,7 @@
     <Compile Include="Selectors\NamespaceHttpControllerSelector.cs" />
     <Compile Include="Serialization\IHttpMessageSerializerAsync.cs" />
     <Compile Include="Serialization\MessageContentHttpMessageSerializer.cs" />
+    <Compile Include="Serialization\UnderscoreMappingResolver.cs" />
     <Compile Include="Tracing\TraceWriterExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
