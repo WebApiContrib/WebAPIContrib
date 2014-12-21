@@ -102,6 +102,7 @@
     <Compile Include="ResponseMessages\RedirectResponseTests.cs" />
     <Compile Include="ResponseMessages\TemporaryRedirectResponseMessageTests.cs" />
     <Compile Include="Serialization\SerialisationTests.cs" />
+    <Compile Include="Serialization\UnderscoreMappingResolverTests.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="Conneg\ContentNegotiationTests.cs" />
     <Compile Include="TestHelpers.cs" />
@@ -113,7 +114,9 @@
     <EmbeddedResource Include="Data\Response" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\WebApiContrib.Testing\WebApiContrib.Testing.csproj">
       <Project>{DDEB5F68-7E22-4F54-9B04-63518083B83E}</Project>
