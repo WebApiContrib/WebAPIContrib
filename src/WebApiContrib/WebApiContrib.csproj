@@ -58,18 +58,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\CachingHandler.cs" />
-    <Compile Include="Caching\EntityTagKey.cs" />
     <Compile Include="Caching\InMemoryThrottleStore.cs" />
     <Compile Include="Caching\IThrottleStore.cs" />
     <Compile Include="Caching\ThrottleEntry.cs" />
-    <Compile Include="Caching\TimedEntityTagHeaderValue.cs" />
     <Compile Include="Http\HttpRequestMessageExtensions.cs" />
     <Compile Include="Internal\Extensions\ActionExtensions.cs" />
     <Compile Include="Internal\Extensions\IsInExtensions.cs" />
     <Compile Include="Internal\HttpHeaderNames.cs" />
-    <Compile Include="Caching\IEntityTagStore.cs" />
-    <Compile Include="Caching\InMemoryEntityTagStore.cs" />
     <Compile Include="Configuration\ConfigurationExtensions.cs" />
     <Compile Include="Filters\ExceptionHandlingAttribute.cs" />
     <Compile Include="Formatting\CSVMediaTypeFormatter.cs" />
