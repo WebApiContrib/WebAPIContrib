@@ -34,12 +34,10 @@ namespace WebApiContrib.Testing
             var controllerTypeName = controller.GetType().Name;
             var controllerName = controllerTypeName.Substring(0, controllerTypeName.IndexOf("Controller")).ToLower();
             var routeData = new HttpRouteData(route, new HttpRouteValueDictionary { { "controller", controllerName } });
+            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
+            request.Properties[HttpPropertyKeys.HttpRouteDataKey] = routeData;
             controller.ControllerContext = new HttpControllerContext(config, routeData, request);
             controller.ControllerContext.ControllerDescriptor = new HttpControllerDescriptor(config, controllerName, controller.GetType());
-            controller.Request = request;
-            controller.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
-            controller.Request.Properties[HttpPropertyKeys.HttpRouteDataKey] = routeData;
-            controller.RequestContext = new HttpRequestContext { Configuration = config, RouteData = routeData, Url = new UrlHelper(controller.Request) };
         }
     }
 }
