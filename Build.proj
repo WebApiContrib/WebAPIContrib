@@ -1,0 +1,17 @@
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+ <PropertyGroup>
+  <Root>$(MSBuildThisFileDirectory)</Root>
+  <SolutionDir>$(Root)</SolutionDir>
+ </PropertyGroup>
+ <Target Name="InstallNuGet">
+  <MakeDir Directories="$(Root)/.nuget" />
+  <MSBuild Projects="$(Root)/.nuget/NuGet.targets"
+           Properties="DownloadNuGetExe=true;ProjectDir=$(Root);SolutionDir=$(Root)"
+           Targets="RestorePackages" />
+ </Target>
+ <Target Name="Build" DependsOnTargets="InstallNuGet">
+  <Exec Command="tools\psake\psake.bat"
+        WorkingDirectory="$(Root)"
+        LogStandardErrorAsError="true" />
+ </Target>
+</Project>
