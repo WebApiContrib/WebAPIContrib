@@ -1,0 +1,5 @@
+Microsoft.AspNet.WebApi.Client
+Microsoft.AspNet.WebApi.Core
+Microsoft.Net.Http
+Newtonsoft.Json
+RhinoMocks

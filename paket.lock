@@ -1,0 +1,32 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+  specs:
+    FAKE (3.17.13)
+    Microsoft.AspNet.WebApi.Client (5.0.0)
+      Microsoft.Net.Http (>= 2.2.13) - framework: portable-wp80+win+net45
+      Newtonsoft.Json (>= 4.5.11) - framework: portable-wp80+win+net45, >= net45
+    Microsoft.AspNet.WebApi.Core (5.0.0)
+      Microsoft.AspNet.WebApi.Client (>= 5.0.0)
+    Microsoft.AspNet.WebApi.SelfHost (5.0.0)
+      Microsoft.AspNet.WebApi.Core (>= 5.0.0)
+    Microsoft.AspNet.WebApi.WebHost (5.0.0)
+      Microsoft.AspNet.WebApi.Core (>= 5.0.0)
+    Microsoft.Bcl (1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Bcl.Build (1.0.21)
+    Microsoft.Net.Http (2.2.29)
+      Microsoft.Bcl (>= 1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Newtonsoft.Json (4.5.11)
+    NUnit (2.6.3)
+    NUnit.Runners (2.6.4)
+    Octokit (0.7.1)
+      Microsoft.Net.Http
+    RhinoMocks (3.6.1)
+    Should (1.1.20)
+    SourceLink.Fake (0.4.2)
+GITHUB
+  remote: fsharp/FAKE
+  specs:
+    modules/Octokit/Octokit.fsx (99bf805630805455031684c9369b1872d14a4fdd)
+      Octokit
