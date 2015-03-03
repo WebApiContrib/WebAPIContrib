@@ -35,3 +35,6 @@ nuget/
 packages/
 *.nupkg
 *.DotSettings
+
+.paket/paket.exe
+paket-files/

@@ -1,0 +1,8 @@
+Microsoft.AspNet.WebApi.Client
+Microsoft.AspNet.WebApi.Core
+Microsoft.AspNet.WebApi.SelfHost
+Microsoft.AspNet.WebApi.WebHost
+Newtonsoft.Json
+NUnit
+RhinoMocks
+Should
