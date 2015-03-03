@@ -4,7 +4,7 @@ WebAPIContrib is a collection of open source projects to help improve your work 
 
 ## Core
 
-* WebApiContrib
+* WebApiContrib [![Build Status](https://travis-ci.org/WebApiContrib/WebAPIContrib.svg)](https://travis-ci.org/WebApiContrib/WebAPIContrib)
 * WebApiContrib.Testing
 
 ## Formatters
