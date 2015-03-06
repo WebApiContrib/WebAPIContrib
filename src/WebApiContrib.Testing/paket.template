@@ -1,0 +1,17 @@
+type project
+authors 
+    WebApiContrib Contributors
+projectUrl
+    http://github.com/WebApiContrib/WebAPIContrib
+licenseUrl
+    http://github.com/WebApiContrib/WebAPIContrib/blob/master/LICENSE.txt
+requireLicenseAcceptance
+    false
+copyright
+    Copyright 2012-2015
+tags
+    webapi webapicontrib testing extensions
+summary
+    Community Contributions for ASP.NET Web API
+description
+    Community Contributions for ASP.NET Web API
