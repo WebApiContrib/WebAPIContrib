@@ -94,7 +94,7 @@ namespace WebApiContrib.Formatting {
                         } 
                         else 
                         {
-                            valueLine = string.Concat(string.Empty, ",");
+                            valueLine = string.Concat(valueLine, ",");
                         }
                 	}
 
