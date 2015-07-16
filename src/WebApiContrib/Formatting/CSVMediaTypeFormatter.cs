@@ -76,8 +76,7 @@ namespace WebApiContrib.Formatting {
 
                 	foreach (var val in vals)
                 	{
-                		
-                		if (val.Value != null) 
+                        if (val.Value != null) 
                         {
                             string _val = val.Value.ToString();
 
