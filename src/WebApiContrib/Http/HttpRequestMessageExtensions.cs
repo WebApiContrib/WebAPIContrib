@@ -9,6 +9,7 @@ namespace WebApiContrib.Http
         private const string RemoteEndpointMessage = "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
         private const string OwinContext = "MS_OwinContext";
 
+        [Obsolete("See IsLocal at HttpRequestMessageExtensions Version 5.0.0.0")]
         public static bool IsLocal(this HttpRequestMessage request)
         {
             var localFlag = request.Properties["MS_IsLocal"] as Lazy<bool>;
