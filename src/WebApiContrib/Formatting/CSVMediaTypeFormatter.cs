@@ -76,9 +76,10 @@ namespace WebApiContrib.Formatting {
 
                 	foreach (var val in vals)
                 	{
-                		string _val = val.Value.ToString();
                 		if (val.Value != null) 
                         {
+                            string _val = val.Value.ToString();
+                            
                         	//Check if the value contans a comma and place it in quotes if so
                             if (_val.Contains(","))
                                 _val = string.Concat("\"", _val, "\"");
