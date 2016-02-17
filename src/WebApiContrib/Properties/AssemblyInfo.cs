@@ -4,6 +4,7 @@ using System.Reflection;
 [assembly: AssemblyTitleAttribute("WebApiContrib")]
 [assembly: AssemblyProductAttribute("WebApiContrib")]
 [assembly: AssemblyDescriptionAttribute("Community Contributions for ASP.NET Web API")]
+[assembly: AssemblyCopyrightAttribute("WebApiContrib Contributors")]
 [assembly: AssemblyVersionAttribute("1.0.0")]
 [assembly: AssemblyFileVersionAttribute("1.0.0")]
 namespace System {
