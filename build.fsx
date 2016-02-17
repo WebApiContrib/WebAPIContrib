@@ -30,10 +30,7 @@ let summary = "Community Contributions for ASP.NET Web API"
 let description = "Community Contributions for ASP.NET Web API"
 
 // List of author names (for NuGet package)
-let authors = [ "WebApiContrib Contributors" ]
-
-// Tags for your project (for NuGet package)
-let tags = "webapi webapicontrib extensions"
+let copyright = "WebApiContrib Contributors"
 
 // File system information 
 let solutionFile  = "WebApiContrib.sln"
@@ -78,9 +75,10 @@ let genFSAssemblyInfo (projectPath) =
     let basePath = "src" @@ folderName
     let fileName = basePath @@ "AssemblyInfo.fs"
     CreateFSharpAssemblyInfo fileName
-      [ Attribute.Title (projectName)
+      [ Attribute.Title projectName
         Attribute.Product project
         Attribute.Description summary
+        Attribute.Copyright copyright
         Attribute.Version release.AssemblyVersion
         Attribute.FileVersion release.AssemblyVersion ]
 
@@ -90,9 +88,10 @@ let genCSAssemblyInfo (projectPath) =
     let basePath = folderName @@ "Properties"
     let fileName = basePath @@ "AssemblyInfo.cs"
     CreateCSharpAssemblyInfo fileName
-      [ Attribute.Title (projectName)
+      [ Attribute.Title projectName
         Attribute.Product project
         Attribute.Description summary
+        Attribute.Copyright copyright
         Attribute.Version release.AssemblyVersion
         Attribute.FileVersion release.AssemblyVersion ]
 
