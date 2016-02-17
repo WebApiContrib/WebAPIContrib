@@ -1,4 +1,4 @@
-type project
+﻿type project
 authors 
     WebApiContrib Contributors
 projectUrl
@@ -8,9 +8,9 @@ licenseUrl
 requireLicenseAcceptance
     false
 copyright
-    Copyright 2012-2015
+    Copyright © WebApiContrib Contributors 2012-2016
 tags
-    webapi webapicontrib testing extensions
+    AspNetWebApi WebApi WebApiContrib testing extensions
 summary
     Community Contributions for ASP.NET Web API
 description

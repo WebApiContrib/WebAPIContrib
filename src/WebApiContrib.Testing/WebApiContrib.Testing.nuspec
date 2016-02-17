@@ -1,19 +1,19 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package>
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
     <authors>WebApiContrib Contributors</authors>
-    <owners>ChrisMissal pedroreys panesofglass alexzeitler darrelmiller</owners>
+    <owners>chrismissal pedroreys panesofglass alexzeitler darrelmiller abatishchev</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <projectUrl>https://github.com/WebApiContrib/WebApiContrib.Testing</projectUrl>
-    <licenseUrl>https://raw.github.com/WebApiContrib/WebApiContrib.Testing/master/LICENSE.txt</licenseUrl>
-    <copyright>Copyright © WebApiContrib 2012 - 2013</copyright>
+    <projectUrl>https://github.com/WebApiContrib/WebApiContrib</projectUrl>
+    <licenseUrl>https://raw.github.com/WebApiContrib/WebApiContrib/master/LICENSE.txt</licenseUrl>
+    <copyright>Copyright © WebApiContrib Contributors 2012-2016</copyright>
     <dependencies>
-      <dependency id="WebApiContrib" version="0.9" />
+      <dependency id="WebApiContrib" version="2.0.0" />
     </dependencies>
-    <tags>webapi webapicontrib test testing</tags>
+    <tags>WebApi AspNetWebApi WebApiContrib extensions testing</tags>
   </metadata>
 </package>

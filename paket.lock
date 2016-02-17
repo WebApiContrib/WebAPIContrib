@@ -2,22 +2,22 @@ NUGET
   remote: https://www.nuget.org/api/v2
   specs:
     FAKE (3.17.13)
-    Microsoft.AspNet.WebApi.Client (5.0.0)
-      Microsoft.Net.Http (>= 2.2.13) - framework: portable-wp80+win+net45
-      Newtonsoft.Json (>= 4.5.11) - framework: portable-wp80+win+net45, >= net45
-    Microsoft.AspNet.WebApi.Core (5.0.0)
-      Microsoft.AspNet.WebApi.Client (>= 5.0.0)
-    Microsoft.AspNet.WebApi.SelfHost (5.0.0)
-      Microsoft.AspNet.WebApi.Core (>= 5.0.0)
-    Microsoft.AspNet.WebApi.WebHost (5.0.0)
-      Microsoft.AspNet.WebApi.Core (>= 5.0.0)
+    Microsoft.AspNet.WebApi.Client (5.2.3)
+      Microsoft.Net.Http (>= 2.2.29) - framework: portable-wp80+win+net45
+      Newtonsoft.Json (>= 6.0.5) - framework: portable-wp80+win+net45, >= net45
+    Microsoft.AspNet.WebApi.Core (5.2.3)
+      Microsoft.AspNet.WebApi.Client (>= 5.2.3)
+    Microsoft.AspNet.WebApi.SelfHost (5.2.3)
+      Microsoft.AspNet.WebApi.Core (>= 5.2.3)
+    Microsoft.AspNet.WebApi.WebHost (5.2.3)
+      Microsoft.AspNet.WebApi.Core (>= 5.2.3)
     Microsoft.Bcl (1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Bcl.Build (1.0.21)
     Microsoft.Net.Http (2.2.29)
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
-    Newtonsoft.Json (4.5.11)
+    Newtonsoft.Json (6.0.5)
     NUnit (2.6.3)
     NUnit.Runners (2.6.4)
     Octokit (0.7.1)
