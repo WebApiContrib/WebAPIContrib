@@ -5,12 +5,12 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>WebApiContrib Contributors</authors>
-    <owners>ChrisMissal pedroreys panesofglass alexzeitler darrelmiller</owners>
+    <owners>chrismissal pedroreys panesofglass alexzeitler darrelmiller abatishchev</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/WebApiContrib/WebApiContrib</projectUrl>
     <licenseUrl>https://raw.github.com/WebApiContrib/WebApiContrib/master/LICENSE.txt</licenseUrl>
-    <copyright>Copyright © WebApiContrib 2012 - 2013</copyright>
-    <tags>webapi webapicontrib extensions</tags>
+    <copyright>Copyright © WebApiContrib 2012-2016</copyright>
+    <tags>WebApi AspNetWebApi WebApiContrib extensions</tags>
   </metadata>
 </package>
