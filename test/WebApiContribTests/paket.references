@@ -6,3 +6,4 @@ Newtonsoft.Json
 NUnit
 RhinoMocks
 Should
+Microsoft.Owin

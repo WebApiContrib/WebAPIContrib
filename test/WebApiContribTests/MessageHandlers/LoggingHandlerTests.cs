@@ -16,7 +16,7 @@ namespace WebApiContribTests.MessageHandlers
         [Test]
         public void Log_Simple_Request_Test_Should_Log_Request_And_Response()
         {
-            var config = new HttpConfiguration();
+            var config = TestFactory.GetDefaultConfiguration();
             config.Routes.MapHttpRoute("default", "api/{controller}/{id}", new { id = RouteParameter.Optional });
 
             var dummyRepository = new DummyLoggingRepository();

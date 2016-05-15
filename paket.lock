@@ -18,15 +18,18 @@ NUGET
       Microsoft.Bcl (>= 1.1.10)
       Microsoft.Bcl.Build (>= 1.0.14)
     Newtonsoft.Json (6.0.5)
+	Microsoft.Owin (3.0.1)
+      Owin (>= 1.0)
     NUnit (2.6.3)
     NUnit.Runners (2.6.4)
     Octokit (0.7.1)
       Microsoft.Net.Http
+    Owin (1.0)
     RhinoMocks (3.6.1)
     Should (1.1.20)
     SourceLink.Fake (0.4.2)
 GITHUB
   remote: fsharp/FAKE
   specs:
-    modules/Octokit/Octokit.fsx (99bf805630805455031684c9369b1872d14a4fdd)
+    modules/Octokit/Octokit.fsx (a1f4a9e19ba5745ca7b8a3b6a0382ee70d692f26)
       Octokit
