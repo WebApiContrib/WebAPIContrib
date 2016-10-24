@@ -22,7 +22,8 @@ namespace WebApiContrib.MessageHandlers {
                     .ContinueWith<HttpResponseMessage>(task => {
                         var response = task.Result;
                         response.RequestMessage.Method = HttpMethod.Head;
-                        response.Content = new HeadContent(response.Content);
+                        if (response.Content != null)
+                            response.Content = new HeadContent(response.Content);
                         return task.Result;
                     });
 
