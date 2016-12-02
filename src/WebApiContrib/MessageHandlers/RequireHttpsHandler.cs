@@ -15,6 +15,22 @@ namespace WebApiContrib.MessageHandlers
     {
         private readonly int _httpsPort;
 
+        /// <summary>
+        /// Indicates whether to ignore this attribute's forced SSL behavior on local requests
+        /// </summary>
+        private bool _ignoreLocalRequests;
+        public bool IgNoreLocalRequests
+        {
+            get
+            {
+                return _ignoreLocalRequests;
+            }
+            set
+            {
+                _ignoreLocalRequests = value;
+            }
+        }
+
         /// <summary>Initializes a new instance of the <see cref="RequireHttpsHandler" /> class.</summary>
         public RequireHttpsHandler()
             : this(443)
@@ -34,7 +50,7 @@ namespace WebApiContrib.MessageHandlers
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />. The task object representing the asynchronous operation.</returns>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request.RequestUri.Scheme == Uri.UriSchemeHttps)
+            if (request.RequestUri.Scheme == Uri.UriSchemeHttps || (_ignoreLocalRequests && request.IsLocal()))
                 return base.SendAsync(request, cancellationToken);
 
             var response = CreateResponse(request);
